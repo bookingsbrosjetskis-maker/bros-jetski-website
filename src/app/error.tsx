@@ -10,7 +10,7 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <div className="flex min-h-[70vh] flex-col items-center justify-center px-4 pt-16 text-center">
+    <div className="flex min-h-[70dvh] flex-col items-center justify-center px-4 py-16 pt-24 text-center [@media(max-height:640px)]:min-h-0">
       <p className="font-label text-xs font-bold uppercase tracking-[0.1em] text-cyan">
         Something went wrong
       </p>

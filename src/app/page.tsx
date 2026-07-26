@@ -50,7 +50,7 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-surface text-ink">
+      <section className="relative flex min-h-[88dvh] items-center overflow-hidden bg-surface text-ink [@media(max-height:640px)]:min-h-0">
         {/* Full-bleed background video with photo poster fallback. Respects
             prefers-reduced-motion and offers a play/pause control. */}
         <AutoplayVideo
@@ -66,7 +66,7 @@ export default async function HomePage() {
         {/* cyan glow accents */}
         <div className="animate-pulse-glow pointer-events-none absolute -left-24 bottom-10 h-80 w-80 rounded-full bg-cyan/20 blur-3xl" />
 
-        <Container className="relative z-10 pb-20 pt-32 sm:pb-28 sm:pt-40">
+        <Container className="relative z-10 pb-20 pt-32 sm:pb-28 sm:pt-40 [@media(max-height:640px)]:pb-12 [@media(max-height:640px)]:pt-24">
           <div className="max-w-2xl">
             <p className="animate-fade-up font-label mb-4 text-xs font-bold uppercase tracking-[0.1em] text-cyan">
               Blair Boat Launch · Ottawa, Ontario

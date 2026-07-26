@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import TrustBadges from "@/components/TrustBadges";
+import { Container } from "@/components/ui";
 import {
   SITE_NAME,
   SITE_SLOGAN,
@@ -22,13 +23,13 @@ export default function Footer() {
     <footer className="mt-auto">
       {/* Trust badges visible on every page (spec requirement) */}
       <div className="border-t border-outline-variant/60 bg-surface-lowest">
-        <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
+        <Container className="py-8">
           <TrustBadges />
-        </div>
+        </Container>
       </div>
       <div className="animated-gradient relative overflow-hidden text-ink-muted">
         <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-cyan/10 blur-3xl" />
-        <div className="relative mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
+        <Container className="relative grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Image
               src="/brand/logo.jpg"
@@ -119,15 +120,17 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-        </div>
-        <div className="relative flex flex-col items-center gap-2 border-t border-white/10 py-4 sm:flex-row sm:justify-between sm:px-6">
-          <p className="text-center text-xs text-outline">
-            © {new Date().getFullYear()} {SITE_NAME}. All prices in CAD.
-          </p>
-          <ul className="flex items-center gap-4 text-xs text-outline">
-            <li><Link href="/terms" className="transition-colors hover:text-cyan-soft">Terms of Service</Link></li>
-            <li><Link href="/privacy" className="transition-colors hover:text-cyan-soft">Privacy Policy</Link></li>
-          </ul>
+        </Container>
+        <div className="relative border-t border-white/10">
+          <Container className="flex flex-col items-center gap-2 py-4 sm:flex-row sm:justify-between">
+            <p className="text-center text-xs text-outline">
+              © {new Date().getFullYear()} {SITE_NAME}. All prices in CAD.
+            </p>
+            <ul className="flex items-center gap-4 text-xs text-outline">
+              <li><Link href="/terms" className="transition-colors hover:text-cyan-soft">Terms of Service</Link></li>
+              <li><Link href="/privacy" className="transition-colors hover:text-cyan-soft">Privacy Policy</Link></li>
+            </ul>
+          </Container>
         </div>
       </div>
     </footer>

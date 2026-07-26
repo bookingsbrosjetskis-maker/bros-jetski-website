@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Container } from "@/components/ui";
+import { Container, SectionHeading } from "@/components/ui";
 import GiftCardForm from "@/components/GiftCardForm";
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default function GiftCardsPage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-surface text-ink">
+      <section className="relative flex min-h-[80dvh] items-center overflow-hidden bg-surface text-ink [@media(max-height:640px)]:min-h-0">
         <Image
           src="/photos/lineup-sunset.jpg"
           alt="Sea-Doo jet skis lined up at sunset on the Ottawa River"
@@ -40,21 +40,24 @@ export default function GiftCardsPage() {
           sizes="100vw"
           className="object-cover opacity-70"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface/40 via-surface/60 to-surface" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-surface/85 via-surface/40 to-transparent" />
         <div className="animate-pulse-glow pointer-events-none absolute -right-24 top-10 h-80 w-80 rounded-full bg-cyan/15 blur-3xl" />
 
-        <Container className="relative z-10 pb-16 pt-32 text-center sm:pb-20 sm:pt-40">
-          <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-cyan">
-            Unforgettable Adventures
-          </p>
-          <h1 className="mx-auto mt-4 max-w-3xl text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Gift the Thrill of{" "}
-            <span className="gradient-text">the Open Water</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted">
-            Premium Sea-Doo rentals on the Ottawa River. A gift card is perfect
-            for birthdays, weddings, and anyone who loves a day on the water.
-          </p>
+        <Container className="relative z-10 pb-16 pt-32 sm:pb-20 sm:pt-40 [@media(max-height:640px)]:pb-12 [@media(max-height:640px)]:pt-24">
+          <div className="max-w-2xl">
+            <p className="font-label text-xs font-bold uppercase tracking-[0.1em] text-cyan">
+              Unforgettable Adventures
+            </p>
+            <h1 className="mt-4 text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+              Gift the Thrill of{" "}
+              <span className="gradient-text">the Open Water</span>
+            </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
+              Premium Sea-Doo rentals on the Ottawa River. A gift card is perfect
+              for birthdays, weddings, and anyone who loves a day on the water.
+            </p>
+          </div>
         </Container>
       </section>
 
@@ -94,19 +97,11 @@ export default function GiftCardsPage() {
       <section className="relative overflow-hidden bg-surface-low py-20 sm:py-24">
         <div className="pointer-events-none absolute left-1/2 top-0 -z-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-cyan/5 blur-[120px]" />
         <Container className="relative z-10">
-          <div className="mb-12 text-center">
-            <p className="font-label text-xs font-bold uppercase tracking-[0.1em] text-cyan">
-              E-Gift Cards
-            </p>
-            <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-4xl">
-              Choose a Value, Send the Adventure
-            </h2>
-            <div className="section-rule mx-auto mt-5" />
-            <p className="mx-auto mt-5 max-w-xl text-base text-ink-muted">
-              Pick a tier below to pre-fill your inquiry. Perfect for birthdays,
-              weddings, and corporate rewards.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="E-Gift Cards"
+            title="Choose a Value, Send the Adventure"
+            subtitle="Pick a tier below to pre-fill your inquiry. Perfect for birthdays, weddings, and corporate rewards."
+          />
 
           <GiftCardForm />
         </Container>

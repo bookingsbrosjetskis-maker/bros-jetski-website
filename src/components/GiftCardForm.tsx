@@ -140,7 +140,7 @@ export default function GiftCardForm() {
                   Popular
                 </span>
               )}
-              <span className="gradient-text text-4xl font-bold tracking-tight">
+              <span className="gradient-text font-display text-4xl font-bold tracking-tight">
                 {tier.amount}
               </span>
               <span className="mt-3 font-display text-lg font-bold text-ink">
@@ -183,7 +183,7 @@ export default function GiftCardForm() {
               : "hover:border-cyan/40"
           }`}
         >
-          <span className="gradient-text text-4xl font-bold tracking-tight">
+          <span className="gradient-text font-display text-4xl font-bold tracking-tight">
             $?
           </span>
           <span className="mt-3 font-display text-lg font-bold text-ink">
@@ -242,7 +242,7 @@ export default function GiftCardForm() {
               <p className="font-label text-xs font-bold uppercase tracking-[0.1em] text-cyan">
                 Selected gift
               </p>
-              <p className="gradient-text mt-1 text-3xl font-bold tracking-tight">
+              <p className="gradient-text font-display mt-1 text-3xl font-bold tracking-tight">
                 {resolvedAmount()}
               </p>
             </div>

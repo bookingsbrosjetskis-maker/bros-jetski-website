@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { SITE_NAME } from "@/lib/constants";
-import { ButtonLink } from "@/components/ui";
+import { ButtonLink, Container } from "@/components/ui";
 
 const navLinks = [
   { href: "/fleet", label: "Fleet & Rates" },
@@ -64,7 +64,7 @@ export default function Header() {
           : "border-b border-cyan/10 bg-surface/70 shadow-[0_0_20px_rgba(0,241,254,0.12)] backdrop-blur-xl"
       }`}
     >
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+      <Container className="flex h-16 items-center justify-between">
         <Logo light={overHero} />
         <nav className="hidden items-center gap-6 md:flex">
           {navLinks.map((l) => {
@@ -106,7 +106,7 @@ export default function Header() {
             )}
           </svg>
         </button>
-      </div>
+      </Container>
       <AnimatePresence>
         {open && (
           <motion.nav
@@ -116,7 +116,7 @@ export default function Header() {
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
             className="overflow-hidden border-t border-outline-variant bg-surface md:hidden"
           >
-            <div className="px-4 pb-4 pt-2">
+            <div className="max-h-[calc(100dvh-4rem)] overflow-y-auto px-4 pb-4 pt-2">
               {navLinks.map((l, i) => (
                 <motion.div
                   key={l.href}

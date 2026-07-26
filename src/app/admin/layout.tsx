@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { getAdminSession } from "@/lib/auth";
 import AdminNav from "@/components/admin/AdminNav";
+import { Container } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -21,9 +22,9 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     <div className="min-h-screen bg-surface">
       <AdminNav name={session.name || session.email} />
       <main className="lg:pl-60">
-        <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:py-10">
+        <Container className="py-6 lg:py-10">
           {children}
-        </div>
+        </Container>
       </main>
     </div>
   );

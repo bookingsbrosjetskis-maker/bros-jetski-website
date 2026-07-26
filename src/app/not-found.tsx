@@ -2,7 +2,7 @@ import { ButtonLink } from "@/components/ui";
 
 export default function NotFound() {
   return (
-    <div className="animated-gradient relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden px-4 pt-16 text-center text-ink">
+    <div className="animated-gradient relative flex min-h-[70dvh] flex-col items-center justify-center overflow-hidden px-4 py-16 pt-24 text-center text-ink [@media(max-height:640px)]:min-h-0">
       <div className="animate-pulse-glow pointer-events-none absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-cyan/20 blur-3xl" />
       <p className="animate-fade-up font-label text-xs font-bold uppercase tracking-[0.1em] text-cyan">
         404, off the map

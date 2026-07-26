@@ -289,7 +289,8 @@ async function CalendarView({ monthKey }: { monthKey: string }) {
         </div>
       </div>
 
-      <Card className="overflow-x-auto">
+      {/* Month grid: desktop only (needs 760px width) */}
+      <Card className="hidden overflow-x-auto md:block">
         <div className="min-w-[760px]">
           <div className="font-label grid grid-cols-7 border-b border-outline-variant bg-surface-low text-center text-xs font-bold uppercase tracking-wide text-ink-muted">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
@@ -345,6 +346,47 @@ async function CalendarView({ monthKey }: { monthKey: string }) {
           </div>
         </div>
       </Card>
+
+      {/* Mobile agenda: days with bookings, no horizontal scroll */}
+      <div className="space-y-3 md:hidden">
+        {byDay.size === 0 ? (
+          <Card className="p-4">
+            <p className="text-sm text-ink-muted">No slot-holding bookings this month.</p>
+          </Card>
+        ) : (
+          [...byDay.entries()].map(([key, dayBookings]) => (
+            <Card key={key} className={`p-4 ${key === todayKey ? "ring-1 ring-cyan/40" : ""}`}>
+              <p className="font-display text-sm font-bold text-ink">
+                {formatDate(key)}
+                {key === todayKey && (
+                  <span className="font-label ml-2 text-xs font-bold uppercase tracking-wide text-cyan">
+                    Today
+                  </span>
+                )}
+              </p>
+              <div className="mt-2 space-y-1.5">
+                {dayBookings.map((b) => (
+                  <div
+                    key={b.id}
+                    className="flex items-center justify-between gap-2 rounded-lg bg-surface-low px-3 py-2"
+                  >
+                    <span className="min-w-0 truncate text-sm text-ink">
+                      {b.jetSki.name} · {b.customerName}
+                    </span>
+                    <span className="flex shrink-0 items-center gap-2">
+                      <span className="text-xs text-ink-muted">
+                        {formatSlot(b.startTime.getUTCHours(), b.hours)}
+                      </span>
+                      <Badge color={statusColor(b.status)}>{b.status}</Badge>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          ))
+        )}
+      </div>
+
       <p className="text-xs text-ink-muted">
         Showing slot-holding bookings (pending, confirmed, completed). Amber entries
         are unpaid pending holds.

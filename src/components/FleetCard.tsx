@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
+import { ButtonLink } from "@/components/ui";
 import type { JetSki } from "@prisma/client";
 import { formatCAD } from "@/lib/format";
 
@@ -120,7 +120,7 @@ export default function FleetCard({
           {priceRows.map((row) => (
             <div key={row.key} className="flex items-baseline justify-between py-2.5">
               <dt className="text-sm text-ink-muted">{row.label}</dt>
-              <dd className="gradient-text text-sm font-bold">
+              <dd className="gradient-text font-display text-sm font-bold">
                 {formatCAD(jetSki[row.key])}
               </dd>
             </div>
@@ -132,12 +132,9 @@ export default function FleetCard({
           Designated area (no deposit) or free range ($1,000 refundable deposit).
         </p>
 
-        <Link
-          href={`/book/${jetSki.id}`}
-          className="sheen font-label glow-cyan hover:glow-cyan-strong inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-cyan px-6 text-sm font-bold text-surface-lowest transition-transform duration-200 hover:-translate-y-0.5"
-        >
+        <ButtonLink href={`/book/${jetSki.id}`} className="min-h-[48px] w-full">
           Book Now
-        </Link>
+        </ButtonLink>
       </div>
     </motion.div>
   );

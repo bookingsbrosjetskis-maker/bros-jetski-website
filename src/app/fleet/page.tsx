@@ -52,7 +52,7 @@ export default async function FleetPage() {
                   ].map((r) => (
                     <div key={r.label} className="flex items-baseline justify-between py-2.5">
                       <dt className="text-sm text-ink-muted">{r.label}</dt>
-                      <dd className="gradient-text text-base font-bold">{formatCAD(r.amount)}</dd>
+                      <dd className="gradient-text font-display text-base font-bold">{formatCAD(r.amount)}</dd>
                     </div>
                   ))}
                 </dl>

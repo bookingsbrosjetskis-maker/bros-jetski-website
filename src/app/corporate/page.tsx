@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Container } from "@/components/ui";
+import { ButtonLink, Container, SectionHeading } from "@/components/ui";
 import CorporateForm from "@/components/CorporateForm";
 
 export const metadata: Metadata = {
@@ -54,7 +54,7 @@ export default function CorporatePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[80vh] items-center overflow-hidden bg-surface text-ink">
+      <section className="relative flex min-h-[80dvh] items-center overflow-hidden bg-surface text-ink [@media(max-height:640px)]:min-h-0">
         <Image
           src="/photos/lineup-sunset.jpg"
           alt="A lineup of Sea-Doo jet skis at sunset on the Ottawa River"
@@ -67,7 +67,7 @@ export default function CorporatePage() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-surface/85 via-surface/40 to-transparent" />
         <div className="animate-pulse-glow pointer-events-none absolute -left-24 bottom-10 h-80 w-80 rounded-full bg-cyan/20 blur-3xl" />
 
-        <Container className="relative z-10 pb-20 pt-32 sm:pb-28 sm:pt-40">
+        <Container className="relative z-10 pb-20 pt-32 sm:pb-28 sm:pt-40 [@media(max-height:640px)]:pb-12 [@media(max-height:640px)]:pt-24">
           <div className="max-w-2xl">
             <p className="font-label mb-5 inline-flex items-center gap-2 rounded-full border border-cyan/25 bg-cyan/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-cyan">
               <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
@@ -85,18 +85,12 @@ export default function CorporatePage() {
               hassle-free experience for groups of every skill level.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="#request"
-                className="font-label inline-flex min-h-[44px] items-center justify-center rounded-full bg-cyan px-8 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-surface-lowest glow-cyan transition-all duration-200 hover:-translate-y-0.5 hover:glow-cyan-strong"
-              >
+              <ButtonLink href="#request" className="px-8">
                 Request a Quote
-              </a>
-              <a
-                href="#services"
-                className="glass font-label inline-flex min-h-[44px] items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan/30"
-              >
+              </ButtonLink>
+              <ButtonLink href="#services" variant="glass" className="px-8">
                 View Itineraries
-              </a>
+              </ButtonLink>
             </div>
           </div>
         </Container>
@@ -105,15 +99,7 @@ export default function CorporatePage() {
       {/* ── Services ─────────────────────────────────────────── */}
       <section id="services" className="bg-surface py-20 sm:py-24">
         <Container>
-          <div className="mb-14 text-center">
-            <p className="font-label text-xs font-bold uppercase tracking-[0.1em] text-cyan">
-              What we handle
-            </p>
-            <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-4xl">
-              A Team Day Made Simple
-            </h2>
-            <div className="section-rule mx-auto mt-5" />
-          </div>
+          <SectionHeading eyebrow="What we handle" title="A Team Day Made Simple" />
 
           <div className="grid gap-6 md:grid-cols-3">
             {services.map((s) => (
@@ -194,7 +180,7 @@ export default function CorporatePage() {
               <p className="font-label text-xs font-bold uppercase tracking-[0.1em] text-cyan">
                 Built for groups
               </p>
-              <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-4xl">
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
                 A Great Day for the Whole Team
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-ink-muted">
@@ -245,7 +231,7 @@ export default function CorporatePage() {
             <p className="font-label text-xs font-bold uppercase tracking-[0.1em] text-cyan">
               Ready to book?
             </p>
-            <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
               Request Event Details
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base text-ink-muted">
