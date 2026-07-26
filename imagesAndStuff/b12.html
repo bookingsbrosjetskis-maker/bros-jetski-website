@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Manrope:wght@400;500&family=Space+Grotesk:wght@600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Montserrat:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#282a2e",
+                        "tertiary-container": "#909191",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "surface": "#111318",
+                        "on-secondary": "#00363a",
+                        "on-primary-container": "#00285b",
+                        "surface-bright": "#37393e",
+                        "inverse-surface": "#e2e2e8",
+                        "outline-variant": "#414754",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-fixed-variant": "#004493",
+                        "secondary-fixed": "#74f5ff",
+                        "primary-container": "#4a8eff",
+                        "on-surface-variant": "#c1c6d7",
+                        "on-surface": "#e2e2e8",
+                        "surface-variant": "#333539",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#adc7ff",
+                        "on-background": "#e2e2e8",
+                        "outline": "#8b90a0",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#006a70",
+                        "on-primary-fixed": "#001a41",
+                        "on-primary": "#002e68",
+                        "secondary-container": "#00f1fe",
+                        "primary-fixed-dim": "#adc7ff",
+                        "on-tertiary-container": "#282a2a",
+                        "inverse-primary": "#005bc0",
+                        "surface-tint": "#adc7ff",
+                        "secondary": "#ddfcff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container": "#1e2024",
+                        "on-secondary-fixed": "#002022",
+                        "surface-dim": "#111318",
+                        "surface-container-lowest": "#0c0e12",
+                        "tertiary": "#c6c6c7",
+                        "surface-container-low": "#1a1c20",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "on-tertiary": "#2f3131",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-highest": "#333539",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "background": "#111318",
+                        "inverse-on-surface": "#2f3035"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Manrope"],
+                        "headline-md": ["Montserrat"],
+                        "button-text": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            backdrop-filter: blur(20px);
+            background: rgba(30, 32, 36, 0.6);
+            border: 1px solid rgba(116, 245, 255, 0.1);
+        }
+        .active-nav-indicator {
+            box-shadow: 0 0 12px rgba(116, 245, 255, 0.4);
+        }
+        body {
+            background-color: #111318;
+            color: #e2e2e8;
+        }
+        .mask-fade-bottom {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md antialiased overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-outline-variant/20 shadow-[0_0_15px_rgba(116,245,255,0.15)]">
+<div class="flex justify-between items-center px-5 py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-primary">Bros Jetsky Rentals</div>
+<button class="material-symbols-outlined text-on-surface-variant">menu</button>
+</div>
+</nav>
+<main class="pt-24 pb-32 px-5 max-w-md mx-auto">
+<!-- Header Section -->
+<header class="mb-10">
+<div class="inline-block px-3 py-1 mb-4 rounded-full bg-secondary-container/10 border border-secondary-fixed/30">
+<span class="font-label-caps text-label-caps text-secondary-fixed uppercase">Verified Experiences</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Rider Reviews</h1>
+<p class="text-on-surface-variant font-body-md">Join the community of 500+ families and thrill-seekers who chose the Bros experience in Ontario.</p>
+</header>
+<!-- Stats Grid (Bento Style) -->
+<div class="grid grid-cols-2 gap-4 mb-10">
+<div class="glass-card p-4 rounded-xl flex flex-col justify-center items-center">
+<div class="text-secondary-fixed font-headline-md text-headline-md">4.9/5</div>
+<div class="flex gap-0.5 my-1">
+<span class="material-symbols-outlined text-secondary-fixed scale-75" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed scale-75" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed scale-75" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed scale-75" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed scale-75" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Average Rating</span>
+</div>
+<div class="glass-card p-4 rounded-xl flex flex-col justify-center items-center">
+<div class="text-primary font-headline-md text-headline-md">100%</div>
+<div class="material-symbols-outlined text-primary my-1">verified_user</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Safety Record</span>
+</div>
+</div>
+<!-- Single Column Feed of Reviews -->
+<div class="flex flex-col gap-8">
+<!-- Review 1: Family Focus -->
+<article class="flex flex-col gap-4">
+<div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A joyful, sun-drenched family of four—a father, mother, and two young sons—taking a happy selfie on a weathered wooden dock. In the background, a high-performance blue Yamaha jet ski is moored on the calm, sparkling waters of a mountain lake surrounded by dense evergreen forests and rolling hills under a soft golden hour sky. The lighting is warm and cinematic, emphasizing the authentic family vacation vibes and the premium aquatic setting of Ontario's lake country." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnZ-OfISFRKIqPuKatj1Pp1-8XU77XH4QC3IMIhBd6_37Tehge4F_6ua6QC_yXoRvQojnGlTwJfD8ee1Ssrn7m0kGGMeRiNwpuIDa_qvU_d6Q52V0ftlMg7u7eiUwQBVbPnMlZi8uS6KRo7dmAuw2GDjf5RLTekBliNCFtJzWUCC2SQzBNitxmIC0rrUh4vj5hu1Kp21r6cMhCdcpjZnA9W3ZgLl2Ca1od4UbT8CG1luw2AD9PONrsBzgiFNM_QkDJDGqTLeocg3RH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-secondary-fixed overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of a middle-aged, outdoorsy man with a friendly smile, wearing a casual zip-up hoodie. The lighting is soft and natural, reflecting the warm glow of sunset at a luxury lake resort. The image has a high-quality, professional photography look with a shallow depth of field, focusing on the genuine expression of satisfaction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOD0npX4WRX4zbwTmTJC-28XEEvZHHeR6mA47_c8cUZ5FJs9goS5op6pAt0adB6ZfJoNLNUZTrrybT9uXMnTYALfBn4ARukhm6iMnZDms8dCbJpMoOqKklJ7Q94kRrHWQss6mac5Wid6nTIYbSEKnQBrVl17BSTiEBhdkmgUCVwukkyYwDvEM-uPUypx3KhgzYe8Ndw7_M9-iONM3zclUUJYVTzNe7aBVSBFo9Lo32kAodtzC2HQHiSC5Q6F3gLAznbjD1yaBm-LNS"/>
+</div>
+<div>
+<p class="font-button-text text-button-text text-white">The Miller Family</p>
+<p class="font-label-caps text-[10px] text-secondary-fixed">M Muskoka Lakes, ON</p>
+</div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl">
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface font-body-lg italic mb-4 leading-relaxed">"Absolutely incredible service. We were worried about the kids' safety, but the Bros team gave us a full briefing and the life vests were top-notch. Seeing the boys' faces when we hit the open water was priceless. High performance meets total family safety."</p>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-variant rounded text-[10px] font-label-caps text-on-surface-variant uppercase tracking-widest">300 HP Ultra</span>
+<span class="px-2 py-1 bg-surface-variant rounded text-[10px] font-label-caps text-on-surface-variant uppercase tracking-widest">Full Day Rental</span>
+</div>
+</div>
+</article>
+<!-- Review 2: Adventure Focus -->
+<article class="flex flex-col gap-4">
+<div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Two athletic young friends in high-visibility life jackets racing jet skis side-by-side across a deep blue lake. Large white water sprays trail behind the jet skis, catching the afternoon sun. The water is crisp and highly detailed, with the far shoreline showing luxury cottage architecture nestled among pine trees. The aesthetic is high-octane and energetic, capturing the power and speed of the jet skis." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Uwv4Ohzo9BjkAszsPSttqQIyg-lKn7qoB3SYmT3iN7mb06w_fEUY6YXF2A51Di1EaVjv-ptJs9OYW2T4gVd7kEbN7ZgDjBs-r1U7b5FpaSdYpUu64jjDpj6CyKblrvsXQU_OttuJQvvfsHMluRIoYYY-_38-07P4Pg5YaLWM0uO8fDOQ0rF8vXf1I1Xs036lA35BuWn28Cu6S5bn5i8mE7F2qEL_Wv-id74wKLFCXcn8uRdxFzGOSJDvMN5ZhLU5nacmxS9IYMU_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of an adventurous woman in her late 20s wearing stylish polarized sunglasses and a wetsuit top, laughing as water spray hits her face. The background is a blurred turquoise water surface. The shot is high-fidelity, vibrant, and energetic, embodying the spirit of high-performance aquatic sports." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALwCqWnaNuTAG7D8x7_ZMFWDPbsl3U6sOmvi8JAs6jt-zKK4G0N4GaDfWa4UF3XvZzfV6Lcl9RP3J7mAndjp1bSjB1Tjg7-YWrL5zCQE5l3L0Cw7EHr-Zl2U0Yl6QW1FA_bPTQEm7k0ZpQhhXAU7Py6STa-XEmQYZEf7LB8ZPPfBUtwwp-qvmV34aUOjA427FiJPJNzpYCjVH-E73Gs-EUtpzcicCMYom11FrGUbpDB4KD-id1x5otU8ZqQZKJEuO96Le9ykwjaBnS"/>
+</div>
+<div>
+<p class="font-button-text text-button-text text-white">Sarah & Mike</p>
+<p class="font-label-caps text-[10px] text-primary">Lake Simcoe, ON</p>
+</div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl">
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface font-body-lg italic mb-4 leading-relaxed">"These machines are beastly. Best fleet in Ontario by far. We rented two for a sprint across Simcoe and they handled the chop like a dream. Bluetooth audio was a huge plus!"</p>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-variant rounded text-[10px] font-label-caps text-on-surface-variant uppercase tracking-widest">Premium Audio</span>
+<span class="px-2 py-1 bg-surface-variant rounded text-[10px] font-label-caps text-on-surface-variant uppercase tracking-widest">High Contrast</span>
+</div>
+</div>
+</article>
+<!-- Review 3: Sunset/Couples -->
+<article class="flex flex-col gap-4">
+<div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A cinematic wide shot of a couple sitting on a stationary jet ski in the middle of a calm lake during a vibrant purple and orange sunset. The silhouette of the jet ski is sharp against the shimmering water reflections. The mood is exclusive, serene, and luxurious, highlighting the lifestyle aspect of high-end jet ski rentals in a corporate modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJXoLKZPT3bs51CIO-UcAVTFmvr0lzZSX4QLCGY2UDMthz9M4khBkBmDlPh9-t7HcHOw7RImL7x07BY3TVRx-bI46nSKYuS7fxcpDjZWT4vkmcGdXpsLCQlmwPPu2-o_GtIbr-Y0C88l7nfd2yUKhh32oQAp1E9uGGJoNbtrFio81ZBBr41CaZHlS_W5LRnk6mK3JNBZMLK7hIJqY-uo_SkkgWVZcUCMgugPPU1T1KMQcwESMQvw3CN94mccleiUVAeehIPCJyhaGH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-secondary-fixed overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A smiling couple in their 30s posing together in front of a modern rental kiosk with sleek black and cyan branding. They are holding high-tech safety helmets. The lighting is clean and high-key, emphasizing a professional and polished rental service environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6fnVgCKSLec11u2fOVUIYn0SKyjgzquXYc3jizFUzKBKOR8GWl-GLHpv7FAGhf2LLH10NOOROcAkhHMikET1pHOMpaScw0lVTYEIjOCv5JJRITL6jUejqIUtQwnaNWbXrkOVzdLHgyOOTW5QdmCToXtoaxsZxvjpr5LRuFkhlGLKgcQNUz2q-SHwK_Q6_1fYg5kPby13cr43zNB0HnY565dGyL9EWg_yt8JtWvgLjx9h9DHGFtFOGGvT4XFcFLblkNza15D8nGtrl"/>
+</div>
+<div>
+<p class="font-button-text text-button-text text-white">David L.</p>
+<p class="font-label-caps text-[10px] text-secondary-fixed">Georgian Bay, ON</p>
+</div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl">
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface font-body-lg italic mb-4 leading-relaxed">"The booking process was seamless. We did the sunset package and it was the highlight of our summer. Everything was clean, well-maintained, and ready the moment we arrived."</p>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-variant rounded text-[10px] font-label-caps text-on-surface-variant uppercase tracking-widest">Sunset Special</span>
+<span class="px-2 py-1 bg-surface-variant rounded text-[10px] font-label-caps text-on-surface-variant uppercase tracking-widest">Seamless Booking</span>
+</div>
+</div>
+</article>
+</div>
+<!-- Call to Action -->
+<div class="mt-16 text-center">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Ready to share your story?</h3>
+<button class="w-full py-4 px-8 rounded-xl bg-secondary-fixed text-on-secondary-fixed font-button-text text-button-text shadow-[0_0_20px_rgba(116,245,255,0.3)] active:scale-95 transition-transform">Book Your Experience</button>
+</div>
+<!-- Footer -->
+<footer class="w-full py-12 mt-20 border-t border-outline-variant/10 bg-surface-container-lowest text-center">
+<div class="font-headline-md text-headline-md font-extrabold text-on-surface mb-6">Bros Jetsky Rentals</div>
+<div class="flex flex-col gap-4 mb-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Rental Agreement</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">FAQ</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+</div>
+<p class="font-body-md text-[12px] text-on-surface-variant opacity-50 px-4">© 2024 Bros Jetsky Rentals. All rights reserved. Built for high performance.</p>
+</footer>
+</main>
+<!-- Bottom Navigation Bar (Mobile) -->
+<div class="fixed bottom-0 w-full z-50 bg-surface/80 backdrop-blur-2xl border-t border-outline-variant/10 md:hidden">
+<div class="flex justify-around items-center py-4 px-2">
+<div class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">waves</span>
+<span class="font-label-caps text-[10px]">Fleet</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="font-label-caps text-[10px]">Gallery</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-secondary-fixed">
+<span class="material-symbols-outlined active-nav-indicator rounded-full p-1" style="font-variation-settings: 'FILL' 1;">reviews</span>
+<span class="font-label-caps text-[10px]">Reviews</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-caps text-[10px]">Safety</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">alternate_email</span>
+<span class="font-label-caps text-[10px]">Contact</span>
+</div>
+</div>
+</div>
+<!-- Floating Action Button Contextual (Hides on Detail/Settings, Shows on Feed) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-secondary-fixed text-on-secondary-fixed rounded-full shadow-[0_4px_20px_rgba(116,245,255,0.4)] flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined">add_a_photo</span>
+</button>
+</body></html>

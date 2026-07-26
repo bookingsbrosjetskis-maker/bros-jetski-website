@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Review &amp; Pay - Bros Jetsky Rentals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#c6c6c7",
+                        "on-tertiary": "#2f3131",
+                        "surface-container": "#1e2024",
+                        "surface-dim": "#111318",
+                        "on-secondary": "#00363a",
+                        "background": "#111318",
+                        "inverse-on-surface": "#2f3035",
+                        "on-background": "#e2e2e8",
+                        "surface-container-high": "#282a2e",
+                        "surface": "#111318",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-primary-fixed": "#001a41",
+                        "on-surface-variant": "#c1c6d7",
+                        "on-tertiary-container": "#282a2a",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "primary": "#adc7ff",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0c0e12",
+                        "on-secondary-fixed": "#002022",
+                        "surface-tint": "#adc7ff",
+                        "tertiary-container": "#909191",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "surface-container-highest": "#333539",
+                        "primary-fixed-dim": "#adc7ff",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-low": "#1a1c20",
+                        "inverse-primary": "#005bc0",
+                        "secondary-container": "#00f1fe",
+                        "inverse-surface": "#e2e2e8",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "on-primary-fixed-variant": "#004493",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "outline-variant": "#414754",
+                        "primary-container": "#4a8eff",
+                        "on-secondary-container": "#006a70",
+                        "on-primary-container": "#00285b",
+                        "surface-bright": "#37393e",
+                        "outline": "#8b90a0",
+                        "surface-variant": "#333539",
+                        "secondary-fixed": "#74f5ff",
+                        "on-primary": "#002e68",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-surface": "#e2e2e8",
+                        "secondary": "#ddfcff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Manrope"],
+                        "label-caps": ["Space Grotesk"],
+                        "headline-xl": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "button-text": ["Space Grotesk"],
+                        "headline-md": ["Montserrat"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #111318;
+            color: #e2e2e8;
+        }
+        .glass-panel {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 241, 254, 0.1);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 241, 254, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-x-hidden">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-[0_0_15px_rgba(0,241,254,0.15)]">
+<div class="flex justify-between items-center px-5 py-4 max-w-container-max mx-auto md:px-margin-desktop">
+<div class="flex items-center gap-3">
+<img alt="Bros Jetsky Rentals Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJGueak3DgTYS5A7MwcbNOKMh7q1WRvawGwrXDjNA19xKRilcxBB9MC3-hlHzNLiYwjStf4n0OIaUHSI-RiVlvqVgxbialXZnEESsYihh2huLiTEj81YoCeQj4KjJN-mXEDGb9-VshpDia8y2q2744yUhO8XcfNF4szv0GyeLjYnonAHbaFeH-Seo76uxhBLwCRcClXtC-faOx_3zk1sFRqaifsePFHBK0pFnzaidFE4Kk-Ot9cBZXjORWglakPzW38ym1lcY2YcYg"/>
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">Bros Jetsky Rentals</span>
+</div>
+<button class="transition-all duration-300 ease-in-out active:scale-95 text-on-background hover:text-primary">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-5 md:px-margin-mobile">
+<div class="max-w-md mx-auto space-y-6">
+<!-- Header Section -->
+<section class="space-y-2">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Review &amp; Pay</h1>
+<p class="text-on-surface-variant font-body-md">Complete your booking for the ultimate aquatic adventure.</p>
+</section>
+<!-- Booking Summary Bento Card -->
+<section class="glass-panel p-6 rounded-xl space-y-6">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-label-caps text-secondary-container bg-on-secondary-container/20 px-2 py-1 rounded">CONFIRMED FLEET</span>
+<h2 class="font-headline-md text-headline-md mt-2">Yamaha VX Cruiser HO</h2>
+<p class="text-on-surface-variant text-sm">High-Output 1.9L • 3 Seats</p>
+</div>
+<div class="w-16 h-16 rounded-lg bg-surface-container-highest overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A sleek Yamaha VX Cruiser HO jet ski in deep metallic green and black, sitting on pristine blue water in Ontario, Canada, with light reflecting off the chrome surfaces. The image is high-fidelity and modern, matching a dark corporate aesthetic with high contrast and sharp details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdezJyLI3r0DDlxXL8WxG2Wv1gKSfTlFkZKaHpTCRd1bKtFeIVbctxSUixp4VxhZWQnyvD0YTsP_hmjSpiarorPamgWihFHQSUqgAa-zYL80bIQzk0P_7f02BCpMS2p9WnnRzUbUXaiHOH9ZZSQJMmGFdMzUwqLU_lx7IQir2RuHOL4BXO3lDGn9bTuvAkqWtR_40qPb9m5vUM1ffJuia_v3ZQ_Sy9W3gZyg4BykqHpQHRx8BM_oBkLrpNZX0yDymmCfBcYX_zHIhN"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-outline-variant/20 pt-6">
+<div class="space-y-1">
+<p class="font-label-caps text-label-caps text-outline">DATE</p>
+<p class="font-body-md font-semibold">July 14, 2024</p>
+</div>
+<div class="space-y-1">
+<p class="font-label-caps text-label-caps text-outline">DURATION</p>
+<p class="font-body-md font-semibold">4 Hours (Half Day)</p>
+</div>
+<div class="space-y-1">
+<p class="font-label-caps text-label-caps text-outline">PICKUP</p>
+<p class="font-body-md font-semibold">10:00 AM</p>
+</div>
+<div class="space-y-1">
+<p class="font-label-caps text-label-caps text-outline">LOCATION</p>
+<p class="font-body-md font-semibold">Simcoe Dock B</p>
+</div>
+</div>
+</section>
+<!-- Pricing Breakdown -->
+<section class="glass-panel p-6 rounded-xl space-y-4">
+<h3 class="font-label-caps text-label-caps text-primary">PRICE BREAKDOWN</h3>
+<div class="space-y-3">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">4-Hour Rental</span>
+<span class="font-semibold">$450.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Fuel Surcharge (Est.)</span>
+<span class="font-semibold">$45.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Insurance &amp; Safety Gear</span>
+<span class="font-semibold">Included</span>
+</div>
+<div class="flex justify-between border-t border-outline-variant/20 pt-3">
+<span class="text-on-surface-variant">Tax (HST 13%)</span>
+<span class="font-semibold">$64.35</span>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="font-headline-md text-headline-md">Total</span>
+<span class="font-headline-md text-headline-md text-secondary-container">$559.35</span>
+</div>
+</div>
+</section>
+<!-- Payment Method -->
+<section class="glass-panel p-6 rounded-xl space-y-4">
+<h3 class="font-label-caps text-label-caps text-primary">PAYMENT METHOD</h3>
+<div class="flex items-center justify-between p-3 bg-surface-container-highest rounded border border-secondary-container/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container">credit_card</span>
+<span class="font-body-md">•••• 4242</span>
+</div>
+<button class="text-secondary-container font-button-text text-button-text uppercase tracking-wider">Change</button>
+</div>
+</section>
+<!-- Policies -->
+<div class="px-2 space-y-4">
+<label class="flex items-start gap-3 cursor-pointer">
+<input class="mt-1 w-5 h-5 rounded border-outline bg-surface-container-lowest text-secondary-container focus:ring-secondary-container focus:ring-offset-background" type="checkbox"/>
+<span class="text-sm text-on-surface-variant">I agree to the <a class="underline text-primary" href="#">Cancellation Policy</a> and confirm I am 19+ with a valid boat license.</span>
+</label>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar (Mobile Priority) -->
+<div class="fixed bottom-0 left-0 w-full bg-background border-t border-outline-variant/10 p-5 z-50">
+<div class="max-w-md mx-auto">
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-lg py-4 rounded-xl flex items-center justify-center gap-3 active:scale-[0.98] transition-transform glow-cyan">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
+                Pay $559.35 CAD
+            </button>
+<p class="text-center text-[10px] text-outline mt-3 uppercase tracking-widest">Secure 256-bit Encrypted Transaction</p>
+</div>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('button, input[type="checkbox"]').forEach(el => {
+            el.addEventListener('click', () => {
+                // Subtle feedback logic could go here
+            });
+        });
+    </script>
+</body></html>

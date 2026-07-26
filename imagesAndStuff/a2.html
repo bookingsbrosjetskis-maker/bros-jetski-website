@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gift Cards &amp; Adventure Bundles | Bros Jetsky Rentals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Manrope:wght@400;500&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#333539",
+                    "secondary-container": "#00f1fe",
+                    "on-primary": "#002e68",
+                    "background": "#111318",
+                    "on-surface": "#e2e2e8",
+                    "on-secondary-container": "#006a70",
+                    "primary": "#adc7ff",
+                    "primary-fixed": "#d8e2ff",
+                    "outline-variant": "#414754",
+                    "on-tertiary-container": "#282a2a",
+                    "secondary-fixed-dim": "#00dbe7",
+                    "surface": "#111318",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-tertiary": "#2f3131",
+                    "primary-fixed-dim": "#adc7ff",
+                    "outline": "#8b90a0",
+                    "surface-container-lowest": "#0c0e12",
+                    "secondary-fixed": "#74f5ff",
+                    "on-secondary": "#00363a",
+                    "on-background": "#e2e2e8",
+                    "on-surface-variant": "#c1c6d7",
+                    "tertiary-fixed": "#e2e2e2",
+                    "tertiary": "#c6c6c7",
+                    "surface-container-high": "#282a2e",
+                    "inverse-primary": "#005bc0",
+                    "primary-container": "#4a8eff",
+                    "tertiary-container": "#909191",
+                    "on-error-container": "#ffdad6",
+                    "error-container": "#93000a",
+                    "secondary": "#ddfcff",
+                    "on-primary-fixed-variant": "#004493",
+                    "surface-dim": "#111318",
+                    "surface-container-highest": "#333539",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "on-secondary-fixed": "#002022",
+                    "inverse-surface": "#e2e2e8",
+                    "error": "#ffb4ab",
+                    "on-error": "#690005",
+                    "surface-tint": "#adc7ff",
+                    "surface-container-low": "#1a1c20",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-primary-container": "#00285b",
+                    "inverse-on-surface": "#2f3035",
+                    "on-primary-fixed": "#001a41",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-bright": "#37393e",
+                    "surface-container": "#1e2024"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "unit": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Montserrat"],
+                    "body-md": ["Manrope"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-lg": ["Manrope"],
+                    "headline-xl": ["Montserrat"],
+                    "button-text": ["Space Grotesk"],
+                    "label-caps": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #111318;
+            color: #e2e2e8;
+            scroll-behavior: smooth;
+        }
+        .glass-card {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 241, 254, 0.1);
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(0, 241, 254, 0.15);
+        }
+        .speedometer-gradient {
+            background: conic-gradient(from 180deg at 50% 50%, #00f1fe 0deg, #005bc0 180deg, transparent 270deg);
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(173, 199, 255, 0.5);
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #111318; }
+        ::-webkit-scrollbar-thumb { background: #333539; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f1fe; }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-[0_0_15px_rgba(0,241,254,0.15)]">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary font-headline-md text-headline-md" style="font-variation-settings: 'FILL' 1;">waves</span>
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">Bros Jetsky Rentals</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-background hover:text-primary transition-colors font-button-text text-button-text" href="#">Fleet &amp; Rates</a>
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container font-button-text text-button-text" href="#">Gift Cards</a>
+<a class="text-on-background hover:text-primary transition-colors font-button-text text-button-text" href="#">Safety</a>
+<a class="text-on-background hover:text-primary transition-colors font-button-text text-button-text" href="#">Gallery</a>
+</nav>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-full font-button-text text-button-text font-bold transition-all duration-300 ease-in-out active:scale-95 hover:bg-secondary-fixed">
+                Book Now
+            </button>
+</div>
+</header>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative h-[614px] flex items-center justify-center overflow-hidden mb-16">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic, wide-angle shot of a high-performance jet ski cutting through crystal clear turquoise water at sunset. The lighting is dramatic, with the golden hour sun reflecting off the water spray and the sleek chrome surfaces of the machinery. The atmosphere is energetic and exclusive, with a color palette of deep ocean blues, vibrant cyans, and warm amber highlights." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAOU1GvOqpBqG0j4zAvvo_PySRw_DVd8AfiHOYlrXiOdOLJ-17LT8wWuBEtn_CKdoQfN5Z7zwz7vHCRSyfkCOjJusfUrUmmmkkMEew0Xeo3-Usq8r4ZfiFQ5yvMBWMlKv3naxTVx-NUZF9I63HbrccQBcQVuuqIN2oCUFRuVk_VOplVismbBTjblfZbyCZPnApGTNjLhUIv_t3OuH8Mka1_1CILUl0-jSiFj1l5S3x6I9VFIXR1Ot2Q2CyLOqsFAFGWm7xLXArJtMl8')"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background"></div>
+</div>
+<div class="relative z-10 text-center px-margin-mobile max-w-4xl">
+<p class="font-label-caps text-label-caps text-secondary-container mb-4 tracking-[0.2em]">UNFORGETTABLE ADVENTURES</p>
+<h1 class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-on-background mb-6">Gift the Thrill of the Open Water</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Premium aquatic experiences for those who live for high-performance excitement. Perfect for birthdays, weddings, or corporate rewards.</p>
+</div>
+</section>
+<!-- E-Gift Cards Grid -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-24">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">E-Gift Cards</h2>
+<p class="text-on-surface-variant">Choose a value and send a digital passport to adventure instantly.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-outline-variant rounded-lg text-on-surface hover:bg-surface-container-high transition-colors font-button-text">View All Cards</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Gift Card 1 -->
+<div class="glass-card rounded-xl overflow-hidden group transition-all duration-500 hover:-translate-y-2 glow-hover">
+<div class="relative h-48 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A premium digital gift card design featuring a stylized metallic jet ski icon over a deep navy background with glowing cyan circuit patterns. The design is modern and high-tech, reflecting high-performance machinery. Soft blue glows accentuate the edges, giving it a three-dimensional, floating appearance." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHy3_Z3uvueE5SEykT00o_j061YMBkXRmGgh81a_MoPuD_cZ6uxtdkNBxcoiEsOdBUSX4tMzbO_ZstWKVxjE1I_2YC7yxif-tN-n5Xh8ATgEwisLk-TDK26eD6NSdDtVoIR3AIkgDh3Dy1iVjE-KKbCssfkuI_dS05h9IavYKu3dA1HbAlRMxgWy4Ewcx-9vn4VbL4fim6lx9mr-QoawISLHJ2fkUt0lkzdbLKFRGdB_it-6asSKxxXa4ntq7vX_P2xUs7nmtsA42Q')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute bottom-4 left-6">
+<span class="font-headline-md text-headline-md text-primary">$100</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md mb-2">Explorer Credit</h3>
+<p class="text-on-surface-variant text-sm mb-6">Valid for any rental, fuel, or merchandise at all Bros locations.</p>
+<div class="flex gap-3">
+<button class="flex-1 bg-surface-container-highest text-on-surface py-3 rounded font-button-text hover:bg-primary/20 transition-colors">Send as Gift</button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded hover:bg-outline-variant/20"><span class="material-symbols-outlined">shopping_cart</span></button>
+</div>
+</div>
+</div>
+<!-- Gift Card 2 (Custom) -->
+<div class="glass-card rounded-xl overflow-hidden group transition-all duration-500 hover:-translate-y-2 glow-hover border-primary/30">
+<div class="relative h-48 flex items-center justify-center bg-surface-container-low overflow-hidden">
+
+<div class="relative z-10 text-center">
+<span class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-secondary-container">$???</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md mb-2">Custom Amount</h3>
+<p class="text-on-surface-variant text-sm mb-4">Tailor the adventure to your specific budget and needs.</p>
+<input class="w-full bg-background border border-outline rounded p-3 mb-4 focus:border-secondary-container outline-none transition-colors text-on-surface" placeholder="Enter Amount ($)" type="number"/>
+<button class="w-full bg-secondary-container text-on-secondary-container py-3 rounded font-button-text font-bold hover:bg-secondary-fixed transition-colors">Choose Amount</button>
+</div>
+</div>
+<!-- Gift Card 3 -->
+<div class="glass-card rounded-xl overflow-hidden group transition-all duration-500 hover:-translate-y-2 glow-hover">
+<div class="relative h-48 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A luxury digital gift card with a holographic finish showing a jet ski carving through dark water. The lighting is cool-toned with cyan and indigo hues. The surface has a polished, high-gloss texture like a high-end sports car, with crisp white typography indicating a premium value." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4o62D88lUlF2mqltZ1hz34EU6ji3-WTDsQ6EI6NNdmnSDTQNP6oljuRfULaMu5KSPqdFJ-8Og_mfb9SMc2d64t-6IgNIR4D2xnfPHY8hjheJeClGo5gJhGaomT9e2lWMZnxtbevKOpBQ2GJYoFXsyeM9nFs_NknmQbcxYZSYmOG9N5JT2AqddslNOjdA1dr0s5DzgXOwmSVcsd6tM6wF8Ttb9mxfQFMOzzWE-51IKLEAFOyTJE5UHr5qa4rwwnMgrmyYVth4PKslY')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute bottom-4 left-6">
+<span class="font-headline-md text-headline-md text-primary">$500</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md mb-2">High-Octane Credit</h3>
+<p class="text-on-surface-variant text-sm mb-6">Our most popular value for full-day premium fleet experiences.</p>
+<div class="flex gap-3">
+<button class="flex-1 bg-surface-container-highest text-on-surface py-3 rounded font-button-text hover:bg-primary/20 transition-colors">Send as Gift</button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded hover:bg-outline-variant/20"><span class="material-symbols-outlined">shopping_cart</span></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Experience Bundles Section -->
+<section class="bg-surface-container-low py-24 border-y border-outline-variant/10">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="text-center mb-16">
+<span class="font-label-caps text-label-caps text-primary tracking-[0.3em]">CURATED EXPERIENCES</span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mt-4">Adventure Bundles</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto mt-4">All-inclusive packages designed for maximum impact and seamless execution. Just show up and ride.</p>
+</div>
+<!-- Horizontal Bundle Feature -->
+<div class="flex flex-col lg:flex-row glass-card rounded-2xl overflow-hidden mb-12 border-secondary-container/20 group">
+<div class="lg:w-1/2 relative h-80 lg:h-auto overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="A romantic, high-end sunset scene featuring two premium jet skis moored at a private dock with a luxury picnic setup nearby. The sky is a gradient of deep purples and vibrant oranges, reflecting perfectly on the calm water. The lighting is soft and atmospheric, highlighting the sleek curves of the skis and the premium leather seating." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDt9cRaSLHYXKPkogSf--R7oFGOLMdHT77_gUVMc-DIVgJQYtzUzDaTpftCu0yjYzZXzTD8r903OrHy-1htK3zh54mlLdMjbVx1CMyatZzXNP1Mr0_ijWIDaBSMEnFmHM44_HC0Wl4dH_ms5gJ2PM9TVhy1zY2VgSwj7P85WU0Hy1tz9qS0cHJo9pv6b1JDgNqrdC_6vTwOnYTKm1bqvkSrVYepsKDbUdtbBG6YtYHnzNEOgnfvPVND3yXbUBuejt-dU3m6YzQU-3hl')"></div>
+<div class="absolute top-6 left-6 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-4 py-2 rounded-full">BEST SELLER</div>
+</div>
+<div class="lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+<h3 class="font-headline-xl text-headline-lg-mobile md:text-headline-md lg:text-headline-lg text-on-background mb-4">Sunset Date Night</h3>
+<p class="text-body-lg text-on-surface-variant mb-8">Two high-performance skis, priority launch at golden hour, a waterproof tech-bag with premium snacks, and professional photography of your ride.</p>
+<div class="grid grid-cols-2 gap-6 mb-10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container">schedule</span>
+<span class="text-on-surface">3 Hours Rental</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container">camera_enhance</span>
+<span class="text-on-surface">Photo Package</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container">restaurant</span>
+<span class="text-on-surface">Gourmet Snacks</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container">local_gas_station</span>
+<span class="text-on-surface">Fuel Included</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-6">
+<div class="text-3xl font-headline-md text-on-background">$349 <span class="text-sm font-body-md text-on-surface-variant">/ couple</span></div>
+<button class="w-full sm:w-auto bg-primary text-on-primary px-10 py-4 rounded-full font-button-text font-bold hover:brightness-110 transition-all shadow-lg shadow-primary/10">Book Experience</button>
+</div>
+</div>
+</div>
+<!-- Grid of smaller bundles -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Bundle 1 -->
+<div class="glass-card p-8 rounded-xl flex flex-col border-l-4 border-l-primary hover:border-l-secondary-container transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-primary/10 p-4 rounded-xl">
+<span class="material-symbols-outlined text-primary text-3xl">sports_score</span>
+</div>
+<div class="text-right">
+<div class="text-on-surface-variant font-label-caps text-label-caps">INDIVIDUAL</div>
+<div class="text-2xl font-headline-md text-on-surface">$599</div>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md mb-4">The Full Weekend Warrior</h3>
+<ul class="space-y-3 mb-8 flex-grow">
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-primary">check_circle</span>
+                                48h Premium Fleet Access
+                            </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-primary">check_circle</span>
+                                VIP Docking Rights
+                            </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-primary">check_circle</span>
+                                Towing Trailer Included
+                            </li>
+</ul>
+<button class="w-full py-3 border border-primary/30 rounded font-button-text text-primary hover:bg-primary hover:text-on-primary transition-all">View Details</button>
+</div>
+<!-- Bundle 2 -->
+<div class="glass-card p-8 rounded-xl flex flex-col border-l-4 border-l-secondary-container transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="bg-secondary-container/10 p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary-container text-3xl">groups</span>
+</div>
+<div class="text-right">
+<div class="text-on-surface-variant font-label-caps text-label-caps">GROUP (UP TO 6)</div>
+<div class="text-2xl font-headline-md text-on-surface">$1,299</div>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md mb-4">Corporate Adrenaline</h3>
+<ul class="space-y-3 mb-8 flex-grow">
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary-container">check_circle</span>
+                                Private Fleet Exclusive
+                            </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary-container">check_circle</span>
+                                On-site Instructor
+                            </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary-container">check_circle</span>
+                                Beachside Lunch Catering
+                            </li>
+</ul>
+<button class="w-full py-3 border border-secondary-container/30 rounded font-button-text text-secondary-container hover:bg-secondary-container hover:text-on-secondary-container transition-all">View Details</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Speedometer Duration Selector (Featured Component) -->
+<section class="py-24 px-margin-mobile">
+<div class="max-w-4xl mx-auto glass-card rounded-[2.5rem] p-8 md:p-16 relative overflow-hidden text-center">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+<div class="absolute -bottom-24 -left-24 w-64 h-64 bg-secondary-container/10 blur-[100px] rounded-full"></div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4">Configure Your Gift</h2>
+<p class="text-on-surface-variant mb-12">Drag the gauge to select the rental duration for your gift voucher.</p>
+<div class="relative w-64 h-64 mx-auto mb-12 flex items-center justify-center">
+<!-- Gauge Background -->
+<div class="absolute inset-0 rounded-full border-[12px] border-surface-variant"></div>
+<!-- Active Gauge Progress -->
+<div class="absolute inset-0 rounded-full border-[12px] border-t-secondary-container border-r-secondary-container border-b-transparent border-l-transparent rotate-45 transform"></div>
+<div class="text-center z-10">
+<div class="text-5xl font-black font-headline-xl text-on-background tracking-tighter" id="duration-val">4</div>
+<div class="text-sm font-label-caps text-secondary-container tracking-widest mt-1">HOURS</div>
+</div>
+<!-- Speedometer Needle -->
+<div class="absolute w-full h-full flex items-center justify-center rotate-[45deg]" id="needle">
+<div class="w-1 h-32 bg-secondary-container absolute -top-4 rounded-full shadow-[0_0_10px_rgba(0,241,254,0.8)]"></div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-center gap-12">
+<div class="text-left">
+<p class="text-on-surface-variant font-label-caps mb-1">TOTAL VALUE</p>
+<p class="text-4xl font-headline-md text-on-surface" id="price-display">$340.00</p>
+</div>
+<div class="h-px w-full md:h-12 md:w-px bg-outline-variant/30"></div>
+<div class="flex gap-4">
+<button class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-button-text font-bold hover:scale-105 transition-transform">Add to Cart</button>
+<button class="border border-outline-variant px-8 py-4 rounded-xl font-button-text hover:bg-surface-container transition-colors">Compare Bundles</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Elegant Pricing Table -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-24 overflow-hidden">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-12">Bundle Comparison</h2>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/30">
+<th class="py-6 font-label-caps text-on-surface-variant">FEATURES</th>
+<th class="py-6 font-headline-md text-on-surface px-4">THE EXPLORER</th>
+<th class="py-6 font-headline-md text-secondary-container px-4">SUNSET DATE</th>
+<th class="py-6 font-headline-md text-on-surface px-4">WEEKEND WARRIOR</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr>
+<td class="py-6 text-on-surface-variant">Premium Fleet Access</td>
+<td class="px-4"><span class="material-symbols-outlined text-primary">check</span></td>
+<td class="px-4"><span class="material-symbols-outlined text-secondary-container">check</span></td>
+<td class="px-4"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr>
+<td class="py-6 text-on-surface-variant">Fuel Credits</td>
+<td class="px-4 text-on-surface-variant">—</td>
+<td class="px-4 text-on-surface">Full Tank</td>
+<td class="px-4 text-on-surface">Unlimited</td>
+</tr>
+<tr>
+<td class="py-6 text-on-surface-variant">GoPro Hero 11 Rental</td>
+<td class="px-4 text-on-surface-variant">—</td>
+<td class="px-4"><span class="material-symbols-outlined text-secondary-container">check</span></td>
+<td class="px-4"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr>
+<td class="py-6 text-on-surface-variant">Personal Instructor</td>
+<td class="px-4 text-on-surface-variant">Optional</td>
+<td class="px-4 text-on-surface-variant">—</td>
+<td class="px-4"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr>
+<td class="py-6 text-on-surface-variant">VIP Concierge Launch</td>
+<td class="px-4 text-on-surface-variant">—</td>
+<td class="px-4"><span class="material-symbols-outlined text-secondary-container">check</span></td>
+<td class="px-4"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-surface-dim border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<span class="font-headline-md text-headline-md font-black text-secondary-fixed mb-6 block">BROS JETSKY</span>
+<p class="text-on-surface-variant font-body-md text-body-md mb-8">Redefining high-performance aquatic luxury in the heart of Ontario's water landscape.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-6">Experience</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:underline decoration-secondary-container underline-offset-4" href="#">Fleet &amp; Rates</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:underline decoration-secondary-container underline-offset-4" href="#">Adventure Bundles</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:underline decoration-secondary-container underline-offset-4" href="#">Membership</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:underline decoration-secondary-container underline-offset-4" href="#">Gift Cards</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-6">Service</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:underline decoration-secondary-container underline-offset-4" href="#">Safety &amp; FAQ</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:underline decoration-secondary-container underline-offset-4" href="#">Gallery</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:underline decoration-secondary-container underline-offset-4" href="#">Reviews</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:underline decoration-secondary-container underline-offset-4" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-6">Stay Connected</h4>
+<p class="text-on-surface-variant mb-6 font-body-md">Join our elite community for exclusive launch events and offers.</p>
+<div class="flex">
+<input class="bg-surface-container border border-outline-variant p-3 rounded-l-lg outline-none focus:border-secondary-container flex-grow" placeholder="Your Email" type="email"/>
+<button class="bg-primary text-on-primary px-4 rounded-r-lg font-button-text font-bold">Join</button>
+</div>
+</div>
+</div>
+<div class="px-margin-mobile md:px-margin-desktop py-8 border-t border-outline-variant/10 max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-on-surface-variant font-body-md text-body-md">© 2024 Bros Jetsky Rentals. High-Performance Aquatic Adventure.</span>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-on-surface text-sm transition-opacity duration-200 hover:opacity-80" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-on-surface text-sm transition-opacity duration-200 hover:opacity-80" href="#">Terms of Use</a>
+</div>
+</div>
+</footer>
+<script>
+        // Speedometer interaction simulation
+        let duration = 4;
+        const durationDisplay = document.getElementById('duration-val');
+        const priceDisplay = document.getElementById('price-display');
+        const needle = document.getElementById('needle');
+
+        function updateGauge(hours) {
+            duration = Math.max(1, Math.min(24, hours));
+            durationDisplay.innerText = duration;
+            const price = (duration * 85).toFixed(2);
+            priceDisplay.innerText = `$${price}`;
+            
+            // Map 1-24 hours to -135deg to +135deg
+            const rotation = ((duration / 24) * 270) - 135;
+            needle.style.transform = `rotate(${rotation}deg)`;
+        }
+
+        // Initialize
+        updateGauge(4);
+
+        // Simple click interaction to demonstrate
+        document.querySelector('.relative.w-64.h-64').addEventListener('click', () => {
+            const nextVal = (duration % 12) + 1;
+            updateGauge(nextVal);
+        });
+    </script>
+</body></html>

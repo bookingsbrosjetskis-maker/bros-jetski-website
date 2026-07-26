@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Member Dashboard | Bros Jetsky Rentals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-card {
+            background: rgba(25, 28, 35, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 241, 254, 0.1);
+        }
+        .glow-accent {
+            box-shadow: 0 0 15px rgba(0, 241, 254, 0.15);
+        }
+        .speedometer-track {
+            background: conic-gradient(from 180deg, #00f1fe 0%, #00f1fe 75%, transparent 75%);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111318;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333539;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #414754;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#333539",
+                        "secondary-container": "#00f1fe",
+                        "on-primary": "#002e68",
+                        "background": "#111318",
+                        "on-surface": "#e2e2e8",
+                        "on-secondary-container": "#006a70",
+                        "primary": "#adc7ff",
+                        "primary-fixed": "#d8e2ff",
+                        "outline-variant": "#414754",
+                        "on-tertiary-container": "#282a2a",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "surface": "#111318",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-tertiary": "#2f3131",
+                        "primary-fixed-dim": "#adc7ff",
+                        "outline": "#8b90a0",
+                        "surface-container-lowest": "#0c0e12",
+                        "secondary-fixed": "#74f5ff",
+                        "on-secondary": "#00363a",
+                        "on-background": "#e2e2e8",
+                        "on-surface-variant": "#c1c6d7",
+                        "tertiary-fixed": "#e2e2e2",
+                        "tertiary": "#c6c6c7",
+                        "surface-container-high": "#282a2e",
+                        "inverse-primary": "#005bc0",
+                        "primary-container": "#4a8eff",
+                        "tertiary-container": "#909191",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "secondary": "#ddfcff",
+                        "on-primary-fixed-variant": "#004493",
+                        "surface-dim": "#111318",
+                        "surface-container-highest": "#333539",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "on-secondary-fixed": "#002022",
+                        "inverse-surface": "#e2e2e8",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "surface-tint": "#adc7ff",
+                        "surface-container-low": "#1a2c20",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-container": "#00285b",
+                        "inverse-on-surface": "#2f3035",
+                        "on-primary-fixed": "#001a41",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-bright": "#37393e",
+                        "surface-container": "#1e2024"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Montserrat"],
+                        "body-md": ["Manrope"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-xl": ["Montserrat"],
+                        "button-text": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- Top Navigation Bar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-[0_0_15px_rgba(0,241,254,0.15)]">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">waves</span>
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">Bros Jetsky Rentals</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-button-text text-on-background dark:text-on-background hover:text-primary transition-colors" href="#">Fleet</a>
+<a class="font-button-text text-secondary-container dark:text-secondary-container font-bold border-b-2 border-secondary-container pb-1" href="#">Dashboard</a>
+<a class="font-button-text text-on-background dark:text-on-background hover:text-primary transition-colors" href="#">History</a>
+<a class="font-button-text text-on-background dark:text-on-background hover:text-primary transition-colors" href="#">Support</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-secondary-container text-on-secondary-container font-button-text px-6 py-2 rounded-full transition-all duration-300 ease-in-out active:scale-95 hover:shadow-[0_0_20px_rgba(0,241,254,0.3)]">
+                    Book Now
+                </button>
+<div class="w-10 h-10 rounded-full border border-secondary-container/50 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a confident male explorer in his 30s, wearing high-end outdoor tactical gear. The lighting is dramatic and cinematic, with cool blue rim lighting to match a premium high-tech aquatic brand. The background is a dark, out-of-focus lakeside setting at dusk, emphasizing the luxury and exclusivity of the membership profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYMHDgkR9I47M06kH48jErOFprv15aIfcYfAcZ-XHoD9tnPM8PzMUfSqZ3kHhjos02RQsO8Ujhcji1EWkDsC8GiT37HxdwwuAc52CQ8bPud6zPP2LYI0qh1ZYmu403Z-KloXZ0PhSmTD5341b1M7MWUagl-f2qXDiGuYmPzo1RszHz78XO4vYh6oJ6pw-lhRPIIiuDkhuFTI6BsBV77Xrz_0IfuQ8Qqn9U0CYovcdbao7EkfemXnlZ7u0emi9A2Hpw4pZI5y9Cp8kn"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full relative">
+<!-- Background Ambient Shader -->
+<div class="fixed inset-0 pointer-events-none opacity-20 z-[-1]">
+
+</div>
+<!-- Welcome Header -->
+<section class="mb-12">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6">
+<div>
+<span class="font-label-caps text-label-caps text-secondary-container uppercase tracking-widest mb-2 block">Premium Member Portal</span>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Welcome back, <span class="text-primary">Alex</span></h1>
+<p class="font-body-md text-on-surface-variant mt-2 max-w-2xl">The water is perfect today in Lake Muskoka. Your Sea-Doo RXT-X 300 is ready for your next adventure.</p>
+</div>
+<div class="flex gap-4">
+<div class="glass-card px-6 py-4 rounded-xl flex items-center gap-4">
+<div class="text-right">
+<p class="font-label-caps text-on-surface-variant">MEMBERSHIP LEVEL</p>
+<p class="font-button-text text-secondary-container">ELITE PLATINUM</p>
+</div>
+<span class="material-symbols-outlined text-secondary-container text-4xl">workspace_premium</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Upcoming Bookings (Primary Focus) -->
+<div class="md:col-span-8 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+                        Upcoming Bookings
+                    </h2>
+<button class="text-primary hover:underline font-button-text">View All</button>
+</div>
+<!-- Booking Card 1 -->
+<div class="glass-card rounded-2xl overflow-hidden group transition-all duration-500 hover:border-secondary-container/40">
+<div class="flex flex-col lg:flex-row">
+<div class="lg:w-1/3 h-48 lg:h-auto overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A high-performance Sea-Doo RXT-X 300 jet ski cutting through crystal-clear blue water, creating a powerful spray of white mist. The scene is shot in high-definition with high contrast, showing the sleek black and neon cyan finish of the vessel. The sun is setting in the background, casting a warm golden glow that contrasts with the deep blue shadows of the water." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIBngiIN6xh7YemtQ33rxHKZFKy6_Ay897wNqXyAQSRhnb7TUpYkGIuYMmoWk3pfLtiC-mmBpMMk5OWWrv5fnuyGrmqxCjjO3CpQY9_lzzgJ0M-j_3T_dqUtCJVEeXnhyX7TDNNdFY-cPBUU05DQEcHi6fOG2a1_UgtuRSBzZ12Z793QwQ1qss4rqeQd0uI12aMS77vw9EvBGeomZFw2lrsjIaYAPSvsJSw4s0Y6zR9PYqak0DnrXx4oIJNXD8zJIB5vczZHFG5_uL"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent lg:hidden"></div>
+</div>
+<div class="p-8 flex-grow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-secondary-container bg-secondary-container/10 px-3 py-1 rounded-full">CONFIRMED</span>
+<h3 class="font-headline-md text-headline-md mt-3">Sea-Doo RXT-X 300</h3>
+<p class="text-on-surface-variant font-body-md">High-Performance Sport Series</p>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-primary">July 14</p>
+<p class="font-label-caps text-on-surface-variant">09:00 AM - 05:00 PM</p>
+</div>
+</div>
+<div class="mt-8 flex flex-wrap gap-4 items-center justify-between border-t border-outline-variant/20 pt-6">
+<div class="flex gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">location_on</span>
+<span class="font-body-md">Muskoka Wharf</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+<span class="font-body-md">3 Passengers</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2 rounded-lg border border-outline hover:bg-surface-variant transition-colors font-button-text">Modify</button>
+<button class="px-5 py-2 rounded-lg bg-primary text-on-primary font-button-text hover:bg-primary-container transition-all">Check In</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Booking Card 2 (Compact) -->
+<div class="glass-card rounded-2xl p-6 border-l-4 border-l-secondary-container">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 rounded-xl bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container text-3xl">sailing</span>
+</div>
+<div>
+<h4 class="font-button-text text-lg">Yamaha WaveRunner GP1800R</h4>
+<p class="text-on-surface-variant text-sm">August 02 • full-day Rental</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Documents & Sidebar Section -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Membership Stats Card -->
+<div class="glass-card rounded-2xl p-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-9xl">speed</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-6">Stats</h3>
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label-caps text-on-surface-variant">TOTAL ADVENTURES</p>
+<p class="font-headline-md text-secondary-container">24</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-on-surface-variant">HRS ON WATER</p>
+<p class="font-headline-md text-secondary-container">156.4</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary-container h-full w-[75%] shadow-[0_0_10px_rgba(0,241,254,0.5)]"></div>
+</div>
+<p class="text-sm text-on-surface-variant">4 more rentals until your next <span class="text-primary">Elite Bonus</span></p>
+</div>
+</div>
+<!-- Digital Documents -->
+<div class="glass-card rounded-2xl p-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md">Documents</h3>
+<span class="material-symbols-outlined text-on-surface-variant">folder_open</span>
+</div>
+<div class="space-y-4">
+<a class="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-variant transition-all border border-transparent hover:border-outline-variant/30 group" href="#">
+<div class="w-10 h-10 rounded bg-secondary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container">description</span>
+</div>
+<div class="flex-grow">
+<p class="font-button-text group-hover:text-primary transition-colors">PCOC Certificate</p>
+<p class="text-xs text-on-surface-variant">Verified • Valid til 2029</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">download</span>
+</a>
+<a class="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-variant transition-all border border-transparent hover:border-outline-variant/30 group" href="#">
+<div class="w-10 h-10 rounded bg-secondary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container">draw</span>
+</div>
+<div class="flex-grow">
+<p class="font-button-text group-hover:text-primary transition-colors">Digital Waiver 2024</p>
+<p class="text-xs text-on-surface-variant">Signed May 12, 2024</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">visibility</span>
+</a>
+<a class="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-variant transition-all border border-transparent hover:border-outline-variant/30 group" href="#">
+<div class="w-10 h-10 rounded bg-secondary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container">shield_with_heart</span>
+</div>
+<div class="flex-grow">
+<p class="font-button-text group-hover:text-primary transition-colors">Insurance Policy</p>
+<p class="text-xs text-on-surface-variant">Platinum Coverage Active</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">download</span>
+</a>
+</div>
+<button class="w-full mt-6 py-3 rounded-xl border border-dashed border-outline-variant hover:border-secondary-container text-on-surface-variant hover:text-secondary-container transition-all text-sm font-button-text">
+                        + Upload New Document
+                    </button>
+</div>
+</div>
+</div>
+<!-- Past Adventures History -->
+<section class="mt-20">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline-md text-headline-md">Past Adventures</h2>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-variant"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-variant"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- History Card 1 -->
+<div class="glass-card rounded-2xl overflow-hidden group">
+<div class="h-40 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A serene wide-angle photograph of a premium jet ski floating on a calm, mirror-like lake at sunrise. The colors are misty lavender and deep indigo, creating a peaceful and exclusive mood. The jet ski is a modern, high-gloss white and silver model, reflecting the morning light with cinematic precision. The overall aesthetic is one of luxury and quiet confidence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHIfKvkxN5FydOId8x3Q7jW6_T9KYUSyKr-2FcKly6RdGRj_PlNzX3ylxtD58BtGjkTXnWGh82OqcuahOTkS1yfvzsvDetncQHyDNw6AcFm3zSO210cndcDwO1OdrSRxKmbs9V2KMRMA63KS23QeZMl4h4kR1Nm-uqmoJKI16oUiI00kVguw0WvZ3zcku0yJxqFAVmcrXJddekRhi8Mx8JUUIqVpzB9vwRe_5gUusdd6k_YgdrAwjZ9-QtjG3976sXncMuMewRa7a-"/>
+</div>
+<div class="p-6">
+<p class="font-label-caps text-on-surface-variant">JUNE 22, 2024</p>
+<h4 class="font-button-text mt-1">Sunset Expedition</h4>
+<div class="flex items-center gap-2 mt-4 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">timer</span>
+<span>4 Hours • 42 Miles</span>
+</div>
+<button class="mt-6 text-primary text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                            View Gallery <span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- History Card 2 -->
+<div class="glass-card rounded-2xl overflow-hidden group">
+<div class="h-40 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Action shot of two high-end jet skis racing through deep blue ocean waves, with white foam and spray captured in sharp detail. The lighting is bright mid-day sun, emphasizing the high-contrast textures of the water and the vibrant primary colors of the equipment. The visual style is energetic and commercial-grade, portraying the ultimate high-performance aquatic experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnHHVAbOCwi05KnckhSu91aAjjrZwrKS-JQWS0F0gFFLWm9N1rcE24TFMy4an9qQNYVHJf2bQto737yQFvMNL5zu9oTilRg8-AuvSkmiuEQa7KzzJV4G24gT_vTR7b3I6nfMZ70B1ifaiM1SPUZR0-dthX5PGsNVG_EVW3znbnWkeVVbMPLUqdZfH1EvAALLyaLqSy84tkohqDGR0fqnC64xgQltUMhuPnQ8fUz9e6M7yyHME05Pms7fL-vabnxDqYXctcI7fwm6Si"/>
+</div>
+<div class="p-6">
+<p class="font-label-caps text-on-surface-variant">JUNE 15, 2024</p>
+<h4 class="font-button-text mt-1">High-Speed Trials</h4>
+<div class="flex items-center gap-2 mt-4 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">timer</span>
+<span>2 Hours • 58 Miles</span>
+</div>
+<button class="mt-6 text-primary text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                            View Gallery <span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- History Card 3 -->
+<div class="glass-card rounded-2xl overflow-hidden group">
+<div class="h-40 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A lifestyle photo of a group of friends on high-end jet skis docked near a luxury lakeside villa. The setting is exclusive and upscale, featuring modern architecture and pristine natural surroundings. The lighting is soft afternoon sun, casting long elegant shadows and highlighting the premium textures of the marine upholstery and equipment. The mood is social, high-net-worth leisure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK0q6nZ8Gs6VSP2wiJna9_LpxNqadOumRtEYqeec74tT2jBDGVqZCvejQYTQ48aNyQjaCzcMX-kNpXT33mtIKkm6IjwTd7N5SicEP8mrlUmLDPmKK847C6CEaG3FAUa8nqULufJiyfe3f3ni82w_a2F4GVz898qgLvhHF2MwBMS1DaZ5CRt5WrXpWCU7FlzHytkhplWt9_XfkVOz9Vs4VD_HjjlsbqZNkuEkwcgBiYJ_GSnVYwAYCJqhZCDG_oP1vQS2_ggjdHHPeQ"/>
+</div>
+<div class="p-6">
+<p class="font-label-caps text-on-surface-variant">MAY 28, 2024</p>
+<h4 class="font-button-text mt-1">Lakeside Tour</h4>
+<div class="flex items-center gap-2 mt-4 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">timer</span>
+<span>8 Hours • 112 Miles</span>
+</div>
+<button class="mt-6 text-primary text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                            View Gallery <span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- History Card 4 -->
+<div class="glass-card rounded-2xl overflow-hidden group">
+<div class="h-40 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Extreme close-up of a high-tech digital jet ski display and dashboard glowing with neon cyan and electric blue interface elements against a dark black carbon fiber finish. The background shows blurred blue water passing by at high speed. The shot captures the precision engineering and high-fidelity technology associated with a premium adventure brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbISSLp10ZzfiKIl8fsb8CN2Gu83te96vlVwdQjm25EnAUdQyNjsgBm3katYnJzqFUOWE-ZOBXYs0lGZ9RO0_UiA_cjbCS2oS5yvcFTBxybzHa-RlB9lS0UxfM87AOzmddPVO294bfXSq3K2ZXTMnvxk3sA5fuOo3RJ_1GnTUgpJPzoVYLcIejOsjF1ExYONvjZzxg6K1AoVhFpCY1QB8A1Z6x6MBmYSr5OyELWCGwfRNmpiZfst6GOPw392C5jAF3yKguW7uLy7Hn"/>
+</div>
+<div class="p-6">
+<p class="font-label-caps text-on-surface-variant">MAY 12, 2024</p>
+<h4 class="font-button-text mt-1">Solo Training</h4>
+<div class="flex items-center gap-2 mt-4 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base">timer</span>
+<span>1 Hour • 18 Miles</span>
+</div>
+<button class="mt-6 text-primary text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                            View Gallery <span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-dim dark:bg-surface-dim border-t border-outline-variant/20 w-full mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<span class="font-headline-md text-headline-md font-black text-secondary-fixed">BROS JETSKY</span>
+<p class="mt-4 text-on-surface-variant font-body-md leading-relaxed">
+                    Elevating the standard of aquatic adventure in Ontario with premium equipment and elite service.
+                </p>
+<div class="flex gap-4 mt-8">
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:text-secondary-container hover:border-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:text-secondary-container hover:border-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined">waves</span>
+</a>
+</div>
+</div>
+<div>
+<h5 class="font-button-text text-primary mb-6">Explore</h5>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Fleet &amp; Rates</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Safety &amp; FAQ</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Gallery</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-button-text text-primary mb-6">Company</h5>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Reviews</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Contact Us</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-button-text text-primary mb-6">Newsletter</h5>
+<p class="text-sm text-on-surface-variant mb-4">Get notified about exclusive club events and new fleet arrivals.</p>
+<div class="relative">
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-secondary-container transition-all text-sm" placeholder="Your email" type="email"/>
+<button class="absolute right-2 top-2 bg-secondary-container text-on-secondary-container p-1 rounded-md transition-all active:scale-90">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="px-margin-desktop py-8 border-t border-outline-variant/10 max-w-container-max mx-auto text-center md:text-left">
+<p class="text-xs text-on-surface-variant">© 2024 Bros Jetsky Rentals. High-Performance Aquatic Adventure. Built for the elite.</p>
+</div>
+</footer>
+<!-- FAB (Suppressed on Dashboard as per rules, but included if user specifically asked for "High-End Patterns") -->
+<!-- Rule says suppress on Dashboard, so it is omitted -->
+<script>
+        // Micro-interactions for glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

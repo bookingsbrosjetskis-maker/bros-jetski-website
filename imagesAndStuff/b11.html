@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reviews | Bros Jetsky Rentals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Manrope:wght@400;500&family=Space+Grotesk:wght@600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Montserrat:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#282a2e",
+                    "tertiary-container": "#909191",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "surface": "#111318",
+                    "on-secondary": "#00363a",
+                    "on-primary-container": "#00285b",
+                    "surface-bright": "#37393e",
+                    "inverse-surface": "#e2e2e8",
+                    "outline-variant": "#414754",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed-variant": "#004493",
+                    "secondary-fixed": "#74f5ff",
+                    "primary-container": "#4a8eff",
+                    "on-surface-variant": "#c1c6d7",
+                    "on-surface": "#e2e2e8",
+                    "surface-variant": "#333539",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary": "#adc7ff",
+                    "on-background": "#e2e2e8",
+                    "outline": "#8b90a0",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#006a70",
+                    "on-primary-fixed": "#001a41",
+                    "on-primary": "#002e68",
+                    "secondary-container": "#00f1fe",
+                    "primary-fixed-dim": "#adc7ff",
+                    "on-tertiary-container": "#282a2a",
+                    "inverse-primary": "#005bc0",
+                    "surface-tint": "#adc7ff",
+                    "secondary": "#ddfcff",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container": "#1e2024",
+                    "on-secondary-fixed": "#002022",
+                    "surface-dim": "#111318",
+                    "surface-container-lowest": "#0c0e12",
+                    "tertiary": "#c6c6c7",
+                    "surface-container-low": "#1a1c20",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#00dbe7",
+                    "on-tertiary": "#2f3131",
+                    "primary-fixed": "#d8e2ff",
+                    "surface-container-highest": "#333539",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "background": "#111318",
+                    "inverse-on-surface": "#2f3035"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-lg": ["Manrope"],
+                    "headline-md": ["Montserrat"],
+                    "button-text": ["Space Grotesk"],
+                    "label-caps": ["Space Grotesk"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .backdrop-blur-20px { backdrop-filter: blur(20px); }
+        .glass-card {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(116, 245, 255, 0.1);
+        }
+        .speedometer-glow {
+            filter: drop-shadow(0 0 8px rgba(116, 245, 255, 0.3));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b border-outline-variant/20 bg-surface/60 backdrop-blur-20px shadow-[0_0_15px_rgba(116,245,255,0.15)]">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-primary dark:text-primary-fixed-dim">
+                Bros Jetsky Rentals
+            </div>
+<!-- Desktop Links -->
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-button-text text-button-text" href="#">Fleet</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-button-text text-button-text" href="#">Gallery</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-button-text text-button-text" href="#">Safety</a>
+<a class="text-secondary-fixed border-b-2 border-secondary-fixed pb-1 font-button-text text-button-text" href="#">Reviews</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors font-button-text text-button-text" href="#">Contact</a>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-lg font-button-text text-button-text font-bold hover:opacity-80 transition-all duration-300 active:scale-95">
+                Book Now
+            </button>
+</div>
+</nav>
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Hero Social Proof Section -->
+<section class="mb-20 text-center">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-secondary-fixed/30 bg-secondary-fixed/5 mb-6">
+<span class="material-symbols-outlined text-secondary-fixed text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-caps text-label-caps text-secondary-fixed tracking-widest">VERIFIED RIDER EXPERIENCES</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl mb-6 leading-tight">Trusted by Thrill Seekers.</h1>
+<div class="flex flex-col md:flex-row items-center justify-center gap-12 mt-12">
+<div class="flex flex-col items-center">
+<div class="text-[80px] font-bold text-secondary-fixed leading-none mb-2 speedometer-glow">4.7</div>
+<div class="flex gap-1 text-secondary-fixed mb-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0.5;">star_half</span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">AVERAGE RATING FROM 500+ RIDERS</p>
+</div>
+<div class="hidden md:block w-px h-24 bg-outline-variant/30"></div>
+<div class="flex -space-x-4">
+<div class="w-16 h-16 rounded-full border-2 border-surface bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a smiling young man in athletic wear standing by a lake at sunset, high contrast corporate style lighting, deep blue water background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmyh7K2TgykoE6vxWRPHDQjd8Kuw0AuM6_CuSyhwHMZa2aCAbs6SxJuYORohPULmsqZWdwYgNeVbRuAmdNGILxxvr-Qaa-OJpyDqlb-Q3PnQVao_UuaeHMJKouv7vmm7QpJ8Rms9zRm-lCdaRd4WKQ5JwpQ-Sh99hZKycq9znKRQ-9gCgvjWy0Vvw_e8kw8018zpV9XLwSe2Jr_BNLxc_TYoMS2HSWeD-UZ3b-tLNJObE7zFqRfFOyKsS9_tzBKstsjuHKlGhj3xJS"/>
+</div>
+<div class="w-16 h-16 rounded-full border-2 border-surface bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a cheerful woman with sunglasses on her head, vibrant lighting, soft outdoor lake setting with a hint of a jet ski in the background, professional quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPeVsIqxsqsE1VuFSTDMnBU5np1kbc8--tWYWxhdcNXsnwSbxSHk257cOEB_uTayHa8Rf4VYDDfjBcGCJpL7LzhvPHHGX413pbNKfqAba7U82_LgYontc_ilykP1Odw8UdwoU8gkvF0zuwjG8iXN7RW8UsX1apTbwue-_4MGQUqPscvLtUVnPc3ZSqRr_LvDGKxQjWBxu5RuFDkDBowKmb8wMddKOHl76sADZw4Lq_vCtIAISh2n3l5nxlnReSBuQCsVH5bZGIp2Xy"/>
+</div>
+<div class="w-16 h-16 rounded-full border-2 border-surface bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a middle-aged man with a thumbs up, wearing a life jacket, bright cyan and deep navy color palette, outdoors at a high-end dock facility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQxVPrQBTfWPeKNk6e4zdHJSRutl862DNeVMjxtnMmbxJh6WwX2-E00EhdAaLdPCgZ-MMiS-SLXoL_W7UH2gC_QD2tWcarqzA3k8hNYFMvDPQmIXJZq1Lq5FuFZdeX7XK_3OUoNbxtEtRmUGMI4xyhYEKvTIjtBQL32NgspERuJxLkd1u4EsxbzUpBdXutmy6cwGkqw4wGmYPCOqGKRcD-05MSe8EbNY41CrGLVqTwAbxljVYtnKHqD0WEUbsG8Vp7UA7wpdXH97zD"/>
+</div>
+<div class="w-16 h-16 rounded-full border-2 border-surface bg-surface-container-high flex items-center justify-center text-secondary-fixed font-bold">
+                        +12k
+                    </div>
+</div>
+</div>
+</section>
+<!-- Bento Grid of Reviews -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Featured Review (Large) -->
+<div class="md:col-span-2 glass-card p-8 rounded-xl flex flex-col justify-between group">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden border border-secondary-fixed/20">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of a family of four laughing together on a wooden dock with blue jet skis moored behind them, golden hour sunlight, warm and energetic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmupv_UtllAopXtlt2SeieyqvVl7KeNPuTH7JTTH_KbKIeAuLnrk_-b0iV5BAP1O_Al5t8USRlnMmnaDjaCu-3CyY-N8p4vbWsCD27LJnGyxo_z-1GAvocqbLlrvqvEtrKW9j22enK0xQ0qQLedWtBELm22_xxksIkgJ2txF-BT75RIto9Cc6lGA_l6gIbho9l5sHDDVK2yYnJPfcpaBZsf0OWoDP1WSrxiHuBivAnGpKkoMRkgnh-hQiexz-nwrfq96Rlo-Pwvk5g"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">The Thompson Family</h3>
+<p class="text-on-surface-variant text-sm">Rented 3x Yamaha FX SVHO</p>
+</div>
+</div>
+<div class="flex text-secondary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="font-headline-md text-headline-md leading-relaxed text-on-surface mb-8 italic">
+                        "Unbelievable experience! The power of these machines is unmatched in the area. Bros Jetsky Rentals made the safety briefing quick but thorough. We felt like VIPs from the second we stepped onto the dock."
+                    </p>
+</div>
+<div class="h-64 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A wide cinematic shot of three high-performance jet skis carving through crystal clear lake water, leaving dramatic white spray trails, deep navy and cyan color grade, high energy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRlL-hYd6Orv7dL1UweukJs81O8TIXVZAQMAIZEYhybpctgrerV2KR7nVgmo345NCwzjndkZU9-rezQ8Qxv0QcwMBJLajKNHhnd-RxhmKefAhcdeYHmsPtHXKQmxuYuBcwGW6qgLG_hmI-oVDz1hRTWIgzAbvsQX0oPVtkoGast-dsHTrsJ-HlbIZIxbBSej0doE7SU7xr12oqnTnc8ufMRyLeakY8HSbPmLBuaLXT2YI3x-AtU2j15jM-gbNwGK01pIoSZluOtPSe"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-white text-sm">photo_camera</span>
+<span class="text-white text-xs font-label-caps">PHOTO ATTACHED BY RIDER</span>
+</div>
+</div>
+</div>
+<!-- Standard Review 1 -->
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex text-secondary-fixed mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-3">Pure Adrenaline</h4>
+<p class="text-on-surface-variant font-body-md mb-6">
+                        If you want speed, this is the place. The equipment is brand new and maintained to perfection. Bluetooth audio on the skis worked flawlessly the whole time.
+                    </p>
+</div>
+<div class="flex items-center gap-3 pt-6 border-t border-outline-variant/20">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">JD</div>
+<div>
+<p class="font-button-text text-button-text text-on-surface">James D.</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant">VERIFIED MAY 2024</p>
+</div>
+</div>
+</div>
+<!-- Standard Review 2 -->
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex text-secondary-fixed mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-3">Excellent Service</h4>
+<p class="text-on-surface-variant font-body-md mb-6">
+                        Staff was super helpful getting us set up. The area for riding is huge and well-marked. We'll definitely be back next summer.
+                    </p>
+</div>
+<div class="flex items-center gap-3 pt-6 border-t border-outline-variant/20">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">SL</div>
+<div>
+<p class="font-button-text text-button-text text-on-surface">Sarah L.</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant">VERIFIED JUNE 2024</p>
+</div>
+</div>
+</div>
+<!-- Image/Review Hybrid -->
+<div class="glass-card p-6 rounded-xl flex flex-col gap-6">
+<div class="aspect-square rounded-lg overflow-hidden border border-outline-variant/10">
+<img class="w-full h-full object-cover" data-alt="Close up shot of a high-tech digital gauge on a jet ski dashboard showing speed and rpm, illuminated with bright cyan light against a dark metallic finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCxhH0M5DjJjvTy--xDtQhFCf2qmhdijEhZ1tpG_mz9YgnGx8Zrq6h7_6Ia18GgXe5XvRFp873ZJWi5rFJlynwvKFBJPv-jDv2I8pxi8PZrgo64nS-MrSKlcNCNmKQbKw-ltR2jA8We8LGeq2b_PNJYqe8GwYrG_0zxmoecOQnsUxPiptPZ2yUofMVctB0t9OXfLgTZubZbOoo_86flTkfh730gRCtv3mLh98oXLmZ9Lvb6S-LunktvJw-YYY4QcqCiIujH5lBKdND"/>
+</div>
+<div>
+<div class="flex text-secondary-fixed mb-3">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface font-body-md italic mb-4">"The 300HP supercharged model is a beast. Smoothest ride I've ever had on the water."</p>
+<p class="font-label-caps text-[10px] text-secondary-fixed">— MARCUS V., SPEED ENTHUSIAST</p>
+</div>
+</div>
+<!-- Standard Review 3 -->
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex text-secondary-fixed mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-3">Professional Team</h4>
+<p class="text-on-surface-variant font-body-md mb-6">
+                        Safe, professional, and exciting. Everything was ready when we arrived. No hidden fees or surprises. Highly recommend the sunset slot.
+                    </p>
+</div>
+<div class="flex items-center gap-3 pt-6 border-t border-outline-variant/20">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface font-bold">RT</div>
+<div>
+<p class="font-button-text text-button-text text-on-surface">Robert T.</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant">VERIFIED AUGUST 2024</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Action Section -->
+<section class="mt-32 relative rounded-2xl overflow-hidden py-24 px-8 text-center bg-surface-container-lowest border border-outline-variant/10">
+<div class="absolute inset-0 opacity-20">
+<div class="w-full h-full bg-cover bg-center" data-alt="Atmospheric wide shot of several jet skis docked in a line at night, illuminated by dramatic blue underwater lights and neon dock lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCELDFV-bieFXo53c0nB8t7yhNC3MKIt8TZ2E7p751LDvU7v_84fOrmUlxpTTpnaa-HhP5ODSmD93IuM3rwAJ5AVI8wJ0ocGUmDfxLPLnqmBqoSaUV4nJKiMGWxhBj3rZ1P9wCpJsl2OtFNl9vuHM2gTdDq4HpjivdRmU3aQzo93du8Cpb_E_Hm7I3KRZPirGntFv3SMDmUddvUyvPu9vYEBg4IR9JXs2NmIfhyADxTjPk_-6-wO8KDkA7PYuqstDYk4fyQEcCEygwN')"></div>
+</div>
+<div class="relative z-10">
+<h2 class="font-headline-lg text-headline-lg mb-4">Ready to Write Your Own Story?</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto mb-10 font-body-lg">Join thousands of happy riders this season. Book your premium jet ski adventure today and experience the ultimate rush.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-secondary-fixed text-on-secondary-fixed px-10 py-4 rounded-xl font-button-text text-button-text font-bold hover:bg-secondary-fixed-dim transition-all shadow-lg hover:shadow-secondary-fixed/20 active:scale-95">
+                        Book Your Ride
+                    </button>
+<button class="bg-transparent border border-outline text-on-surface px-10 py-4 rounded-xl font-button-text text-button-text font-bold hover:bg-surface-variant transition-all active:scale-95">
+                        View Our Fleet
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest border-t border-outline-variant/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<div class="font-headline-md text-headline-md font-extrabold text-on-surface mb-6">
+                    Bros Jetsky Rentals
+                </div>
+<p class="text-on-surface-variant font-body-md mb-8">
+                    The premier aquatic adventure company in Ontario. Precision, safety, and power.
+                </p>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-label-caps text-label-caps text-primary uppercase mb-2">Platform</h5>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Fleet</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Safety</a>
+<a class="text-primary font-bold" href="#">Reviews</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Gallery</a>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-label-caps text-label-caps text-primary uppercase mb-2">Legal</h5>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Rental Agreement</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">FAQ</a>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-label-caps text-label-caps text-primary uppercase mb-2">Support</h5>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Contact Us</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Location</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Safety Manual</a>
+<div class="flex gap-4 mt-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary-fixed cursor-pointer">public</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary-fixed cursor-pointer">groups</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary-fixed cursor-pointer">play_circle</span>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant/10 text-center px-margin-desktop max-w-container-max mx-auto">
+<p class="text-on-surface-variant text-xs font-label-caps">
+                © 2024 Bros Jetsky Rentals. All rights reserved. Built for high performance.
+            </p>
+</div>
+</footer>
+<script>
+        // Simple reveal animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-8');
+            observer.observe(el);
+        });
+    </script>
+</body></html>

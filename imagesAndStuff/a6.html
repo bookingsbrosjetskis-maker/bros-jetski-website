@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Safety Briefing | Bros Jetsky Rentals</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Manrope:wght@400;500;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#333539",
+                    "secondary-container": "#00f1fe",
+                    "on-primary": "#002e68",
+                    "background": "#111318",
+                    "on-surface": "#e2e2e8",
+                    "on-secondary-container": "#006a70",
+                    "primary": "#adc7ff",
+                    "primary-fixed": "#d8e2ff",
+                    "outline-variant": "#414754",
+                    "on-tertiary-container": "#282a2a",
+                    "secondary-fixed-dim": "#00dbe7",
+                    "surface": "#111318",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-tertiary": "#2f3131",
+                    "primary-fixed-dim": "#adc7ff",
+                    "outline": "#8b90a0",
+                    "surface-container-lowest": "#0c0e12",
+                    "secondary-fixed": "#74f5ff",
+                    "on-secondary": "#00363a",
+                    "on-background": "#e2e2e8",
+                    "on-surface-variant": "#c1c6d7",
+                    "tertiary-fixed": "#e2e2e2",
+                    "tertiary": "#c6c6c7",
+                    "surface-container-high": "#282a2e",
+                    "inverse-primary": "#005bc0",
+                    "primary-container": "#4a8eff",
+                    "tertiary-container": "#909191",
+                    "on-error-container": "#ffdad6",
+                    "error-container": "#93000a",
+                    "secondary": "#ddfcff",
+                    "on-primary-fixed-variant": "#004493",
+                    "surface-dim": "#111318",
+                    "surface-container-highest": "#333539",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "on-secondary-fixed": "#002022",
+                    "inverse-surface": "#e2e2e8",
+                    "error": "#ffb4ab",
+                    "on-error": "#690005",
+                    "surface-tint": "#adc7ff",
+                    "surface-container-low": "#1a1c20",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-primary-container": "#00285b",
+                    "inverse-on-surface": "#2f3035",
+                    "on-primary-fixed": "#001a41",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-bright": "#37393e",
+                    "surface-container": "#1e2024"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "unit": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Montserrat"],
+                    "body-md": ["Manrope"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-lg": ["Manrope"],
+                    "headline-xl": ["Montserrat"],
+                    "button-text": ["Space Grotesk"],
+                    "label-caps": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(51, 53, 57, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 241, 254, 0.1);
+        }
+        .speed-glow {
+            box-shadow: 0 0 15px rgba(0, 241, 254, 0.15);
+        }
+        .active-quiz-card {
+            border-color: #00f1fe;
+            box-shadow: 0 0 20px rgba(0, 241, 254, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Checkbox Appearance */
+        input[type="checkbox"]:checked {
+            background-color: #00f1fe;
+            border-color: #00f1fe;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-[0_0_15px_rgba(0,241,254,0.15)]">
+<div class="flex justify-between items-center px-4 md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="waves">waves</span>
+<h1 class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">Bros Jetsky Rentals</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-on-background hover:text-primary transition-colors" href="#">Fleet &amp; Rates</a>
+<a class="font-body-md text-secondary-container font-bold border-b-2 border-secondary-container" href="#">Safety Briefing</a>
+<a class="font-body-md text-on-background hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+<button class="bg-secondary-container text-on-secondary-container font-button-text px-6 py-2 rounded-full transition-all duration-300 ease-in-out active:scale-95 hover:bg-secondary-fixed">
+                Book Now
+            </button>
+</div>
+</header>
+<main class="pt-24 pb-20">
+<!-- Hero Section: Video Orientation -->
+<section class="max-w-container-max mx-auto px-4 md:px-margin-desktop mb-16">
+<div class="relative w-full aspect-video rounded-xl overflow-hidden glass-panel group">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A cinematic, high-definition action shot of a professional jet ski instructor on a deep blue lake at golden hour, wearing high-end safety gear and gesturing towards the controls. The aesthetic is corporate and premium, with sharp contrasts between the obsidian water and electric cyan highlights from the setting sun. The atmosphere is serious and professional yet exhilarating, emphasizing both high-performance machinery and strict safety protocols." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDHVElS-WqCot6c3R17D41srC3liYktlX65jeQTliKC-Nr7zqYyQPUmcZ4vrIaI6yyWc21XMH2ogrD2fwViQ-lGpngxN1pd8ETjvB5QZuJr6GwrY08MuDpnpswM_sUm-tSGuMx25clTq8n-ABOHLKhuvDusikpWTuVVfWB1b_LRIKP63RMR1XRp8Sl3AJfUTb0mxZwTuLnHt0JhZc5xc0LIsEb55Q3B4Tdi2fUGjGfVspE0DuiTkCDcgaIAiXV3AfEkrKrXOEW5BQ7q')"></div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-all duration-500">
+<button class="w-24 h-24 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center speed-glow transition-transform hover:scale-110 active:scale-95" id="playBtn">
+<span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/80 to-transparent">
+<p class="font-label-caps text-secondary-container mb-2 uppercase tracking-widest">Mandatory Orientation</p>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white">Mastering the High-Performance Seadoo</h2>
+</div>
+</div>
+</section>
+<!-- Safety Checklist & Bento Layout -->
+<section class="max-w-container-max mx-auto px-4 md:px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-20">
+<!-- Left: Rule Checklist -->
+<div class="lg:col-span-7">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="fact_check">fact_check</span>
+<h3 class="font-headline-md text-headline-md">Pre-Ride Safety Checklist</h3>
+</div>
+<div class="space-y-4">
+<label class="glass-panel p-6 rounded-xl flex items-start gap-4 cursor-pointer transition-all hover:bg-surface-container-highest/30">
+<input class="mt-1 w-6 h-6 rounded border-outline-variant bg-surface-container text-secondary-container focus:ring-secondary-container" type="checkbox"/>
+<div>
+<p class="font-body-lg text-white font-bold mb-1">PFD Compliance</p>
+<p class="text-on-surface-variant text-body-md">Life jackets must be worn at all times and buckled securely before boarding.</p>
+</div>
+</label>
+<label class="glass-panel p-6 rounded-xl flex items-start gap-4 cursor-pointer transition-all hover:bg-surface-container-highest/30">
+<input class="mt-1 w-6 h-6 rounded border-outline-variant bg-surface-container text-secondary-container focus:ring-secondary-container" type="checkbox"/>
+<div>
+<p class="font-body-lg text-white font-bold mb-1">Safety Lanyard (Kill Switch)</p>
+<p class="text-on-surface-variant text-body-md">Attach the lanyard to your life jacket or wrist before starting the engine.</p>
+</div>
+</label>
+<label class="glass-panel p-6 rounded-xl flex items-start gap-4 cursor-pointer transition-all hover:bg-surface-container-highest/30">
+<input class="mt-1 w-6 h-6 rounded border-outline-variant bg-surface-container text-secondary-container focus:ring-secondary-container" type="checkbox"/>
+<div>
+<p class="font-body-lg text-white font-bold mb-1">No-Wake Zone Awareness</p>
+<p class="text-on-surface-variant text-body-md">Maintain idle speed within 30 meters of docks, swimmers, or non-motorized craft.</p>
+</div>
+</label>
+<label class="glass-panel p-6 rounded-xl flex items-start gap-4 cursor-pointer transition-all hover:bg-surface-container-highest/30">
+<input class="mt-1 w-6 h-6 rounded border-outline-variant bg-surface-container text-secondary-container focus:ring-secondary-container" type="checkbox"/>
+<div>
+<p class="font-body-lg text-white font-bold mb-1">Distance &amp; Proximity</p>
+<p class="text-on-surface-variant text-body-md">Keep a minimum of 50 meters distance from all other personal watercraft.</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Right: Quick Facts / Technical Spec Chips -->
+<div class="lg:col-span-5 flex flex-col gap-gutter">
+<div class="glass-panel p-8 rounded-xl flex-1 relative overflow-hidden">
+
+<div class="relative z-10">
+<h4 class="font-label-caps text-secondary-container mb-6 tracking-[0.2em]">CRAFT SPECIFICATIONS</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="border border-secondary-container/20 p-4 rounded bg-background/50">
+<span class="material-symbols-outlined text-primary block mb-2" data-icon="bolt">bolt</span>
+<span class="text-white font-bold text-headline-md block">300 HP</span>
+<span class="text-on-surface-variant text-body-md">Engine Output</span>
+</div>
+<div class="border border-secondary-container/20 p-4 rounded bg-background/50">
+<span class="material-symbols-outlined text-primary block mb-2" data-icon="speed">speed</span>
+<span class="text-white font-bold text-headline-md block">65+ MPH</span>
+<span class="text-on-surface-variant text-body-md">Max Velocity</span>
+</div>
+</div>
+<div class="mt-8">
+<p class="font-body-md text-on-surface mb-4 italic">"With great power comes the need for absolute vigilance. These machines respond instantly to input."</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full border border-secondary-container/30 text-label-caps bg-secondary-container/10 text-secondary-container">IBR BRAKE SYSTEM</span>
+<span class="px-3 py-1 rounded-full border border-secondary-container/30 text-label-caps bg-secondary-container/10 text-secondary-container">BLUETOOTH AUDIO</span>
+<span class="px-3 py-1 rounded-full border border-secondary-container/30 text-label-caps bg-secondary-container/10 text-secondary-container">ST3 HULL</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Quiz Section -->
+<section class="max-w-container-max mx-auto px-4 md:px-margin-desktop mb-20">
+<div class="text-center mb-12">
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4">Competency Check</h3>
+<p class="text-on-surface-variant max-w-2xl mx-auto font-body-lg">Select the correct maneuver for each high-speed scenario to demonstrate your preparedness.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Question 1 -->
+<div class="quiz-card glass-panel p-8 rounded-xl transition-all duration-300 hover:scale-[1.02] cursor-pointer group" onclick="this.classList.toggle('active-quiz-card')">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center mb-6 text-primary font-bold font-headline-md">01</div>
+<p class="font-body-lg text-white font-bold mb-4">You encounter a swimmer 40 meters ahead. What is your primary action?</p>
+<ul class="space-y-3">
+<li class="p-3 rounded border border-outline-variant text-body-md group-hover:border-primary/30">Accelerate to bypass quickly</li>
+<li class="p-3 rounded border border-secondary-container/50 bg-secondary-container/10 text-body-md text-secondary-container font-bold">Cut throttle and steer away</li>
+<li class="p-3 rounded border border-outline-variant text-body-md group-hover:border-primary/30">Maintain speed, they see you</li>
+</ul>
+</div>
+<!-- Question 2 -->
+<div class="quiz-card glass-panel p-8 rounded-xl transition-all duration-300 hover:scale-[1.02] cursor-pointer group" onclick="this.classList.toggle('active-quiz-card')">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center mb-6 text-primary font-bold font-headline-md">02</div>
+<p class="font-body-lg text-white font-bold mb-4">When should you engage the iBR (Intelligent Brake &amp; Reverse) system?</p>
+<ul class="space-y-3">
+<li class="p-3 rounded border border-outline-variant text-body-md group-hover:border-primary/30">Only at the dock</li>
+<li class="p-3 rounded border border-secondary-container/50 bg-secondary-container/10 text-body-md text-secondary-container font-bold">To decelerate rapidly safely</li>
+<li class="p-3 rounded border border-outline-variant text-body-md group-hover:border-primary/30">Never while in motion</li>
+</ul>
+</div>
+<!-- Question 3 -->
+<div class="quiz-card glass-panel p-8 rounded-xl transition-all duration-300 hover:scale-[1.02] cursor-pointer group" onclick="this.classList.toggle('active-quiz-card')">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center mb-6 text-primary font-bold font-headline-md">03</div>
+<p class="font-body-lg text-white font-bold mb-4">The safety lanyard detaches. What happens instantly?</p>
+<ul class="space-y-3">
+<li class="p-3 rounded border border-secondary-container/50 bg-secondary-container/10 text-body-md text-secondary-container font-bold">Engine shuts down immediately</li>
+<li class="p-3 rounded border border-outline-variant text-body-md group-hover:border-primary/30">The craft enters slow-mode</li>
+<li class="p-3 rounded border border-outline-variant text-body-md group-hover:border-primary/30">An alarm sounds only</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Final Confirmation CTA -->
+<section class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+<div class="bg-primary-container p-12 rounded-2xl text-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container to-on-primary-container opacity-90"></div>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-white text-6xl mb-6" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h3 class="font-headline-lg text-white mb-4">Ready for Launch</h3>
+<p class="text-primary-fixed-dim text-body-lg mb-10 max-w-xl mx-auto">By clicking below, you acknowledge that you have watched the orientation video in full and agree to abide by all safety regulations.</p>
+<button class="bg-secondary-container text-on-secondary-container font-button-text text-lg px-12 py-5 rounded-full speed-glow hover:bg-secondary-fixed transition-all hover:scale-105 active:scale-95 shadow-xl inline-flex items-center gap-3">
+                        Confirm Briefing Completion
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-dim border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-4 md:px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<h2 class="font-headline-md text-headline-md font-black text-secondary-fixed mb-4">Bros Jetsky Rentals</h2>
+<p class="text-on-surface-variant font-body-md">High-Performance Aquatic Adventure in Ontario's finest waters.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-white font-bold font-label-caps tracking-widest">NAVIGATE</h5>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4" href="#">Fleet &amp; Rates</a>
+<a class="text-secondary-fixed hover:opacity-80" href="#">Safety &amp; FAQ</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4" href="#">Gallery</a>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-white font-bold font-label-caps tracking-widest">LEGAL</h5>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4" href="#">Rental Agreement</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4" href="#">Insurance Info</a>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-white font-bold font-label-caps tracking-widest">SUPPORT</h5>
+<p class="text-on-surface-variant text-body-md italic">Available 24/7 for emergency dockside assistance.</p>
+<a class="text-on-surface-variant hover:text-on-surface" href="#">Contact Us</a>
+<div class="flex gap-4 mt-2">
+<span class="material-symbols-outlined text-primary" data-icon="share">share</span>
+<span class="material-symbols-outlined text-primary" data-icon="language">language</span>
+</div>
+</div>
+</div>
+<div class="px-4 md:px-margin-desktop py-8 border-t border-outline-variant/10 text-center text-on-surface-variant font-body-md">
+            © 2024 Bros Jetsky Rentals. High-Performance Aquatic Adventure.
+        </div>
+</footer>
+<script>
+        document.getElementById('playBtn').addEventListener('click', function() {
+            this.innerHTML = '<span class="material-symbols-outlined text-5xl">pause</span>';
+            // Mock video play interaction
+        });
+
+        // Interactive Checklist Count
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                if(this.checked) {
+                    this.closest('label').classList.add('bg-secondary-container/5', 'border-secondary-container/30');
+                } else {
+                    this.closest('label').classList.remove('bg-secondary-container/5', 'border-secondary-container/30');
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Safety &amp; FAQ | Bros Jetsky Rentals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Manrope:wght@400;500&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#282a2e",
+                        "tertiary-container": "#909191",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "surface": "#111318",
+                        "on-secondary": "#00363a",
+                        "on-primary-container": "#00285b",
+                        "surface-bright": "#37393e",
+                        "inverse-surface": "#e2e2e8",
+                        "outline-variant": "#414754",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-fixed-variant": "#004493",
+                        "secondary-fixed": "#74f5ff",
+                        "primary-container": "#4a8eff",
+                        "on-surface-variant": "#c1c6d7",
+                        "on-surface": "#e2e2e8",
+                        "surface-variant": "#333539",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#adc7ff",
+                        "on-background": "#e2e2e8",
+                        "outline": "#8b90a0",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#006a70",
+                        "on-primary-fixed": "#001a41",
+                        "on-primary": "#002e68",
+                        "secondary-container": "#00f1fe",
+                        "primary-fixed-dim": "#adc7ff",
+                        "on-tertiary-container": "#282a2a",
+                        "inverse-primary": "#005bc0",
+                        "surface-tint": "#adc7ff",
+                        "secondary": "#ddfcff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container": "#1e2024",
+                        "on-secondary-fixed": "#002022",
+                        "surface-dim": "#111318",
+                        "surface-container-lowest": "#0c0e12",
+                        "tertiary": "#c6c6c7",
+                        "surface-container-low": "#1a1c20",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "on-tertiary": "#2f3131",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-highest": "#333539",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "background": "#111318",
+                        "inverse-on-surface": "#2f3035"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Manrope"],
+                        "headline-md": ["Montserrat"],
+                        "button-text": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .backdrop-blur-20px { backdrop-filter: blur(20px); }
+        .safety-card {
+            background: linear-gradient(135deg, rgba(40, 42, 46, 0.4) 0%, rgba(17, 19, 24, 0.4) 100%);
+            border: 1px solid rgba(116, 245, 255, 0.1);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<header class="fixed top-0 w-full z-50 border-b border-outline-variant/20 bg-surface/60 backdrop-blur-xl shadow-[0_0_15px_rgba(116,245,255,0.15)]">
+<nav class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-primary dark:text-primary-fixed-dim">
+                Bros Jetsky Rentals
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Fleet</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Gallery</a>
+<a class="font-button-text text-button-text text-secondary-fixed border-b-2 border-secondary-fixed pb-1" href="#">Safety</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Reviews</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Contact</a>
+</div>
+<button class="px-6 py-2 bg-secondary-fixed text-on-secondary-fixed font-button-text text-button-text rounded-full hover:opacity-80 transition-all duration-300 active:scale-95">
+                Book Now
+            </button>
+</nav>
+</header>
+<main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<section class="mb-16 text-center md:text-left">
+<span class="font-label-caps text-label-caps text-secondary-fixed mb-4 block">ADVENTURE RESPONSIBLY</span>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-6 leading-tight">Safety &amp; Operations</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Your thrill is our priority, but your safety is our mission. Explore our guidelines, requirements, and frequently asked questions to prepare for your premium aquatic experience.
+            </p>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-7 space-y-gutter">
+<div class="safety-card p-8 rounded-xl backdrop-blur-20px">
+<div class="flex items-start gap-4 mb-6">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="verified_user">verified_user</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Licensing Requirements</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Navigating Ontario waters requires adherence to federal and local regulations.</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="credit_card">credit_card</span>
+<span class="font-body-md text-body-md">Valid Pleasure Craft Operator Card (PCOC) is preferred.</span>
+</div>
+<div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="assignment">assignment</span>
+<span class="font-body-md text-body-md">Rental Boat Safety Checklist completed on-site for those without a PCOC.</span>
+</div>
+<div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="badge">badge</span>
+<span class="font-body-md text-body-md">Minimum age of 19 with a valid Government-issued Photo ID.</span>
+</div>
+</div>
+</div>
+<div class="safety-card p-8 rounded-xl backdrop-blur-20px">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-8">Frequently Asked Questions</h2>
+<div class="space-y-4">
+<div class="accordion-item group border-b border-outline-variant/10 pb-4">
+<button class="flex justify-between items-center w-full text-left py-2" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-[18px] text-on-surface group-hover:text-primary transition-colors">What happens if the weather is bad?</span>
+<span class="material-symbols-outlined accordion-icon transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content">
+<p class="pt-4 font-body-md text-body-md text-on-surface-variant">
+                                    Safety is paramount. In the event of high winds, lightning, or heavy rain, we will offer a full refund or reschedule your booking at no extra cost. We monitor local weather radars in real-time.
+                                </p>
+</div>
+</div>
+<div class="accordion-item group border-b border-outline-variant/10 pb-4">
+<button class="flex justify-between items-center w-full text-left py-2" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-[18px] text-on-surface group-hover:text-primary transition-colors">Is fuel included in the rental price?</span>
+<span class="material-symbols-outlined accordion-icon transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content">
+<p class="pt-4 font-body-md text-body-md text-on-surface-variant">
+                                    Our jet skis are provided with a full tank of premium fuel. Fuel charges are calculated upon return based on usage, similar to a car rental, ensuring you only pay for what you use.
+                                </p>
+</div>
+</div>
+<div class="accordion-item group border-b border-outline-variant/10 pb-4">
+<button class="flex justify-between items-center w-full text-left py-2" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-[18px] text-on-surface group-hover:text-primary transition-colors">Do you provide life jackets?</span>
+<span class="material-symbols-outlined accordion-icon transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content">
+<p class="pt-4 font-body-md text-body-md text-on-surface-variant">
+                                    Yes, high-performance, high-buoyancy life jackets (PFDs) are included with every rental for all passengers. We carry a variety of sizes to ensure a secure and comfortable fit.
+                                </p>
+</div>
+</div>
+<div class="accordion-item group border-b border-outline-variant/10 pb-4">
+<button class="flex justify-between items-center w-full text-left py-2" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-[18px] text-on-surface group-hover:text-primary transition-colors">What is the security deposit?</span>
+<span class="material-symbols-outlined accordion-icon transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content">
+<p class="pt-4 font-body-md text-body-md text-on-surface-variant">
+                                    A $1,500 security deposit is required for each rental via credit card pre-authorization. This is fully released upon the safe return of the equipment without damage.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 space-y-gutter">
+<div class="safety-card p-8 rounded-xl bg-surface-container-high/20">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="backpack">backpack</span>
+                        What to Bring
+                    </h2>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md">Valid Government Photo ID</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md">Sunscreen &amp; UV Protection</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md">Water-safe Footwear</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md">Waterproof Phone Case (Available for purchase)</span>
+</li>
+</ul>
+</div>
+<div class="safety-card p-8 rounded-xl bg-error-container/10 border-error/20">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-error" data-icon="event_busy">event_busy</span>
+                        Cancellation Policy
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                        We understand plans change. Our policy ensures fair access for all riders.
+                    </p>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">48+ Hours Notice</span>
+<span class="text-primary font-bold">100% Refund</span>
+</div>
+<div class="w-full bg-outline-variant/20 h-1 rounded-full">
+<div class="bg-primary h-1 rounded-full" style="width: 100%"></div>
+</div>
+<div class="flex justify-between items-center text-sm pt-2">
+<span class="text-on-surface-variant">24-48 Hours Notice</span>
+<span class="text-secondary-fixed font-bold">50% Credit</span>
+</div>
+<div class="w-full bg-outline-variant/20 h-1 rounded-full">
+<div class="bg-secondary-fixed h-1 rounded-full" style="width: 50%"></div>
+</div>
+<div class="flex justify-between items-center text-sm pt-2">
+<span class="text-on-surface-variant">Under 24 Hours</span>
+<span class="text-error font-bold">Non-refundable</span>
+</div>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-xl h-64 safety-card">
+<img class="w-full h-full object-cover" data-alt="A high-end, sleek life jacket with a professional racing design, featuring Bros Jetsky Rentals branding, resting on a clean teak dock with crystal clear blue water reflecting the morning sun in the background. The style is crisp, high-contrast, and luxurious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvsUkw3d365ncFSfDC7qgqqQjUuaUTo_7EbvpqajqDKERqNib7REFuP4ERp-rynbXOPOjKrrdrgHXE5XlSrxaUkL7h8DD6zJW3Th2wKIMGAgO5LmJOL7xf_FcnFU4V0zKVFozj-JFlyiN9oHWiMtlHh_z1yqsLEnnFmdPzLFVryWr0AbLYB6GYFy16z22QkLQFaKBt0iAxu9a7PbkNmNyLCET9e_Mkhek7gDO3cILUKeltnpBKhK-ubLyaZIFVmubjYoPRoaG6xYDP"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent p-6 flex flex-col justify-end">
+<span class="font-label-caps text-label-caps text-secondary-fixed">GEAR INCLUDED</span>
+<h3 class="font-headline-md text-headline-md text-white">Elite Safety Gear</h3>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/10 py-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md font-extrabold text-on-surface mb-4">
+                    Bros Jetsky Rentals
+                </div>
+<p class="text-on-surface-variant font-body-md text-body-md mb-6">
+                    Premium jet ski experiences in Ontario's finest waterways. High performance, zero compromise.
+                </p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-caps text-label-caps text-primary mb-2">Navigation</h4>
+<a class="text-on-surface-variant hover:text-primary font-body-md text-body-md transition-colors" href="#">Fleet</a>
+<a class="text-on-surface-variant hover:text-primary font-body-md text-body-md transition-colors" href="#">Safety</a>
+<a class="text-on-surface-variant hover:text-primary font-body-md text-body-md transition-colors" href="#">Reviews</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-caps text-label-caps text-primary mb-2">Legal</h4>
+<a class="text-on-surface-variant hover:text-primary font-body-md text-body-md transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary font-body-md text-body-md transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary font-body-md text-body-md transition-colors" href="#">Rental Agreement</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-caps text-label-caps text-primary mb-2">Support</h4>
+<a class="text-on-surface-variant hover:text-primary font-body-md text-body-md transition-colors" href="#">FAQ</a>
+<a class="text-on-surface-variant hover:text-primary font-body-md text-body-md transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+<div class="px-margin-desktop max-w-container-max mx-auto mt-12 pt-8 border-t border-outline-variant/5 text-center md:text-left">
+<p class="text-on-surface-variant font-body-md text-body-md opacity-60">
+                © 2024 Bros Jetsky Rentals. All rights reserved. Built for high performance.
+            </p>
+</div>
+</footer>
+<script>
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all items
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+            });
+            
+            // Toggle clicked item
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+    </script>
+</body></html>

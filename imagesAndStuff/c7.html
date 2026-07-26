@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bros Jetsky Rentals | High-Performance Aquatic Adventure</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#c6c6c7",
+                        "on-tertiary": "#2f3131",
+                        "surface-container": "#1e2024",
+                        "surface-dim": "#111318",
+                        "on-secondary": "#00363a",
+                        "background": "#111318",
+                        "inverse-on-surface": "#2f3035",
+                        "on-background": "#e2e2e8",
+                        "surface-container-high": "#282a2e",
+                        "surface": "#111318",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-primary-fixed": "#001a41",
+                        "on-surface-variant": "#c1c6d7",
+                        "on-tertiary-container": "#282a2a",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "primary": "#adc7ff",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0c0e12",
+                        "on-secondary-fixed": "#002022",
+                        "surface-tint": "#adc7ff",
+                        "tertiary-container": "#909191",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "surface-container-highest": "#333539",
+                        "primary-fixed-dim": "#adc7ff",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-low": "#1a1c20",
+                        "inverse-primary": "#005bc0",
+                        "secondary-container": "#00f1fe",
+                        "inverse-surface": "#e2e2e8",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "on-primary-fixed-variant": "#004493",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "outline-variant": "#414754",
+                        "primary-container": "#4a8eff",
+                        "on-secondary-container": "#006a70",
+                        "on-primary-container": "#00285b",
+                        "surface-bright": "#37393e",
+                        "outline": "#8b90a0",
+                        "surface-variant": "#333539",
+                        "secondary-fixed": "#74f5ff",
+                        "on-primary": "#002e68",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-surface": "#e2e2e8",
+                        "secondary": "#ddfcff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Manrope"],
+                        "label-caps": ["Space Grotesk"],
+                        "headline-xl": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "button-text": ["Space Grotesk"],
+                        "headline-md": ["Montserrat"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 241, 254, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #adc7ff 0%, #00f1fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-shadow {
+            box-shadow: 0 0 20px rgba(0, 241, 254, 0.15);
+        }
+        body {
+            background-color: #111318;
+            color: #e2e2e8;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-[0_0_15px_rgba(0,241,254,0.15)]">
+<div class="flex justify-between items-center px-margin-mobile py-4 max-w-container-max mx-auto md:px-margin-desktop">
+<div class="flex items-center gap-2">
+<img alt="Bros Jetsky Rentals Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJGueak3DgTYS5A7MwcbNOKMh7q1WRvawGwrXDjNA19xKRilcxBB9MC3-hlHzNLiYwjStf4n0OIaUHSI-RiVlvqVgxbialXZnEESsYihh2huLiTEj81YoCeQj4KjJN-mXEDGb9-VshpDia8y2q2744yUhO8XcfNF4szv0GyeLjYnonAHbaFeH-Seo76uxhBLwCRcClXtC-faOx_3zk1sFRqaifsePFHBK0pFnzaidFE4Kk-Ot9cBZXjORWglakPzW38ym1lcY2YcYg"/>
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary hidden md:block">Bros Jetsky Rentals</span>
+</div>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container py-1" href="#">Home</a>
+<a class="text-on-background hover:text-primary transition-colors py-1" href="#">Fleet</a>
+<a class="text-on-background hover:text-primary transition-colors py-1" href="#">Rates</a>
+<a class="text-on-background hover:text-primary transition-colors py-1" href="#">Safety</a>
+<button class="bg-secondary-container text-on-secondary-container font-button-text text-button-text px-6 py-2.5 rounded-full transition-all duration-300 ease-in-out active:scale-95 hover:brightness-110 glow-shadow">Book Now</button>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background z-10"></div>
+<div class="w-full h-full bg-cover bg-center scale-105 animate-pulse" data-alt="A cinematic, high-speed photograph of a premium jet ski cutting through crystal-clear turquoise waters, creating a dramatic white spray. The lighting is golden hour, with the sun reflecting off the water's surface and the sleek metallic body of the vehicle. The scene is shot from a low angle to emphasize power and speed, set against a backdrop of a tropical coastline under a deep blue sky." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3yWVFmeRIf5fGz-AnuyP2d2TK-5CuWO8dqCTwjC-PoBgs7GqYlJ8u6jUFqje8MGiJEFKbi3Rq2tSOPuZciX6tbAXbBWNPFH_iRBXOdmRs6A5wvt4PGAgCazRyPsWgCPO2sjWUFxtx0s1HBThW1LJsPhXjbahyont4_PvB6KrLU17W4E8bNAr2cv7SCpO7R0T0KoTprIU6Gq_N7jrzcvTJTD-DzdeOLA1tDMPh4izOgIyTXBTuCt1YRqEuEBtDlzaDLYPDBkuSY8er')"></div>
+</div>
+<div class="relative z-20 px-margin-mobile text-center max-w-4xl mx-auto md:px-margin-desktop">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-xl md:text-headline-xl mb-6 leading-tight">
+                DOMINATE THE <span class="gradient-text">WAVES</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
+                Premium jet ski rentals for adrenaline seekers and luxury travelers in Ontario. High-performance machinery, unparalleled safety, and pure aquatic power.
+            </p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-4">
+<button class="w-full md:w-auto bg-secondary-container text-on-secondary-container font-button-text text-button-text px-10 py-4 rounded-full transition-all duration-300 ease-in-out active:scale-95 hover:brightness-110 glow-shadow uppercase tracking-widest">
+                    Book Your Session
+                </button>
+<button class="w-full md:w-auto bg-surface-container-highest/50 backdrop-blur-sm border border-outline-variant/30 text-primary font-button-text text-button-text px-10 py-4 rounded-full transition-all duration-300 ease-in-out active:scale-95 hover:bg-surface-container-highest uppercase tracking-widest">
+                    Explore Fleet
+                </button>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex flex-col items-center gap-2 text-outline">
+<span class="font-label-caps text-label-caps">Scroll to explore</span>
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</section>
+<!-- Trust Signals / Stats -->
+<section class="py-12 bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="text-center">
+<div class="text-secondary-fixed-dim font-headline-md text-headline-md font-black mb-1">300 HP</div>
+<div class="text-outline font-label-caps text-label-caps uppercase">Max Power</div>
+</div>
+<div class="text-center">
+<div class="text-secondary-fixed-dim font-headline-md text-headline-md font-black mb-1">5.0 ★</div>
+<div class="text-outline font-label-caps text-label-caps uppercase">Customer Rating</div>
+</div>
+<div class="text-center">
+<div class="text-secondary-fixed-dim font-headline-md text-headline-md font-black mb-1">24/7</div>
+<div class="text-outline font-label-caps text-label-caps uppercase">Support</div>
+</div>
+<div class="text-center">
+<div class="text-secondary-fixed-dim font-headline-md text-headline-md font-black mb-1">100%</div>
+<div class="text-outline font-label-caps text-label-caps uppercase">Safety Record</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Fleet Bento Grid -->
+<section class="py-24 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="mb-16">
+<span class="font-label-caps text-label-caps text-secondary-container uppercase tracking-[0.2em] block mb-4">The Collection</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg">Select Your Vessel</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Featured Card: Sea-Doo Spark Trixx -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl glass-card transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,241,254,0.2)]">
+<div class="aspect-[16/9] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A professional action shot of a Sea-Doo Spark Trixx jet ski performing a wheelie trick on calm water. The jet ski has a vibrant orange and black color scheme that contrasts sharply with the deep blue water and bright sky. The camera captures the intensity of the moment with sharp focus on the water droplets and the rider's focused expression, emphasizing high-performance maneuverability and fun." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJhcFZsi-lv2EZA70p5yJXR-RdtUQFXy4gJqpKPiWUWHvMpWkUWg4eGc7U5caQBJ7GjVqYtvqYaLt-TRPRKpgXVi4D3ydYFvDqjvfrry6T2tvtZLZThMRbdNZw3GHLv-pX-SmaaoQKQIJy7mMowu9n8XLJnHtBH6_XhqiE-FSg15oQmF81xn3BeXBr3XXFuq7gg_E9su-6pkJj77OpKNsAWLzAPn8TAr8XMelOv1aTXcZai0-gHaJ7-e0fdHc6nk9ePGN3g5vPLm-w"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-md text-headline-md mb-2">Sea-Doo Spark Trixx</h3>
+<div class="flex gap-2">
+<span class="bg-surface-container-high border border-secondary-fixed-dim/30 px-3 py-1 rounded text-xs font-bold text-secondary-fixed-dim">90 HP</span>
+<span class="bg-surface-container-high border border-secondary-fixed-dim/30 px-3 py-1 rounded text-xs font-bold text-secondary-fixed-dim">2 SEATS</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-outline font-label-caps text-label-caps block mb-1">Starting at</span>
+<span class="text-primary font-headline-md text-headline-md">$89<small class="text-sm">/hr</small></span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md mb-8 max-w-lg">
+                        The ultimate trick machine. Featuring an extended range VTS, step wedges, and adjustable handlebar riser for effortless stunts.
+                    </p>
+<button class="w-full md:w-auto bg-primary text-on-primary px-8 py-3 rounded-full font-button-text text-button-text uppercase tracking-widest hover:brightness-110 transition-all">
+                        Reserve Now
+                    </button>
+</div>
+</div>
+<!-- Side Card: Yamaha Waverunner -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl glass-card transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,241,254,0.2)]">
+<div class="aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A luxury Yamaha Waverunner jet ski anchored near a secluded white sand beach. The water is a brilliant turquoise, and the jet ski's metallic blue finish sparkles under the mid-day tropical sun. The composition is clean and minimalist, highlighting the sleek lines of the vessel and the serene, exclusive atmosphere of a private island getaway. High-end luxury aquatic travel aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjj2aL3jL4UceIipvnLSnIfnSfSymdsNjBeXFV8H6PTGf0jisTw3-9N6nD9C41ItGqZGHRXPVyMG8cVsqFtck1lhI65z6UGjn0WqkDWrgZNj_-QZOijMIp7hrhxYw2xbc4JdIK05K5jDAwyY0NXLD6MCuGYbczOOn08XXXQrUBNechvBm6oEju7FQH2ZQO1KzvWyDaiUKhRr5E_PRngISf1MLvrm3e9_jqWaLl2NannbtBuDfd4mk_0qFS0Jks8Y0MaijMVYs3OX9G"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent flex flex-col justify-end p-8">
+<h3 class="font-headline-md text-headline-md mb-2">Yamaha VX Limited</h3>
+<div class="flex gap-2 mb-4">
+<span class="bg-surface-container-high border border-secondary-fixed-dim/30 px-3 py-1 rounded text-xs font-bold text-secondary-fixed-dim">180 HP</span>
+</div>
+<button class="text-secondary-fixed-dim font-button-text text-button-text uppercase tracking-[0.2em] flex items-center gap-2 group/btn">
+                        Details <span class="material-symbols-outlined transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Wide Card: Performance Specs -->
+<div class="md:col-span-12 glass-card rounded-xl p-8 flex flex-col md:flex-row items-center gap-8">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md mb-4">Engineered for Peak Performance</h3>
+<p class="text-on-surface-variant max-w-2xl">
+                        Our entire fleet consists of current-year models maintained by certified marine technicians. We don't just rent jet skis; we provide high-performance aquatic instruments.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4 w-full md:w-auto">
+<div class="bg-surface-container p-6 rounded-lg text-center border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary-container mb-2 text-4xl">speed</span>
+<div class="font-bold">60+ MPH</div>
+<div class="text-xs text-outline uppercase tracking-widest">Top Speed</div>
+</div>
+<div class="bg-surface-container p-6 rounded-lg text-center border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary-container mb-2 text-4xl">waves</span>
+<div class="font-bold">iBR Gen 3</div>
+<div class="text-xs text-outline uppercase tracking-widest">Brake System</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Speedometer Duration Selector -->
+<section class="py-24 bg-surface-dim">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-16">Plan Your Session</h2>
+<div class="relative max-w-lg mx-auto p-12 glass-card rounded-full aspect-square flex flex-col items-center justify-center border-4 border-secondary-container/20 overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="w-full h-full border-[20px] border-dashed border-secondary-container rounded-full animate-[spin_60s_linear_infinite]"></div>
+</div>
+<span class="font-label-caps text-label-caps text-primary mb-2">Select Duration</span>
+<div class="font-headline-xl text-headline-xl font-black text-secondary-fixed mb-1" id="duration-display">4 HRS</div>
+<div class="font-headline-md text-headline-md text-on-surface-variant mb-8" id="price-display">$299.00</div>
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary-container" max="8" min="1" oninput="updateDuration(this.value)" step="1" type="range" value="4"/>
+<div class="flex justify-between w-full mt-4 text-xs font-bold text-outline">
+<span>1 HR</span>
+<span>8 HRS</span>
+</div>
+</div>
+<script>
+                function updateDuration(val) {
+                    const durationEl = document.getElementById('duration-display');
+                    const priceEl = document.getElementById('price-display');
+                    const prices = {
+                        1: 89, 2: 159, 3: 229, 4: 299, 5: 359, 6: 419, 7: 469, 8: 499
+                    };
+                    durationEl.innerText = `${val} HRS`;
+                    priceEl.innerText = `$${prices[val]}.00`;
+                }
+            </script>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-surface-dim border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile py-16 max-w-container-max mx-auto md:px-margin-desktop">
+<div class="col-span-1 md:col-span-2">
+<img alt="Bros Jetsky Rentals Footer Logo" class="h-12 w-auto object-contain mb-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJGueak3DgTYS5A7MwcbNOKMh7q1WRvawGwrXDjNA19xKRilcxBB9MC3-hlHzNLiYwjStf4n0OIaUHSI-RiVlvqVgxbialXZnEESsYihh2huLiTEj81YoCeQj4KjJN-mXEDGb9-VshpDia8y2q2744yUhO8XcfNF4szv0GyeLjYnonAHbaFeH-Seo76uxhBLwCRcClXtC-faOx_3zk1sFRqaifsePFHBK0pFnzaidFE4Kk-Ot9cBZXjORWglakPzW38ym1lcY2YcYg"/>
+<p class="text-on-surface-variant max-w-sm mb-6">
+                    Professional high-performance jet ski rentals serving the Ontario region. Experience the power and precision of industry-leading marine technology.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined text-sm">call</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md mb-6">Explore</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Fleet &amp; Rates</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Safety &amp; FAQ</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Gallery</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md mb-6">Company</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Reviews</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Contact Us</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary-container underline-offset-4 transition-all" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-outline-variant/10">
+<p class="text-center md:text-left text-outline text-body-md font-body-md">
+                © 2024 Bros Jetsky Rentals. High-Performance Aquatic Adventure. All rights reserved.
+            </p>
+</div>
+</footer>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-t border-outline-variant/10">
+<div class="flex justify-around items-center py-3">
+<button class="flex flex-col items-center gap-1 text-secondary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold">HOME</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">directions_boat</span>
+<span class="text-[10px] font-bold">FLEET</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-[10px] font-bold">BOOK</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">PROFILE</span>
+</button>
+</div>
+</nav>
+<script>
+        // Smooth scroll reveal effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
+    </script>
+</body></html>

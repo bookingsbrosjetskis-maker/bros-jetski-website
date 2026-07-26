@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Azure Velocity | Booking Oversight</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#e2e2e8",
+                    "on-primary-fixed-variant": "#004493",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#00dbe7",
+                    "on-secondary": "#00363a",
+                    "primary": "#adc7ff",
+                    "secondary-container": "#00f1fe",
+                    "primary-container": "#4a8eff",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "secondary-fixed": "#74f5ff",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#1a1c20",
+                    "on-primary-container": "#00285b",
+                    "on-secondary-fixed": "#002022",
+                    "on-secondary-container": "#006a70",
+                    "on-error-container": "#ffdad6",
+                    "inverse-on-surface": "#2f3035",
+                    "outline": "#8b90a0",
+                    "surface-container-lowest": "#0c0e12",
+                    "primary-fixed": "#d8e2ff",
+                    "tertiary": "#c6c6c7",
+                    "on-background": "#e2e2e8",
+                    "on-surface": "#e2e2e8",
+                    "on-primary-fixed": "#001a41",
+                    "surface-container": "#1e2024",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "secondary": "#ddfcff",
+                    "surface-container-highest": "#333539",
+                    "on-tertiary": "#2f3131",
+                    "surface-dim": "#111318",
+                    "on-primary": "#002e68",
+                    "primary-fixed-dim": "#adc7ff",
+                    "error-container": "#93000a",
+                    "surface-variant": "#333539",
+                    "surface-bright": "#37393e",
+                    "inverse-primary": "#005bc0",
+                    "surface-container-high": "#282a2e",
+                    "outline-variant": "#414754",
+                    "tertiary-container": "#909191",
+                    "surface-tint": "#adc7ff",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-surface-variant": "#c1c6d7",
+                    "background": "#111318",
+                    "surface": "#111318",
+                    "on-tertiary-container": "#282a2a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Space Grotesk"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-lg": ["Manrope"],
+                    "button-text": ["Space Grotesk"],
+                    "headline-xl": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "headline-md": ["Montserrat"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-effect {
+        background: rgba(30, 32, 36, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 219, 231, 0.1);
+      }
+      .active-glow {
+        box-shadow: 0 0 15px rgba(0, 219, 231, 0.15);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #414754;
+        border-radius: 10px;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container selection:text-on-secondary-container overflow-hidden">
+<!-- Sidebar Navigation Shell -->
+<nav class="fixed left-0 top-0 h-full flex flex-col p-unit-gutter bg-surface-container-low border-r border-outline-variant w-64 z-50">
+<div class="mb-10">
+<span class="font-headline-md text-headline-md font-bold text-secondary-container tracking-tight">Azure Velocity</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70 mt-1">Fleet Admin Console</p>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<!-- Nav Items -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">sailing</span>
+<span class="font-label-caps text-label-caps">Fleet Management</span>
+</a>
+<!-- Active State: Bookings -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-caps text-label-caps">Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps text-label-caps">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">build</span>
+<span class="font-label-caps text-label-caps">Maintenance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+</div>
+<button class="mt-4 mb-8 bg-secondary-fixed-dim text-on-secondary-fixed py-3 px-4 rounded-full font-button-text text-button-text flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+            New Booking
+        </button>
+<div class="flex flex-col gap-2 pt-4 border-t border-outline-variant/30">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface text-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface text-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Canvas Area -->
+<main class="ml-64 w-[calc(100%-16rem)] h-screen flex flex-col relative overflow-hidden bg-surface">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center h-16 px-margin-desktop backdrop-blur-xl border-b border-outline-variant/30 sticky top-0 z-40 bg-surface-dim/80">
+<div class="flex items-center gap-8 flex-1">
+<h1 class="font-label-caps text-label-caps font-bold text-on-surface uppercase">Booking Oversight</h1>
+<!-- Search Bar -->
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-1 focus:ring-secondary-fixed-dim placeholder:text-on-surface-variant/50" placeholder="Filter by date, customer, or machine..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant/50">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a premium aquatic rental business administrator in a sleek modern office setting with nautical accents. High-quality corporate photography style with cool lighting tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsfeAy8m6CffXXGnItxrJYE8OPSwv5pK3zq59HNfXBqD5Q7YKYC_b0dzsLQHKTtDHQYWYakHorHGF73LVao66qDjASav_ccVWYpbVDA7caU6RNTvWWed-WzRsXeKl9wc5fwgnYOws8Rq33d2Vl4QcznKJMQIGsLCGyQ6yYWfClzwHRjkQXclAJixmmPGKwXBukL99k14a1h0_cacTB1SaD_wo2iJNDe7ksQ72wTranVi28K4lQ0CTCtGstFCOvW-Dup2sE5CvmUor0"/>
+</div>
+</div>
+</header>
+<!-- Dynamic Content -->
+<div class="flex-grow flex flex-col p-8 gap-8 overflow-y-auto custom-scrollbar">
+<!-- Dashboard Controls -->
+<div class="flex justify-between items-end">
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Fleet Schedule</h2>
+<p class="text-on-surface-variant font-body-md">Monitoring 24 active rentals for July 12th, 2024</p>
+</div>
+<div class="flex gap-4">
+<div class="flex bg-surface-container rounded-lg p-1">
+<button class="px-4 py-2 bg-primary-container text-on-primary-container rounded-md text-xs font-label-caps flex items-center gap-2">
+<span class="material-symbols-outlined text-base">view_module</span> Grid
+                        </button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-on-surface rounded-md text-xs font-label-caps flex items-center gap-2">
+<span class="material-symbols-outlined text-base">list</span> List
+                        </button>
+</div>
+<button class="px-4 py-2 border border-outline-variant rounded-lg text-on-surface font-label-caps text-xs flex items-center gap-2 hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-base">calendar_today</span> July 12, 2024
+                    </button>
+</div>
+</div>
+<!-- Oversight Grid Section -->
+<div class="grid grid-cols-12 gap-gutter items-start">
+<!-- Calendar View (Asymmetric Layout) -->
+<section class="col-span-8 flex flex-col gap-6">
+<!-- Gauge Themed Calendar Headers -->
+<div class="grid grid-cols-7 gap-4">
+<div class="flex flex-col items-center py-4 glass-effect rounded-xl border-t-2 border-primary">
+<span class="font-label-caps text-label-caps text-[10px] text-on-surface-variant">MON</span>
+<span class="font-headline-md text-headline-md text-primary">08</span>
+</div>
+<div class="flex flex-col items-center py-4 bg-surface-container-low rounded-xl opacity-50">
+<span class="font-label-caps text-label-caps text-[10px] text-on-surface-variant">TUE</span>
+<span class="font-headline-md text-headline-md">09</span>
+</div>
+<div class="flex flex-col items-center py-4 bg-surface-container-low rounded-xl opacity-50">
+<span class="font-label-caps text-label-caps text-[10px] text-on-surface-variant">WED</span>
+<span class="font-headline-md text-headline-md">10</span>
+</div>
+<div class="flex flex-col items-center py-4 bg-surface-container-low rounded-xl opacity-50">
+<span class="font-label-caps text-label-caps text-[10px] text-on-surface-variant">THU</span>
+<span class="font-headline-md text-headline-md">11</span>
+</div>
+<div class="flex flex-col items-center py-4 glass-effect rounded-xl border-t-2 border-secondary-container active-glow">
+<span class="font-label-caps text-label-caps text-[10px] text-secondary-container">FRI</span>
+<span class="font-headline-md text-headline-md text-secondary-container">12</span>
+</div>
+<div class="flex flex-col items-center py-4 bg-surface-container-low rounded-xl opacity-80">
+<span class="font-label-caps text-label-caps text-[10px] text-on-surface-variant">SAT</span>
+<span class="font-headline-md text-headline-md">13</span>
+</div>
+<div class="flex flex-col items-center py-4 bg-surface-container-low rounded-xl opacity-80">
+<span class="font-label-caps text-label-caps text-[10px] text-on-surface-variant">SUN</span>
+<span class="font-headline-md text-headline-md">14</span>
+</div>
+</div>
+<!-- Visual Timeline / Gantry View -->
+<div class="glass-effect rounded-2xl p-6 min-h-[400px]">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-label-caps text-label-caps text-secondary-container">Live Operations Canvas</h3>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 text-[10px] font-label-caps text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span> RXP-X 300
+                                </span>
+<span class="flex items-center gap-1 text-[10px] font-label-caps text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span> Spark Trixx
+                                </span>
+</div>
+</div>
+<!-- Timeline Grid -->
+<div class="space-y-4">
+<!-- Machine Rows -->
+<div class="flex items-center gap-4">
+<div class="w-24 text-[10px] font-label-caps text-on-surface-variant">Unit 01 (Blue)</div>
+<div class="flex-grow h-10 bg-surface-container-lowest rounded-lg relative overflow-hidden flex items-center">
+<div class="absolute left-[10%] w-[35%] h-full bg-primary-container/40 border-l-2 border-primary-container p-2 flex items-center">
+<span class="text-[10px] font-bold truncate">Jameson, R.</span>
+</div>
+<div class="absolute left-[55%] w-[20%] h-full bg-error-container/40 border-l-2 border-error p-2 flex items-center">
+<span class="text-[10px] font-bold truncate">MAINTENANCE</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-24 text-[10px] font-label-caps text-on-surface-variant">Unit 02 (Cyan)</div>
+<div class="flex-grow h-10 bg-surface-container-lowest rounded-lg relative overflow-hidden flex items-center">
+<div class="absolute left-[5%] w-[15%] h-full bg-secondary-container/30 border-l-2 border-secondary-container p-2 flex items-center">
+<span class="text-[10px] font-bold truncate">Miller, S.</span>
+</div>
+<div class="absolute left-[25%] w-[60%] h-full bg-secondary-container/30 border-l-2 border-secondary-container p-2 flex items-center">
+<span class="text-[10px] font-bold truncate">Vanderbilt Yacht Group (8 Units)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-24 text-[10px] font-label-caps text-on-surface-variant">Unit 03 (Blue)</div>
+<div class="flex-grow h-10 bg-surface-container-lowest rounded-lg relative overflow-hidden flex items-center">
+<div class="absolute left-[15%] w-[30%] h-full bg-primary-container/40 border-l-2 border-primary-container p-2 flex items-center">
+<span class="text-[10px] font-bold truncate">Holloway, M.</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-24 text-[10px] font-label-caps text-on-surface-variant">Unit 04 (Silver)</div>
+<div class="flex-grow h-10 bg-surface-container-lowest rounded-lg relative overflow-hidden flex items-center">
+<div class="absolute left-[40%] w-[45%] h-full bg-tertiary-container/30 border-l-2 border-tertiary-container p-2 flex items-center">
+<span class="text-[10px] font-bold truncate">Belfort, J.</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 opacity-50">
+<div class="w-24 text-[10px] font-label-caps text-on-surface-variant">Unit 05 (Blue)</div>
+<div class="flex-grow h-10 bg-surface-container-lowest rounded-lg relative overflow-hidden"></div>
+</div>
+</div>
+<!-- Time Legend -->
+<div class="flex ml-28 mt-4 justify-between text-[10px] font-label-caps text-on-surface-variant/50">
+<span>08:00 AM</span>
+<span>10:00 AM</span>
+<span>12:00 PM</span>
+<span>02:00 PM</span>
+<span>04:00 PM</span>
+<span>06:00 PM</span>
+<span>08:00 PM</span>
+</div>
+</div>
+</section>
+<!-- Status Sidebar (List View) -->
+<aside class="col-span-4 flex flex-col gap-6">
+<div class="glass-effect rounded-2xl p-6 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface">Urgent Focus</h3>
+<span class="px-2 py-1 bg-error-container text-on-error-container text-[10px] font-bold rounded">3 ACTION REQ.</span>
+</div>
+<!-- Mini Booking List -->
+<div class="flex flex-col gap-3">
+<!-- Card 1: Due Payment -->
+<div class="bg-surface-container-high/40 p-4 rounded-xl border-l-4 border-error hover:bg-surface-container-high transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-bold text-on-surface text-sm">Marcus Vanderbilt</p>
+<p class="text-[10px] text-on-surface-variant font-label-caps">2x Sea-Doo RXP-X 300</p>
+</div>
+<span class="material-symbols-outlined text-error text-xl">warning</span>
+</div>
+<div class="flex gap-2 mt-4">
+<span class="px-2 py-0.5 bg-error/10 text-error text-[9px] font-bold uppercase rounded border border-error/20">Payment Due</span>
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[9px] font-bold uppercase rounded border border-primary/20">Waiver Signed</span>
+</div>
+<div class="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="flex-1 py-2 bg-primary text-on-primary text-[10px] font-label-caps rounded-md">CALL</button>
+<button class="flex-1 py-2 border border-outline-variant text-on-surface text-[10px] font-label-caps rounded-md">SMS</button>
+</div>
+</div>
+<!-- Card 2: Signed, Deposit -->
+<div class="bg-surface-container-high/40 p-4 rounded-xl border-l-4 border-secondary-container hover:bg-surface-container-high transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-bold text-on-surface text-sm">Elena Rodriguez</p>
+<p class="text-[10px] text-on-surface-variant font-label-caps">1x Spark Trixx (4hr)</p>
+</div>
+<span class="material-symbols-outlined text-secondary-container text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex gap-2 mt-4">
+<span class="px-2 py-0.5 bg-secondary-container/10 text-secondary-container text-[9px] font-bold uppercase rounded border border-secondary-container/20">Deposit Paid</span>
+<span class="px-2 py-0.5 bg-error/10 text-error text-[9px] font-bold uppercase rounded border border-error/20">Missing Waiver</span>
+</div>
+<div class="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="flex-1 py-2 bg-primary text-on-primary text-[10px] font-label-caps rounded-md">CALL</button>
+<button class="flex-1 py-2 border border-outline-variant text-on-surface text-[10px] font-label-caps rounded-md">SMS</button>
+</div>
+</div>
+<!-- Card 3: Fully Clear -->
+<div class="bg-surface-container-high/40 p-4 rounded-xl border-l-4 border-primary hover:bg-surface-container-high transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-bold text-on-surface text-sm">Sarah Jenkins</p>
+<p class="text-[10px] text-on-surface-variant font-label-caps">Full Day Rental</p>
+</div>
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex gap-2 mt-4">
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[9px] font-bold uppercase rounded border border-primary/20">Paid Full</span>
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[9px] font-bold uppercase rounded border border-primary/20">Waiver Signed</span>
+</div>
+<div class="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="flex-1 py-2 bg-primary text-on-primary text-[10px] font-label-caps rounded-md">MESSAGE</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Statistics Summary -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/10">
+<p class="text-[10px] font-label-caps text-on-surface-variant mb-1">TOTAL REVENUE (TODAY)</p>
+<p class="text-headline-md text-primary font-bold">$12,450</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/10">
+<p class="text-[10px] font-label-caps text-on-surface-variant mb-1">FLEET UTILIZATION</p>
+<p class="text-headline-md text-secondary-container font-bold">92%</p>
+</div>
+</div>
+</aside>
+</div>
+<!-- Full List View Section (Bento Grid Style) -->
+<section class="mt-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Comprehensive Ledger</h3>
+<button class="text-primary font-label-caps text-xs flex items-center gap-1 hover:underline">
+                        Export CSV <span class="material-symbols-outlined text-sm">download</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/10 shadow-2xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 border-b border-outline-variant/20">
+<th class="p-5 text-[11px] font-label-caps text-on-surface-variant">Customer</th>
+<th class="p-5 text-[11px] font-label-caps text-on-surface-variant">Asset Details</th>
+<th class="p-5 text-[11px] font-label-caps text-on-surface-variant">Time Slot</th>
+<th class="p-5 text-[11px] font-label-caps text-on-surface-variant">Payment Status</th>
+<th class="p-5 text-[11px] font-label-caps text-on-surface-variant">Waiver</th>
+<th class="p-5 text-[11px] font-label-caps text-on-surface-variant">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Table Row 1 -->
+<tr class="hover:bg-surface-container-high/20 transition-colors">
+<td class="p-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center text-xs font-bold">MV</div>
+<div>
+<p class="font-bold text-on-surface text-sm">Marcus Vanderbilt</p>
+<p class="text-[10px] text-on-surface-variant">VIP Member</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<span class="text-xs text-on-surface">2x RXP-X 300</span>
+<span class="text-[10px] text-on-surface-variant font-label-caps">SERIAL: AV-291, AV-292</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<span class="text-xs text-on-surface">10:00 AM - 02:00 PM</span>
+<span class="text-[10px] text-on-surface-variant font-label-caps">4 HOUR SLOT</span>
+</div>
+</td>
+<td class="p-5">
+<span class="px-2 py-1 bg-error/10 text-error text-[10px] font-bold rounded-full border border-error/20">DUE: $840.00</span>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs font-bold">Verified</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container rounded-lg hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm">mail</span>
+</button>
+<button class="p-2 bg-surface-container rounded-lg hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm">phone</span>
+</button>
+<button class="p-2 bg-surface-container rounded-lg hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-surface-container-high/20 transition-colors">
+<td class="p-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center text-xs font-bold">ER</div>
+<div>
+<p class="font-bold text-on-surface text-sm">Elena Rodriguez</p>
+<p class="text-[10px] text-on-surface-variant">Standard Booking</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<span class="text-xs text-on-surface">1x Spark Trixx</span>
+<span class="text-[10px] text-on-surface-variant font-label-caps">SERIAL: AV-410</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<span class="text-xs text-on-surface">11:30 AM - 01:30 PM</span>
+<span class="text-[10px] text-on-surface-variant font-label-caps">2 HOUR SLOT</span>
+</div>
+</td>
+<td class="p-5">
+<span class="px-2 py-1 bg-secondary-container/10 text-secondary-container text-[10px] font-bold rounded-full border border-secondary-container/20">DEPOSIT PAID</span>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-sm">pending</span>
+<span class="text-xs font-bold">Missing</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container rounded-lg hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm">mail</span>
+</button>
+<button class="p-2 bg-surface-container rounded-lg hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm">phone</span>
+</button>
+<button class="p-2 bg-surface-container rounded-lg hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Footer Shell -->
+<footer class="flex justify-between items-center py-4 px-margin-desktop backdrop-blur-md bg-surface-container-lowest border-t border-outline-variant/10 z-40">
+<div class="flex items-center gap-4">
+<span class="font-body-md text-on-surface-variant opacity-60 text-xs">© 2024 Azure Velocity Ontario. All rights reserved.</span>
+</div>
+<div class="flex gap-6">
+<a class="font-label-caps text-[10px] text-on-surface-variant hover:text-secondary-container transition-all" href="#">Terms of Service</a>
+<a class="font-label-caps text-[10px] text-on-surface-variant hover:text-secondary-container transition-all" href="#">Privacy Policy</a>
+<a class="font-label-caps text-[10px] text-on-surface-variant hover:text-secondary-container transition-all flex items-center gap-1" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed-dim animate-pulse"></span> System Status
+                </a>
+</div>
+</footer>
+</main>
+<!-- Visual Polish: Ambient Glows -->
+<div class="fixed top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] -z-10 pointer-events-none"></div>
+<div class="fixed bottom-0 left-64 w-[300px] h-[300px] bg-secondary-container/5 blur-[100px] -z-10 pointer-events-none"></div>
+<script>
+        // Micro-interaction for table rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Search Bar Focus Effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('active-glow');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('active-glow');
+        });
+    </script>
+</body></html>

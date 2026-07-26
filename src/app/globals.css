@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+/* v3 theme: full-dark surfaces + electric-cyan accent, glass panels, animated gradients. */
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-montserrat);
+  --font-label: var(--font-space-grotesk);
+
+  /* Dark surfaces (v3) */
+  --color-surface: #111318;
+  --color-surface-lowest: #0c0e12;
+  --color-surface-low: #1a1c20;
+  --color-surface-mid: #1e2024;
+  --color-surface-high: #282a2e;
+  --color-surface-bright: #37393e;
+  --color-outline: #8b90a0;
+  --color-outline-variant: #414754;
+  --color-ink: #e2e2e8;
+  --color-ink-muted: #c1c6d7;
+
+  /* Electric cyan accent (v3 primary) */
+  --color-cyan: #00f1fe;
+  --color-cyan-soft: #74f5ff;
+  --color-cyan-dim: #00dbe7;
+  --color-cyan-deep: #006a70;
+
+  /* Brand blues (v1) */
+  --color-brand-50: #eff8ff;
+  --color-brand-100: #daefff;
+  --color-brand-200: #bde4ff;
+  --color-brand-300: #90d3ff;
+  --color-brand-400: #5bb8fd;
+  --color-brand-500: #3597fa;
+  --color-brand-600: #1f78ef;
+  --color-brand-700: #1761dc;
+  --color-brand-800: #194fb2;
+  --color-brand-900: #1a458c;
+  --color-brand-950: #152b55;
+
+  /* Deep navy (hero / CTA bands / footer) */
+  --color-navy-700: #0b2a4a;
+  --color-navy-800: #081f3a;
+  --color-navy-900: #06162b;
+  --color-navy-950: #050f1e;
+
+  /* Cyan accent */
+  --color-accent-300: #67e8f9;
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+  --color-accent-600: #0891b2;
+
+  --animate-gradient-shift: gradient-shift 8s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+  --animate-wave-drift: wave-drift 14s linear infinite;
+  --animate-wave-drift-slow: wave-drift 22s linear infinite reverse;
+  --animate-fade-up: fade-up 0.6s ease both;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+@keyframes wave-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+
+@keyframes draw-check {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.6); }
+  70% { transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-pop-in { animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.draw-check {
+  stroke-dasharray: 32;
+  stroke-dashoffset: 32;
+  animation: draw-check 0.5s ease-out 0.35s forwards;
+}
+
+body {
+  background: #111318;
+  color: #e2e2e8;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+}
+
+/* Uppercase caps label helper (eyebrows, buttons, small labels) */
+.font-label {
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+}
+
+/* Frosted glass panel (dark translucent + cyan-tinted hairline) */
+.glass,
+.glass-panel {
+  background: rgb(17 19 24 / 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 0 0 1px rgb(0 241 254 / 0.10);
+}
+
+/* Cyan glow (CTAs / selected states) */
+.glow-cyan {
+  box-shadow: 0 0 20px rgb(0 241 254 / 0.35);
+}
+.glow-cyan-strong {
+  box-shadow: 0 0 28px rgb(0 241 254 / 0.5);
+}
+
+/* Section title underline rule */
+.section-rule {
+  height: 4px;
+  width: 6rem;
+  border-radius: 999px;
+  background: var(--color-cyan);
+  box-shadow: 0 0 12px rgb(0 241 254 / 0.5);
+}
+
+/* Duration "speedometer" slider (booking) */
+.speedometer-track {
+  background: linear-gradient(90deg, #1e2024 0%, #333539 100%);
+  height: 12px;
+  border-radius: 999px;
+  position: relative;
+}
+.speedometer-fill {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  border-radius: 999px;
+  background: var(--color-cyan);
+  box-shadow: 0 0 12px rgb(0 241 254 / 0.5);
+}
+.speedometer-thumb {
+  width: 24px;
+  height: 24px;
+  background: var(--color-cyan);
+  box-shadow: 0 0 15px rgb(0 241 254 / 0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Gradient headline text (cyan-forward) */
+.gradient-text {
+  background: linear-gradient(92deg, var(--color-cyan-soft), var(--color-cyan) 55%, var(--color-brand-300));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Slow-moving multi-stop gradient background (hero / CTA bands / footer) */
+.animated-gradient {
+  background: linear-gradient(115deg, #0c0e12, #111318 35%, #06162b 60%, #0c0e12);
+  background-size: 220% 220%;
+  animation: gradient-shift 12s ease infinite;
+}
+
+/* Deeper variant for subtle body sections */
+.animated-gradient-light {
+  background: linear-gradient(115deg, #0c0e12, #111318 40%, #12222b 70%, #0c0e12);
+  background-size: 220% 220%;
+  animation: gradient-shift 14s ease infinite;
+}
+
+/* Sheen sweep on hover (cards / primary buttons) */
+.sheen {
+  position: relative;
+  overflow: hidden;
+}
+.sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / 0.35) 50%, transparent 60%);
+  background-size: 250% 100%;
+  background-position: 120% 0;
+  transition: background-position 0.7s ease;
+  pointer-events: none;
+}
+.sheen:hover::after {
+  background-position: -60% 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-gradient,
+  .animated-gradient-light,
+  .sheen::after {
+    animation: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

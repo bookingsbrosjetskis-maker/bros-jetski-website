@@ -1,0 +1,141 @@
+// Jet Ski Rental — Prisma schema
+// Dev: SQLite. Production: change provider to "postgresql" (see README).
+// Money is stored as integer cents (CAD). Enum-like fields are strings
+// validated against constants in src/lib/constants.ts, because SQLite
+// has no native enums; the values are Postgres-compatible as-is.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model JetSki {
+  id            String        @id @default(cuid())
+  name          String
+  model         String
+  horsepower    Int
+  seats         Int
+  description   String
+  imageUrl      String
+  hourlyRate    Int
+  halfDayRate   Int
+  fullDayRate   Int
+  weekendRate   Int           @default(160000)
+  depositAmount Int // refundable free-range security deposit, collected in person (never charged online)
+  featured      Boolean       @default(false)
+  active        Boolean       @default(true)
+  bookings      Booking[]
+  blockedDates  BlockedDate[]
+  createdAt     DateTime      @default(now())
+}
+
+model Booking {
+  id              String    @id @default(cuid())
+  jetSki          JetSki    @relation(fields: [jetSkiId], references: [id])
+  jetSkiId        String
+  customerName    String
+  email           String
+  phone           String
+  startTime       DateTime
+  endTime         DateTime
+  durationType    String // HOURLY | HALF_DAY | FULL_DAY | WEEKEND
+  hours           Int // 1-3, 4, 8, or 36 (weekend: day 1 09:00 to day 2 21:00)
+  totalPrice      Int
+  ridingOption    String    @default("DESIGNATED") // DESIGNATED | FREE_RANGE
+  depositAmount   Int // security deposit due in person (0 for DESIGNATED)
+  status          String    @default("PENDING") // PENDING | CONFIRMED | COMPLETED | CANCELLED | EXPIRED
+  stripeSessionId String?   @unique
+  expiresAt       DateTime? // set while PENDING: created + 15 min
+  waiver          Waiver?
+  checklist       SafetyChecklist?
+  createdAt       DateTime  @default(now())
+
+  @@index([jetSkiId, startTime, endTime])
+  @@index([status, expiresAt])
+}
+
+model Waiver {
+  id                    String   @id @default(cuid())
+  booking               Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  bookingId             String   @unique
+  signedName            String
+  agreed                Boolean
+  waiverText            String
+  waiverVersion         String   @default("") // discrete version, not just embedded in the snapshot
+  dateOfBirth           String   @default("") // "YYYY-MM-DD"; dock verifies photo ID in person (ID never stored)
+  address               String   @default("")
+  emergencyContactName  String   @default("")
+  emergencyContactPhone String   @default("")
+  signedAt              DateTime @default(now())
+}
+
+model BlockedDate {
+  id       String   @id @default(cuid())
+  jetSki   JetSki?  @relation(fields: [jetSkiId], references: [id], onDelete: Cascade)
+  jetSkiId String? // null = blocks the whole fleet (e.g. weather)
+  date     DateTime // whole-day block, normalized to UTC midnight
+  reason   String // MAINTENANCE | WEATHER | OTHER
+  note     String?
+
+  @@unique([jetSkiId, date])
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  authorName String
+  rating     Int
+  text       String
+  approved   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AdminUser {
+  id           String @id @default(cuid())
+  email        String @unique
+  passwordHash String
+  name         String
+}
+
+model SiteContent {
+  key  String @id
+  json String
+}
+
+model GalleryMedia {
+  id        String   @id @default(cuid())
+  url       String // stored path (/uploads/..) or absolute Blob URL
+  caption   String   @default("")
+  type      String // image | video
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([sortOrder])
+}
+
+// Transport Canada Rental Boat Safety Checklist, completed online by the
+// customer after payment. This is a pre-ride acknowledgement; the rental agent
+// still co-signs at the dock and the customer carries a copy on board.
+model SafetyChecklist {
+  id            String    @id @default(cuid())
+  booking       Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  bookingId     String    @unique
+  token         String    @unique // random secret for the public link
+  responsesJson String    @default("{}") // { items: {id: true}, details: {...} }
+  signedName    String?
+  submittedAt   DateTime?
+  read          Boolean   @default(false) // admin has reviewed it
+  createdAt     DateTime  @default(now())
+}

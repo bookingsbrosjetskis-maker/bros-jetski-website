@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Booking Confirmed | ONTARIO JET</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Manrope:wght@400;600&family=Space+Grotesk:wght@600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Montserrat:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#e2e2e8",
+            "surface-bright": "#37393e",
+            "outline": "#8b90a0",
+            "secondary-fixed": "#74f5ff",
+            "on-error": "#690005",
+            "inverse-primary": "#005bc0",
+            "inverse-on-surface": "#2f3035",
+            "surface-variant": "#333539",
+            "on-primary-fixed-variant": "#004493",
+            "on-tertiary-container": "#282a2a",
+            "on-primary": "#002e68",
+            "surface-container-high": "#282a2e",
+            "on-surface": "#e2e2e8",
+            "secondary-fixed-dim": "#00dbe7",
+            "on-tertiary-fixed-variant": "#454747",
+            "primary-fixed": "#d8e2ff",
+            "tertiary-fixed": "#e2e2e2",
+            "on-primary-fixed": "#001a41",
+            "tertiary": "#c6c6c7",
+            "surface-container-highest": "#333539",
+            "primary-fixed-dim": "#adc7ff",
+            "surface": "#111318",
+            "tertiary-container": "#909191",
+            "on-secondary": "#00363a",
+            "error-container": "#93000a",
+            "background": "#111318",
+            "surface-tint": "#adc7ff",
+            "on-error-container": "#ffdad6",
+            "secondary-container": "#00f1fe",
+            "surface-container-lowest": "#0c0e12",
+            "primary": "#adc7ff",
+            "on-surface-variant": "#c1c6d7",
+            "surface-dim": "#111318",
+            "on-secondary-container": "#006a70",
+            "error": "#ffb4ab",
+            "secondary": "#ddfcff",
+            "surface-container": "#1e2024",
+            "inverse-surface": "#e2e2e8",
+            "outline-variant": "#414754",
+            "on-secondary-fixed": "#002022",
+            "on-primary-container": "#00285b",
+            "tertiary-fixed-dim": "#c6c6c7",
+            "primary-container": "#4a8eff",
+            "on-secondary-fixed-variant": "#004f54",
+            "surface-container-low": "#1a1c20",
+            "on-tertiary-fixed": "#1a1c1c",
+            "on-tertiary": "#2f3131"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "gutter": "24px",
+            "margin-mobile": "20px",
+            "margin-desktop": "64px",
+            "container-max": "1280px",
+            "unit": "8px"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Montserrat"],
+            "body-md": ["Manrope"],
+            "headline-lg": ["Montserrat"],
+            "headline-md": ["Montserrat"],
+            "headline-xl": ["Montserrat"],
+            "button-text": ["Space Grotesk"],
+            "body-lg": ["Manrope"],
+            "label-caps": ["Space Grotesk"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body { background-color: #111318; color: #e2e2e8; }
+    .glass-card {
+      background: rgba(30, 32, 36, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 241, 254, 0.1);
+    }
+    .check-glow {
+      filter: drop-shadow(0 0 15px rgba(0, 241, 254, 0.4));
+    }
+    .lake-gradient {
+      background: radial-gradient(circle at top right, rgba(0, 241, 254, 0.05) 0%, transparent 70%),
+                  radial-gradient(circle at bottom left, rgba(74, 142, 255, 0.05) 0%, transparent 70%);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .status-confirmed {
+      background: rgba(0, 241, 254, 0.1);
+      color: #00f1fe;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen font-body-md text-body-md lake-gradient">
+<!-- TopNavBar (JSON Injected Styles & Structure) -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-secondary-container/10 shadow-[0_0_20px_rgba(0,241,254,0.15)]">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tight">ONTARIO JET</div>
+<nav class="hidden md:flex items-center gap-8 font-button-text text-button-text">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Fleet</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Locations</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Safety</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Reviews</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="hidden md:block bg-secondary-container text-on-secondary-container px-6 py-2 rounded-lg font-button-text text-button-text hover:bg-secondary-fixed transition-all active:scale-95">
+          Book Now
+        </button>
+<span class="material-symbols-outlined text-on-surface cursor-pointer hover:text-secondary-container transition-colors">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Success Canvas -->
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop">
+<div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+<!-- Success Icon -->
+<div class="mb-6 relative">
+<div class="absolute inset-0 bg-secondary-container/20 blur-3xl rounded-full"></div>
+<div class="relative w-24 h-24 bg-surface-container rounded-full flex items-center justify-center border-2 border-secondary-container/30 check-glow">
+<span class="material-symbols-outlined text-secondary-container text-[48px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Headline -->
+<h1 class="font-headline-xl text-headline-xl mb-4 text-on-surface">You're booked!</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12">
+        Get ready for an adrenaline-fueled session on the water. We've sent a confirmation email with your digital pass and safety waiver.
+      </p>
+<!-- Booking Card (Bento/Modern Layout) -->
+<div class="w-full glass-card rounded-xl overflow-hidden p-8 text-left grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Summary Header -->
+<div class="md:col-span-12 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant/20 pb-6">
+<div>
+<div class="font-label-caps text-label-caps text-secondary-container mb-1">REFERENCE NO.</div>
+<div class="font-headline-md text-headline-md text-on-surface tracking-wider">OJ-882941-XT</div>
+</div>
+<div class="mt-4 md:mt-0 status-confirmed px-4 py-1.5 rounded-full font-button-text text-button-text flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+            CONFIRMED
+          </div>
+</div>
+<!-- Jet Ski Details -->
+<div class="md:col-span-7 space-y-6">
+<div class="flex gap-6 items-start">
+<div class="w-32 h-24 bg-surface-container-high rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A side view of a high-performance Yamaha GP1800R jet ski in electric blue and black, glistening with water droplets under the bright Ontario sun. The background is a sleek dark navy texture, emphasizing the machine's aerodynamic lines and premium quality in a professional corporate rental setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtiN1uGKMBYUTM8Jc_fqgEzupHfsPDoC2YyDcJ8XjOpj2H9ZcOBSsK__IhP94II-m9-7O0kyMymRiagI9ObLT3RZjyf5tmowqapBgqCypwI-kotCNIuEMOHrDN_BQKcvKP0rtyExshlrrge9q5wEwqgdyv262rluWiuQnTAZ9I1V8P7eRCY7ZoILL7vWXdYXCjfOqkIcZ4ICjjzQ2GgeCKuidiH36A-d5hSUiXO7FiIfc1KuszQjvFy-kBvg3TEgyNYUFIBhrG-9KD"/>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-outline mb-1">EQUIPMENT</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Yamaha GP1800R SVHO</h3>
+<div class="flex flex-wrap gap-2 mt-2">
+<span class="px-2 py-0.5 border border-secondary-container/30 bg-secondary-container/5 rounded-lg font-label-caps text-[10px] text-secondary-container">300 HP</span>
+<span class="px-2 py-0.5 border border-secondary-container/30 bg-secondary-container/5 rounded-lg font-label-caps text-[10px] text-secondary-container">TURBO</span>
+<span class="px-2 py-0.5 border border-secondary-container/30 bg-secondary-container/5 rounded-lg font-label-caps text-[10px] text-secondary-container">BLUETOOTH AUDIO</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div>
+<div class="font-label-caps text-label-caps text-outline mb-1">DATE & TIME</div>
+<div class="font-body-lg text-body-lg text-on-surface">Saturday, July 20</div>
+<div class="font-body-md text-body-md text-on-surface-variant">10:00 AM — 2:00 PM (4hrs)</div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-outline mb-1">LOCATION</div>
+<div class="font-body-lg text-body-lg text-on-surface">Muskoka Wharf</div>
+<div class="font-body-md text-body-md text-on-surface-variant">Dock B, Slip 12</div>
+</div>
+</div>
+</div>
+<!-- Price Breakdown -->
+<div class="md:col-span-5 bg-surface-container-low/40 rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-outline mb-4">COST SUMMARY</div>
+<div class="space-y-3">
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Rental (4 Hours)</span>
+<span>$480.00</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Fuel Surcharge</span>
+<span>$45.00</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Insurance (Gold)</span>
+<span>$35.00</span>
+</div>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-outline-variant/20 flex justify-between items-baseline">
+<span class="font-headline-md text-headline-md text-on-surface">Total</span>
+<span class="font-headline-md text-headline-md text-secondary-container">$560.00</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-12 flex flex-wrap justify-center gap-4">
+<button class="bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed transition-all px-8 py-3 rounded-lg font-button-text text-button-text flex items-center gap-2">
+<span class="material-symbols-outlined">calendar_today</span>
+          Add to Calendar
+        </button>
+<button class="bg-surface-container-high text-on-surface hover:bg-surface-bright transition-all px-8 py-3 rounded-lg font-button-text text-button-text flex items-center gap-2 border border-outline/10">
+<span class="material-symbols-outlined">near_me</span>
+          Directions
+        </button>
+<button class="bg-surface-container-high text-on-surface hover:bg-surface-bright transition-all px-8 py-3 rounded-lg font-button-text text-button-text flex items-center gap-2 border border-outline/10">
+<span class="material-symbols-outlined">help</span>
+          Safety FAQ
+        </button>
+</div>
+</div>
+</main>
+<!-- Footer (JSON Injected Styles & Structure) -->
+<footer class="w-full mt-auto bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md text-on-surface mb-4">ONTARIO JET</div>
+<p class="font-body-md text-body-md text-outline">High-performance aquatic rentals in the heart of Ontario's lake country.</p>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-secondary-container mb-4">Quick Links</div>
+<ul class="space-y-2">
+<li><a class="font-body-md text-body-md text-outline hover:text-on-surface transition-colors" href="#">Terms of Service</a></li>
+<li><a class="font-body-md text-body-md text-outline hover:text-on-surface transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-outline hover:text-on-surface transition-colors" href="#">Rental Agreement</a></li>
+</ul>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-secondary-container mb-4">Support</div>
+<ul class="space-y-2">
+<li><a class="font-body-md text-body-md text-outline hover:text-on-surface transition-colors" href="#">Contact Us</a></li>
+<li><a class="font-body-md text-body-md text-outline hover:text-on-surface transition-colors" href="#">Fleet Info</a></li>
+<li><a class="font-body-md text-body-md text-outline hover:text-on-surface transition-colors" href="#">Safety Video</a></li>
+</ul>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-secondary-container mb-4">Newsletter</div>
+<div class="flex items-center bg-surface-container-high rounded-lg p-1">
+<input class="bg-transparent border-none focus:ring-0 text-on-surface font-body-md text-body-md px-3 w-full" placeholder="Email address" type="text"/>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg font-button-text text-button-text">Join</button>
+</div>
+</div>
+<div class="col-span-1 md:col-span-4 mt-8 pt-8 border-t border-outline-variant/10 text-center font-body-md text-body-md text-outline">
+        © 2024 Ontario Jet Rentals. All Rights Reserved.
+      </div>
+</div>
+</footer>
+<script>
+    // Micro-interaction for hover effects on buttons
+    document.querySelectorAll('button').forEach(button => {
+      button.addEventListener('mousedown', () => button.style.transform = 'scale(0.95)');
+      button.addEventListener('mouseup', () => button.style.transform = 'scale(1)');
+      button.addEventListener('mouseleave', () => button.style.transform = 'scale(1)');
+    });
+  </script>
+</body></html>

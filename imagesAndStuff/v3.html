@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Azure Velocity | Lost &amp; Found Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Manrope:wght@400;500&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "inverse-surface": "#e2e2e8",
+                      "error-container": "#93000a",
+                      "on-secondary-container": "#006a70",
+                      "surface-container-high": "#282a2e",
+                      "on-primary-fixed-variant": "#004493",
+                      "surface-variant": "#333539",
+                      "tertiary": "#c6c6c7",
+                      "on-surface": "#e2e2e8",
+                      "on-primary-fixed": "#001a41",
+                      "primary-container": "#4a8eff",
+                      "on-tertiary-container": "#282a2a",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "surface-tint": "#adc7ff",
+                      "surface-container-low": "#1a1c20",
+                      "inverse-on-surface": "#2f3035",
+                      "primary-fixed-dim": "#adc7ff",
+                      "secondary-container": "#00f1fe",
+                      "on-primary": "#002e68",
+                      "outline": "#8b90a0",
+                      "error": "#ffb4ab",
+                      "background": "#111318",
+                      "surface-container-highest": "#333539",
+                      "primary-fixed": "#d8e2ff",
+                      "secondary": "#ddfcff",
+                      "on-secondary-fixed-variant": "#004f54",
+                      "secondary-fixed": "#74f5ff",
+                      "secondary-fixed-dim": "#00dbe7",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed": "#e2e2e2",
+                      "tertiary-container": "#909191",
+                      "surface-dim": "#111318",
+                      "on-surface-variant": "#c1c6d7",
+                      "on-secondary": "#00363a",
+                      "surface-container": "#1e2024",
+                      "outline-variant": "#414754",
+                      "surface-bright": "#37393e",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-tertiary": "#2f3131",
+                      "on-background": "#e2e2e8",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#002022",
+                      "primary": "#adc7ff",
+                      "inverse-primary": "#005bc0",
+                      "on-primary-container": "#00285b",
+                      "surface-container-lowest": "#0c0e12",
+                      "surface": "#111318"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "margin-desktop": "64px",
+                      "unit": "8px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-md": ["Manrope"],
+                      "headline-xl": ["Montserrat"],
+                      "headline-md": ["Montserrat"],
+                      "button-text": ["Space Grotesk"],
+                      "label-caps": ["Space Grotesk"],
+                      "headline-lg": ["Montserrat"],
+                      "body-lg": ["Manrope"],
+                      "headline-lg-mobile": ["Montserrat"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(116, 245, 255, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #111318;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #414754;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #00dbe7;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed overflow-hidden">
+<!-- Navigation Shell (SideNavBar) -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant flex flex-col h-full py-6 px-4 z-50">
+<div class="font-headline-md text-headline-md text-secondary-fixed mb-8 font-bold tracking-tighter">
+            Azure Velocity
+        </div>
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a marina operations manager in a sleek dark blue uniform, photographed with shallow depth of field against a blurred background of a modern luxury boat dock. The lighting is crisp and cool-toned, matching a high-end corporate marine aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr7bqsrEE7nVhRdfbpLAasjkEjF8-zzmbk9XqQiZHFdpA4Bf2yox0T4ynlPLeCx309NSGbXpGLFb95BgFYogqRkQRDvBskU1m-YqputAiyNQS-uDRZZ8PC6_u3DBiZIFeZjzHBBNxPR9oe75_pQVhE-4pWRXl_m3FOQS24ghpw8RfAJ1DxAvoHdj8Ol2uKC2UyeO4HYRfgQkMgxpSXuvMM-xFhlEifa6op4Up7CERBAVjWkij04pipHfTxjWG4v2cO-_huDyhVOnEW"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface">Fleet Manager</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-widest">Muskoka Central Dock</span>
+</div>
+</div>
+<div class="flex-1 space-y-2 overflow-y-auto custom-scrollbar">
+<!-- Dashboard Tab -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all duration-300 ease-in-out font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all duration-300 ease-in-out font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">sailing</span>
+                Fleet Status
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all duration-300 ease-in-out font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+                Bookings
+            </a>
+<!-- Active Tab: Asset management/Lost & Found falls under Maintenance/Operations -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-secondary-container/20 text-secondary-fixed border-r-4 border-secondary-fixed transition-all duration-300 ease-in-out font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">build</span>
+                Maintenance
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all duration-300 ease-in-out font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all duration-300 ease-in-out font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">badge</span>
+                Staff
+            </a>
+</div>
+<div class="mt-auto pt-6 border-t border-outline-variant space-y-2">
+<button class="w-full py-3 bg-error-container text-on-error-container font-button-text text-button-text rounded-lg hover:brightness-110 active:scale-95 transition-all mb-4">
+                Emergency Stop
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen relative overflow-hidden">
+<!-- Background Atmospheric Element -->
+
+<div class="relative z-10 p-margin-desktop max-w-container-max mx-auto">
+<!-- Header Section -->
+<header class="flex justify-between items-end mb-10">
+<div>
+<nav class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="font-label-caps text-[10px]">Operations</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="font-label-caps text-[10px] text-secondary-fixed">Lost &amp; Found</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Asset Retrieval Hub</h1>
+<p class="text-on-surface-variant mt-2 max-w-xl">Manage customer property found across Muskoka docks and fleet units. Ensure high-fidelity tracking for luxury service standards.</p>
+</div>
+<button class="bg-secondary-fixed text-on-secondary-fixed px-6 py-3 rounded-lg font-button-text text-button-text flex items-center gap-2 hover:shadow-[0_0_15px_rgba(0,241,254,0.3)] active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+                    Register New Item
+                </button>
+</header>
+<!-- Dashboard Stats Bento -->
+<div class="grid grid-cols-4 gap-gutter mb-gutter">
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-between">
+<span class="text-on-surface-variant font-label-caps text-label-caps">Pending Claims</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-4xl font-headline-md text-secondary-fixed">24</span>
+<span class="text-on-surface-variant text-sm">+2 today</span>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-between">
+<span class="text-on-surface-variant font-label-caps text-label-caps">Items Recovered</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-4xl font-headline-md text-on-surface">148</span>
+<span class="text-on-surface-variant text-sm">Last 30 days</span>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-between border-l-4 border-l-secondary-fixed">
+<span class="text-on-surface-variant font-label-caps text-label-caps">Success Rate</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-4xl font-headline-md text-on-surface">92%</span>
+<span class="material-symbols-outlined text-secondary-fixed">trending_up</span>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-between">
+<span class="text-on-surface-variant font-label-caps text-label-caps">Expiring Soon</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-4xl font-headline-md text-error">5</span>
+<span class="text-on-surface-variant text-sm">Ready for disposal</span>
+</div>
+</div>
+</div>
+<!-- Management Table Container -->
+<section class="glass-panel rounded-xl overflow-hidden shadow-2xl">
+<!-- Filters Bar -->
+<div class="p-6 border-b border-outline-variant flex flex-wrap gap-4 items-center justify-between">
+<div class="flex gap-4 items-center flex-1">
+<div class="relative max-w-md w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-highest border border-outline-variant rounded-lg py-2 pl-10 pr-4 text-on-surface focus:border-secondary-fixed focus:ring-1 focus:ring-secondary-fixed outline-none transition-all placeholder:text-on-surface-variant/50" placeholder="Search by item, location, or customer..." type="text"/>
+</div>
+<select class="bg-surface-container-highest border border-outline-variant rounded-lg py-2 px-4 text-on-surface-variant font-label-caps text-label-caps focus:border-secondary-fixed outline-none">
+<option>All Locations</option>
+<option>Dock A</option>
+<option>Dock B</option>
+<option>Fleet - GTX Limited</option>
+<option>Fleet - RXT-X</option>
+</select>
+<select class="bg-surface-container-highest border border-outline-variant rounded-lg py-2 px-4 text-on-surface-variant font-label-caps text-label-caps focus:border-secondary-fixed outline-none">
+<option>Any Status</option>
+<option>Unclaimed</option>
+<option>Claimed</option>
+<option>Disposed</option>
+</select>
+</div>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-secondary-fixed transition-colors font-label-caps text-label-caps">
+<span class="material-symbols-outlined">filter_list</span>
+                        More Filters
+                    </button>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container/50 border-b border-outline-variant">
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary-fixed/70">Item Description</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary-fixed/70">Date Found</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary-fixed/70">Location</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary-fixed/70">Status</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary-fixed/70">Customer Contact</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary-fixed/70 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-variant/20 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded bg-surface-container-highest overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close-up high-fidelity photograph of a pair of high-end designer matte black sunglasses with polarized lenses, lying on a polished teak wood boat deck with water droplets around. Professional product photography lighting with deep shadows and sharp highlights reflecting the luxury marine lifestyle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJMI7rmYDBLKtmdcBvl_u8g6bUtWiPkqG6CUfaeBs6Dd-Tf6nanaTPbVaXbRux75R_nMT8c0N7_BBEog1BCVsnYMmKiEH5u4zDQH2JLgZuRFkzIc6e3xMYjQedyVljEpHYOeFtoDF-AG62kpvbmwEqCIhZ3OLHlV_eayyNwf6-rbK4eUD42I8ZBIxQqmf9vT9w_9prlkU6TY1qzXegbfMJcES3r8Lln-iWBaxrOjajWue_JvcFQK16QVw3b45RlMyQLj8Ph4oLC_Vq"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Oakley Holbrook XL</div>
+<div class="text-xs text-on-surface-variant">Matte Black, Prizm Lenses</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Oct 12, 2024</td>
+<td class="px-6 py-5 text-on-surface">Dock B - Slip 14</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider bg-secondary-container/10 text-secondary-fixed border border-secondary-fixed/30 uppercase">Unclaimed</span>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm">Julian Vane</div>
+<div class="text-xs text-on-surface-variant italic">Waiting for callback</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-secondary-fixed/10 rounded-full transition-colors group-hover:text-secondary-fixed">
+<span class="material-symbols-outlined">edit_square</span>
+</button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-variant/20 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded bg-surface-container-highest overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A durable waterproof smartphone case with a heavy-duty carabiner attached, sitting on a textured grey fiberglass surface of a Sea-Doo jet ski. The case is neon yellow for visibility and contains a high-end smartphone. Dramatic low-angle shot with cool blue light reflections, highlighting the rugged adventure theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA7v_t6LLjlhFE9hhgT8ZMGm_GjNE7xOK7Dmu4418ywNC1m1q-dsJ9cA53D0-YIGKhAa1j7Xgy8W4JsDvoaiY_dfKDv7amCRBGPGflBr763U0PQSjMi5GHWtwTxP9xoe7OqQ56XQSYQ9aEoH2RESnyt1o00M4JM7UwdPbjNcvycHIG14Lozp6jimtR2uwcG1nF7QJIY58pu-zSpRwoyG1mry7z0-ctPp8JD1b0e1AmKXIj9mpweLwFZnjG2reHT7XA292tpIBWvu6L"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Catalyst Case</div>
+<div class="text-xs text-on-surface-variant">Neon Yellow, iPhone 15 Pro</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Oct 10, 2024</td>
+<td class="px-6 py-5 text-on-surface">Sea-Doo #04 (RXT-X)</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider bg-surface-container-highest text-on-surface-variant border border-outline-variant uppercase">Claimed</span>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm">Marcus Thorne</div>
+<div class="text-xs text-on-surface-variant">m.thorne@example.com</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-secondary-fixed/10 rounded-full transition-colors group-hover:text-secondary-fixed">
+<span class="material-symbols-outlined">edit_square</span>
+</button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-variant/20 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded bg-surface-container-highest overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A luxury smart watch with a white silicone sport band, laying on a dark velvet display tray within a modern office setting. The lighting is focused and warm, creating a high-contrast elegant look. The watch face shows a nautical-themed digital interface. Sharp focus on the textures of the silicone and the polished metal watch body." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpm6RoPaMoFaNhLZ-dn8g-IVQG9PPRHsYj_CdzK0pMs7dtb9ZvWYR5Ouvtb_K3MFGxm3TEA25TAZ8LtCRxw_nZVpWhg1MvMw4v6PA1WXPxjXOD23SLpDGvcqIc7CFu7S4pQHJcQJrKpv0A60bcg89fR_v52QwcCf99fWNoDmZVwbBjZHvXwgQ0nEsisiiqOXqoGi-wbNTYaOVmLU9WSjP9R7XHO3eThcUKwt2jdMvbYTqWjdcktf7U2HBqVq0uySlRrOvqZRTwCJ-n"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Apple Watch Ultra 2</div>
+<div class="text-xs text-on-surface-variant">White Ocean Band</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Oct 09, 2024</td>
+<td class="px-6 py-5 text-on-surface">Changing Room A</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider bg-secondary-container/10 text-secondary-fixed border border-secondary-fixed/30 uppercase">Unclaimed</span>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm">Unknown</div>
+<div class="text-xs text-on-surface-variant">No matching rental ID</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-secondary-fixed/10 rounded-full transition-colors group-hover:text-secondary-fixed">
+<span class="material-symbols-outlined">edit_square</span>
+</button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-variant/20 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded bg-surface-container-highest overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A set of premium vehicle keys with a leather key fob featuring a silver logo, laying on a grey concrete surface with wet patches. The lighting is dramatic and moody, reflecting a modern industrial dock environment. High detail on the leather texture and the metallic finish of the keys. Cold, blue-tinted shadows add to the high-end aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHTrNdHYeIGvXVWYQlG91bxvKC71HimW923TlIVzk0Xho1NpRfjH849ue1TqlnEjOceh1FNaeu3a5UnOGHZjQyv_dogzoXtDaj7BOTwaAc8TAczzwHOOE76rrP9bcGqOYaVovLgh4NA5PlhqMRMzdmNFRIYf7A1CwyAelhT4av-9uxs6zatDM8tNu_XxNFZrVNnStzLkZ_wcQw0VjR3RV-ob1euGOikvLIIXOlO2TnwUYLqJx2pMb3LY7VjTbqwO8uTgfEVqQGU1Wm"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">BMW Key Fob</div>
+<div class="text-xs text-on-surface-variant">Black Leather, Silver Logo</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Sep 28, 2024</td>
+<td class="px-6 py-5 text-on-surface">Valet Drop-off</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider bg-error-container/20 text-error border border-error/30 uppercase">Disposed</span>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm">Elena Rossi</div>
+<div class="text-xs text-on-surface-variant italic">Item Unclaimed 30+ days</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-secondary-fixed/10 rounded-full transition-colors group-hover:text-secondary-fixed">
+<span class="material-symbols-outlined">edit_square</span>
+</button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-between">
+<span class="text-sm text-on-surface-variant">Showing <span class="text-on-surface">1 - 10</span> of 148 entries</span>
+<div class="flex gap-2">
+<button class="p-2 rounded border border-outline-variant text-on-surface-variant hover:bg-surface-variant disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-bold text-sm">1</button>
+<button class="px-3 py-1 rounded border border-outline-variant text-on-surface hover:bg-surface-variant font-bold text-sm">2</button>
+<button class="px-3 py-1 rounded border border-outline-variant text-on-surface hover:bg-surface-variant font-bold text-sm">3</button>
+<button class="p-2 rounded border border-outline-variant text-on-surface-variant hover:bg-surface-variant">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Sticky Floating Info (Contextual Maintenance Notification) -->
+<div class="fixed bottom-margin-desktop right-margin-desktop z-50">
+<div class="glass-panel p-4 rounded-xl border-l-4 border-l-secondary-fixed-dim shadow-2xl flex items-center gap-4 animate-bounce">
+<div class="bg-secondary-fixed/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-secondary-fixed">info</span>
+</div>
+<div>
+<div class="text-xs font-label-caps text-label-caps text-secondary-fixed">Update Pending</div>
+<div class="text-sm text-on-surface">3 items marked for disposal at 5:00 PM.</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                // Future: Open detail panel
+                console.log('Opening item details...');
+            });
+        });
+
+        // Search highlight mock
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.opacity = text.includes(val) ? '1' : '0.2';
+            });
+        });
+    </script>
+</body></html>

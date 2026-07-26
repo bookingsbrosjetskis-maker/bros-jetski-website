@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Azure Velocity - Rider Leaderboards</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Manrope:wght@400;500&family=Space+Grotesk:wght@600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Montserrat:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 241, 254, 0.1);
+        }
+        .cyan-glow {
+            box-shadow: 0 0 15px rgba(0, 241, 254, 0.15);
+        }
+        .rank-gradient-1 { background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%); }
+        .rank-gradient-2 { background: linear-gradient(135deg, #C0C0C0 0%, #708090 100%); }
+        .rank-gradient-3 { background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%); }
+        
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #333539; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#e2e2e8",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#006a70",
+                        "surface-container-high": "#282a2e",
+                        "on-primary-fixed-variant": "#004493",
+                        "surface-variant": "#333539",
+                        "tertiary": "#c6c6c7",
+                        "on-surface": "#e2e2e8",
+                        "on-primary-fixed": "#001a41",
+                        "primary-container": "#4a8eff",
+                        "on-tertiary-container": "#282a2a",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-tint": "#adc7ff",
+                        "surface-container-low": "#1a1c20",
+                        "inverse-on-surface": "#2f3035",
+                        "primary-fixed-dim": "#adc7ff",
+                        "secondary-container": "#00f1fe",
+                        "on-primary": "#002e68",
+                        "outline": "#8b90a0",
+                        "error": "#ffb4ab",
+                        "background": "#111318",
+                        "surface-container-highest": "#333539",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary": "#ddfcff",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "secondary-fixed": "#74f5ff",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#e2e2e2",
+                        "tertiary-container": "#909191",
+                        "surface-dim": "#111318",
+                        "on-surface-variant": "#c1c6d7",
+                        "on-secondary": "#00363a",
+                        "surface-container": "#1e2024",
+                        "outline-variant": "#414754",
+                        "surface-bright": "#37393e",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-tertiary": "#2f3131",
+                        "on-background": "#e2e2e8",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#002022",
+                        "primary": "#adc7ff",
+                        "inverse-primary": "#005bc0",
+                        "on-primary-container": "#00285b",
+                        "surface-container-lowest": "#0c0e12",
+                        "surface": "#111318"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Manrope"],
+                        "headline-xl": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "button-text": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden pb-24">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full h-16 z-50 bg-surface dark:bg-surface flex justify-between items-center px-margin-mobile">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">menu</span>
+<h1 class="font-headline-md text-headline-md font-bold text-secondary-container">Azure Velocity</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<div class="w-8 h-8 rounded-full border border-secondary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A profile portrait of a high-end jet ski athlete wearing carbon-fiber racing gear and mirrored goggles, set against a dark oceanic background with electric cyan highlights. The lighting is dramatic and moody, emphasizing a high-fidelity sports aesthetic with clean lines and premium branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUWNyI9yCazCxWsW0Duir0CZ5yBtND1UIsaWMPTchFO28_JU0eFFGBffYiaCVFKHbfMKE-ugCAFeFRPD6aCCctIjb_qhl-VX6OCEB719FRaJaIzAqmQtoDJlKPwrRMVtymCjfF2bBZ-k-RJgdc4VSmNYr9Alu4qsiAew8OTDXzDlBtOuSEIGAKNdyfbMJKBXBQ-63miQMtv-G0TUZcJ7Mqknld58Cj_648-njyVhozXlE5OjeWtZZulbrX8q-VZ0IWHyO3s5OnlxD3"/>
+</div>
+</div>
+</header>
+<main class="pt-20 px-margin-mobile">
+<!-- User Rank Highlight (Hero Section) -->
+<section class="mt-4 mb-8">
+<div class="glass-card rounded-xl p-6 relative overflow-hidden cyan-glow">
+<!-- Background Decorative Element -->
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-secondary-container opacity-10 rounded-full blur-3xl"></div>
+<div class="flex items-center justify-between relative z-10">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">CURRENT STANDING</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-secondary-container">Rank #42</h2>
+<p class="font-body-md text-body-md text-on-surface mt-1">Tier: <span class="text-secondary-fixed-dim font-bold">PRO ELITE</span></p>
+</div>
+<!-- Progress Ring -->
+<div class="relative w-20 h-20 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle cx="40" cy="40" fill="transparent" r="34" stroke="#333539" stroke-width="6"></circle>
+<circle cx="40" cy="40" fill="transparent" r="34" stroke="#00f1fe" stroke-dasharray="213" stroke-dashoffset="60" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-label-caps text-[10px] leading-tight text-on-surface-variant">XP</span>
+<span class="font-bold text-secondary-container">8.4k</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex gap-4">
+<button class="flex-1 bg-secondary-container text-on-secondary py-2 rounded-lg font-button-text hover:opacity-80 transition-all active:scale-95">REDEEM REWARDS</button>
+<button class="flex-1 border border-outline-variant text-on-surface py-2 rounded-lg font-button-text hover:bg-surface-variant transition-all">MY STATS</button>
+</div>
+</div>
+</section>
+<!-- Category Selector -->
+<nav class="flex mb-6 bg-surface-container-low rounded-full p-1 border border-outline-variant">
+<button class="flex-1 py-2 rounded-full font-label-caps text-label-caps transition-all bg-secondary-container text-on-secondary-container">GLOBAL</button>
+<button class="flex-1 py-2 rounded-full font-label-caps text-label-caps transition-all text-on-surface-variant hover:text-on-surface">FRIENDS</button>
+</nav>
+<!-- Leaderboard List -->
+<section class="space-y-4">
+<!-- Top 3 Podium (Visual Treatment) -->
+<div class="flex items-end justify-around pb-8 pt-4 border-b border-outline-variant mb-6">
+<!-- Rank 2 -->
+<div class="flex flex-col items-center">
+<div class="relative mb-2">
+<div class="w-14 h-14 rounded-full border-2 border-slate-400 p-0.5 overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A focused female extreme water sports athlete with saltwater-drenched hair, wearing a sleek black and metallic silver wetsuit. The portrait is high-contrast with dark moody tones and bright cyan light hitting her face from one side, mimicking light reflecting off the water at dusk." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPcV-GaXhXiJQq3vKJLzTySSNggLQgD-xu-JEFQ0Tt0LYMcqGjxYpihZupA8qdsWRpattbSI7XU1KxgKUL2t3HTk-nJeKQ-FexIyXw7MjsrkEs3J9wHzOTIph7nHXKjc_NErMhYrI5WnNV8GfQewgeHCohRCljpQhOZ1Dvb-0Elr2h8CMkQZZTWnDZtAeEPC_Sh5R48qeFE60oEgBfx6epBCKMj7R9ox8QPmGgxmbx7QDIq_Qh8fhoDAyrwU-_mb7If3lJ3sFbQbXE"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rank-gradient-2 rounded-full flex items-center justify-center text-[10px] font-bold text-white border-2 border-background">2</div>
+</div>
+<span class="font-label-caps text-[10px] text-on-surface-variant mb-0.5">ELITE</span>
+<span class="font-bold text-sm">Jax_Wave</span>
+</div>
+<!-- Rank 1 -->
+<div class="flex flex-col items-center">
+<div class="relative mb-4">
+<div class="w-20 h-20 rounded-full border-4 border-yellow-500 p-1 overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.3)]">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional male watercraft rider with a determined expression, wearing high-performance racing gear in deep obsidian and vibrant cyan. The shot is a close-up profile with cinematic lighting, reflecting intense water spray and chrome textures typical of premium aquatic adventure brands." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnMHfCwuICipmmZMpwQdi7PzNfhCOYzY7EkWhNsnREWN2roi7aDQXYEVQ0-hA4FWTvLH7yUpyNSiHG_KZW7ppJyUwpUYAzYK1wPTJ5iVGKdpFYzFJt_gMMfdUxx4p7vchuAZFaNFXz6U9M_AI0J7Vo5cdetFEcyYuz_JC-I8a8WbaEHPhvbJZhXbjQ5J08X6180G0cw_1A9WdvBU6rr3wEAcg4l5pybo9de6YB8TKXhgmrWv-HSQG6D5waK4ooFlG9HOmifgeLR-0D"/>
+</div>
+<div class="absolute -bottom-2 -right-1 w-8 h-8 rank-gradient-1 rounded-full flex items-center justify-center text-xs font-bold text-white border-4 border-background">1</div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<span class="font-label-caps text-xs text-secondary-container mb-0.5">LEGEND</span>
+<span class="font-bold text-lg">HydroMaster</span>
+</div>
+<!-- Rank 3 -->
+<div class="flex flex-col items-center">
+<div class="relative mb-2">
+<div class="w-14 h-14 rounded-full border-2 border-amber-700 p-0.5 overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A dynamic action portrait of a young athlete in a blue and neon cyan life vest, looking at the camera with a confident smirk. Background is a dark, blurred marina at night with glowing blue lights. The aesthetic is clean, professional, and corporate modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUqcKa4vah35JJoYTzXJiykXwCBFKQ5ViPEh4RAfqWDhkTx41A2fgiMN1E5O0ICxGQIvsQtjO_i5CCT0OmBgWyxafKNZmrUQ94HANBZDImabPkUE6cW9YIJU36tOc2dYx38iElN3F71HxmKybJlbxxO7QY2KL6CGPDRn_t7uXqqktc_xui2bYZmJjMgcq5wi7V9fJhazTk6UPJGgNGFntkbCf9K5fUCRtmOuZ4OTQoF7rvysLCe1W01CguPNupfy9bup-m1zhlnPEh"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rank-gradient-3 rounded-full flex items-center justify-center text-[10px] font-bold text-white border-2 border-background">3</div>
+</div>
+<span class="font-label-caps text-[10px] text-on-surface-variant mb-0.5">ELITE</span>
+<span class="font-bold text-sm">Sea_Ghost</span>
+</div>
+</div>
+<!-- List 4-10 -->
+<div class="space-y-2">
+<!-- Item Template (Repeated via list logic) -->
+<div class="flex items-center glass-card p-3 rounded-xl gap-4 group active:scale-[0.98] transition-all">
+<span class="font-headline-md text-on-surface-variant/40 w-6">4</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="High-resolution close-up portrait of a rider's eye through a polarized helmet visor, reflecting a sunset over Lake Ontario. The color palette is dominated by deep obsidian and electric cyan. The mood is intense and high-performance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNXYKHK-QDWZPW0844DIm3glrn-KXHT-fDw5DQjbOdBHql7KK_dfXD8-m20w0qO7f1mVHAFRnARcyXTwuwTsr3AN3zQ4HemTRL7vd2NJt5hK-WbqZ546phSMzQC5fmR58PbVnS53jLUxuBaqJ-sgykReW7B2NnVwquZyLyx-Q065cZfS-oC28asbMFvCZEyikANPXjX7-iJ9SEOIp8GaAb9Lb7MXgMi0tOeO_shqLKnQJaWwoWRB-NNfsDsWrPb0pQKw6w8ZpH2Lb4"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm truncate">Azure_Voyager</h4>
+<p class="font-label-caps text-[10px] text-secondary-fixed-dim">PRO • 7,820 XP</p>
+</div>
+<button class="bg-surface-variant text-on-surface-variant p-2 rounded-full hover:bg-secondary-container hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center glass-card p-3 rounded-xl gap-4 group active:scale-[0.98] transition-all">
+<span class="font-headline-md text-on-surface-variant/40 w-6">5</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Athletic woman in her late 20s wearing a technical performance wetsuit with glowing cyan seams. She is holding a sleek racing helmet. The lighting is cool-toned and dramatic, emphasizing the premium quality of the equipment and the intensity of aquatic sports." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQtk44ZoYIz1YdyeY37dh68lsq9MjQBKCXsm9g6QeSq_yw91jrdUOqaJxC-3gJZKa6CX5LcORm2TG71LDsA69xTAkHfkh4FojqUMcpkfWYJ53mWiqUDerI2huRXVOcpyyiXF_YqaiOQglGm1pYI5qazoLVTCwvOBp4zxRJ-2WLrAYvSqZXLtj4iatFP8Vy5JzDUEixxBebkKODRKio5mrgWnbNoJKEJL4iFlFn2LN-vXdkNNcIkK8kZO2lGb4K_TwLed5hSVXcIeBC"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm truncate">AquaQueen_ONT</h4>
+<p class="font-label-caps text-[10px] text-secondary-fixed-dim">PRO • 7,450 XP</p>
+</div>
+<button class="bg-surface-variant text-on-surface-variant p-2 rounded-full hover:bg-secondary-container hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<!-- Active User Placeholder in list if not in top 5 -->
+<div class="flex items-center bg-secondary-container/10 border border-secondary-container/30 p-3 rounded-xl gap-4 shadow-[0_0_15px_rgba(0,241,254,0.1)]">
+<span class="font-headline-md text-secondary-container w-6 italic">42</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-secondary-container">
+<img class="w-full h-full object-cover" data-alt="Modern high-fidelity avatar of a professional rider with futuristic gear. The image features high contrast, sharp details, and deep ocean blue backgrounds with bright cyan accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxEHLmWkmF_fatC6Qe2fOiSs0RPTsQm0WcPcJDbuP1X1Yu0wdGZ-TKKvMnzX3wEbrH-i_wDnhaPconvMkqQXy-YrhvBbsR3OGSVQ5MfBJ9K5yld8kn9MwC-TBAmJM6dXRipowxGMR8PiH4B5kalTT8E9GIOjAcD3L-UAw4A1xEdLrpDjaQWEDXKmq4GyILh74H4xPjWKE1V3sLNbBJdpmrky9jHmRTEkTbY6Q1WEBzYH2A_t668gg7Y4lJUqwKLy8f7zU3ZLnFwF5S"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm truncate text-on-surface">You (Rider_01)</h4>
+<p class="font-label-caps text-[10px] text-secondary-container">PRO • 5,210 XP</p>
+</div>
+<span class="material-symbols-outlined text-secondary-container">person</span>
+</div>
+<div class="flex items-center glass-card p-3 rounded-xl gap-4 group">
+<span class="font-headline-md text-on-surface-variant/40 w-6">6</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Action portrait of a person with technical water racing gear. Blue neon light accents, dark water background, high-fidelity sports brand look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbBBpqndLmmCg_Tk5O517kQ6Y4me7hEZGCmgJYQYpGTG_HEhfOquLwCH0r5KPrIT5G0e3aDtKYFe0grl0Q55dphpiGuGw25FVu4frukBpatIPW8wWM-c8tuHmaBmCHsS7D1SEzbnGsdbmhtn8-0CfIWdt3RuNxIH8hYM_ZDA6iapHzG4QBWz9bQpqa1YPCKUnGbYmy5v1vHX7Bv06z_uiQ2qYGPVmj2BnWYLpFIJmxQUKqtkY9grtawaQbUvIjslsWiqpmsyCLkkRH"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm truncate">Velocity_Vince</h4>
+<p class="font-label-caps text-[10px] text-secondary-fixed-dim">ELITE • 7,100 XP</p>
+</div>
+<button class="bg-surface-variant text-on-surface-variant p-2 rounded-full">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center glass-card p-3 rounded-xl gap-4 group">
+<span class="font-headline-md text-on-surface-variant/40 w-6">7</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Professional athlete profile. Clean aesthetic, high contrast, obsidian and bright cyan themes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuHou36MEDmzxwRlP2ea2qWYYurBswc7gYLWVQaNXJGN6APtj05ro6SZjTpM2B6at_DDX04fkSRMvscK0jSd4BEYXdLPbjy4IB9-B4nfPe8-60NCDnSilQWcRvsx2jBJvECI-BWK7jY5My7Gnvb-6urx3qf6UjvomqN2SKJ5fGEVeJgB5Vnmt2bJlD-NFTQ5qqNXXHFWHD_NV0sZc7X8TyeE14GMlQEIYCnkACJYN0AFNYOow7P8TTP9Zt6armhpNr_ijhKJKXWvbf"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm truncate">Drift_King</h4>
+<p class="font-label-caps text-[10px] text-secondary-fixed-dim">PRO • 6,890 XP</p>
+</div>
+<button class="bg-surface-variant text-on-surface-variant p-2 rounded-full">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Mobile) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container dark:bg-surface-container shadow-[0_-4px_20px_rgba(0,219,231,0.15)]">
+<div class="flex flex-col items-center justify-center text-on-surface-variant transition-all hover:text-secondary-fixed-dim active:scale-90 duration-200">
+<span class="material-symbols-outlined">directions_boat</span>
+<span class="font-label-caps text-[10px]">Fleet</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant transition-all hover:text-secondary-fixed-dim active:scale-90 duration-200">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-caps text-[10px]">Ops</span>
+</div>
+<!-- Alerts is active since Leaderboards are part of the competitive ecosystem -->
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-label-caps text-[10px]">Alerts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant transition-all hover:text-secondary-fixed-dim active:scale-90 duration-200">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps text-[10px]">Staff</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for list items
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // Potential navigation logic
+                console.log('Viewing rider profile...');
+            });
+        });
+
+        // Tab switching logic
+        const tabs = document.querySelectorAll('nav button');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => {
+                    t.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+                    t.classList.add('text-on-surface-variant');
+                });
+                this.classList.add('bg-secondary-container', 'text-on-secondary-container');
+                this.classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

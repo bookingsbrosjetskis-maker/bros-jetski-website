@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Booking Confirmation | Bros Jetsky Rentals</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Manrope:wght@400;600&family=Space+Grotesk:wght@600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Montserrat:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#2f3035",
+                    "surface-container-highest": "#333539",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "background": "#111318",
+                    "tertiary-fixed": "#e2e2e2",
+                    "primary-fixed": "#d8e2ff",
+                    "secondary-fixed-dim": "#00dbe7",
+                    "on-tertiary": "#2f3131",
+                    "surface-container-low": "#1a1c20",
+                    "surface-dim": "#111318",
+                    "surface-container-lowest": "#0c0e12",
+                    "tertiary": "#c6c6c7",
+                    "on-secondary-fixed": "#002022",
+                    "surface-container": "#1e2024",
+                    "secondary": "#ddfcff",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "secondary-container": "#00f1fe",
+                    "primary-fixed-dim": "#adc7ff",
+                    "surface-tint": "#adc7ff",
+                    "on-tertiary-container": "#282a2a",
+                    "inverse-primary": "#005bc0",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#006a70",
+                    "on-primary-fixed": "#001a41",
+                    "on-primary": "#002e68",
+                    "outline": "#8b90a0",
+                    "on-error": "#690005",
+                    "primary": "#adc7ff",
+                    "on-background": "#e2e2e8",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-surface": "#e2e2e8",
+                    "primary-container": "#4a8eff",
+                    "on-surface-variant": "#c1c6d7",
+                    "surface-variant": "#333539",
+                    "surface-bright": "#37393e",
+                    "inverse-surface": "#e2e2e8",
+                    "secondary-fixed": "#74f5ff",
+                    "outline-variant": "#414754",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed-variant": "#004493",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "tertiary-container": "#909191",
+                    "surface": "#111318",
+                    "on-secondary": "#00363a",
+                    "on-primary-container": "#00285b",
+                    "surface-container-high": "#282a2e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "button-text": ["Space Grotesk"],
+                    "headline-xl": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-lg": ["Manrope"],
+                    "headline-md": ["Montserrat"],
+                    "label-caps": ["Space Grotesk"],
+                    "body-md": ["Manrope"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(116, 245, 255, 0.1);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 15px rgba(116, 245, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased">
+<!-- TopNavBar Suppression: Following "The Destination Rule" for transactional emails/confirmation screens -->
+<main class="max-w-[600px] mx-auto min-h-screen pb-12 relative overflow-hidden">
+<!-- Background Ambient Glow -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-primary/10 to-transparent pointer-events-none -z-10"></div>
+<!-- Header / Logo Area -->
+<header class="pt-12 pb-8 px-6 text-center">
+<h1 class="font-headline-md text-headline-md font-bold tracking-tight text-primary uppercase">
+                Bros Jetsky Rentals
+            </h1>
+</header>
+<!-- Cinematic Hero Section -->
+<div class="relative w-full h-[320px] overflow-hidden rounded-xl mx-auto max-w-[552px] shadow-2xl group">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A cinematic, high-action shot of a sleek, high-performance jet ski carving through dark, crystalline blue water at high speed. The scene is captured at twilight, with the deep obsidian water reflecting electric cyan light from the jet ski's underglow. Water spray is frozen in mid-air, catching sharp highlights like scattered diamonds against the moody, dark atmosphere. The lighting is dramatic and high-contrast, emphasizing the aggressive lines and premium chrome finish of the machine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAq2fQHG2NFxO6TxzMPu7UdQcYu9QeWn_HzJaHGZNJouacz1EyftcnRI1lFppst0JQgnV-MBkun46jEsx5_3TJeI1OLPUDdDsPmmQRADjsaAB9s3VlywMJJ0PMZx1hwkR4kYSAXBd8G9Q6r_9bUIa4YItqieuwWTs2JefgY7E__GeqrCfPmDHbFHszXco_YgX6VvINeMhkq0FZHxpM1OwRPZPE3lo2jNQP-83skvpPpdYFtWqoGTsS1lbi45p21ToOH0MDRrpyCwxx"/>
+<div class="absolute bottom-6 left-6 z-20">
+<p class="font-label-caps text-label-caps text-secondary-fixed mb-1">BOOKING CONFIRMED</p>
+<h2 class="font-headline-lg text-headline-lg text-white">Ride the Thunder.</h2>
+</div>
+</div>
+<!-- Content Canvas -->
+<div class="px-6 -mt-8 relative z-30">
+<!-- Booking Details Bento-ish Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-card p-5 rounded-xl flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary-fixed mb-2">calendar_today</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant">DATE</p>
+<p class="font-headline-md text-headline-md text-primary">July 14, 2024</p>
+</div>
+</div>
+<div class="glass-card p-5 rounded-xl flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary-fixed mb-2">schedule</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant">TIME</p>
+<p class="font-headline-md text-headline-md text-primary">10:00 AM</p>
+</div>
+</div>
+<div class="glass-card p-5 rounded-xl col-span-2 flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">LAUNCH LOCATION</p>
+<p class="font-body-lg text-body-lg text-on-surface">Muskoka Docking Bay 7, ON</p>
+</div>
+</div>
+</div>
+<!-- Check-in QR & CTA -->
+<div class="mt-8 bg-surface-container rounded-xl p-8 text-center border border-outline-variant/20 shadow-xl">
+<h3 class="font-headline-md text-headline-md mb-2">Your Boarding Pass</h3>
+<p class="font-body-md text-on-surface-variant mb-6">Present this QR code to the dock master upon arrival for expedited check-in.</p>
+<div class="inline-block p-4 bg-white rounded-xl mb-6">
+<img class="w-40 h-40" data-alt="A clean, minimalist QR code rendered in high resolution. The QR code is perfectly centered and isolated on a white background, designed for easy scanning. The style is modern and digital, specifically intended for a high-end adventure rental service mobile boarding pass. The image should be sharp, with no distortion, ensuring high contrast between the black modules and the white field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXkjd_ik2awYzQjZo0FyXADkMFVZqP4OwcIpbu1yJhMpNcd3auk5HvnhtTw7j7ryH7pswVdsBYOPM9FzTHihqcLtaVGPWM0HwODSC-TV9WmVoK_8L1BtKbbRyfTdqKPyQjHsJ_joeQLbYI6HuwgyNCUxRPXUjXujbSKw8jvgeDxSaCVxZejD5kHMdxx-gIvVd_PlUVYWn8j9h6ARyha-ERW9HpJAYYG7toKni9kPr8MtmGdHn7898POijP2JsaqizIYObL6Jz3MCO4"/>
+</div>
+<div class="space-y-4">
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text py-4 rounded-lg uppercase tracking-widest glow-cyan active:scale-[0.98] transition-all">
+                        Add to Apple Wallet
+                    </button>
+<button class="w-full border border-outline text-on-surface font-button-text text-button-text py-4 rounded-lg uppercase tracking-widest hover:bg-surface-variant transition-all">
+                        View Full Itinerary
+                    </button>
+</div>
+</div>
+<!-- Checklist Section -->
+<div class="mt-8">
+<h3 class="font-label-caps text-label-caps text-secondary-fixed mb-4">WHAT TO BRING</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="font-body-md text-on-surface">Valid Photo ID (Must be 18+)</p>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="font-body-md text-on-surface">Boating License (Optional, training provided)</p>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="font-body-md text-on-surface">Sun Protection & Towels</p>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="font-body-md text-on-surface">Weather-appropriate swimwear</p>
+</div>
+</div>
+</div>
+<!-- Map/Location Preview -->
+<div class="mt-8 rounded-xl overflow-hidden border border-outline-variant/20 h-48 relative">
+<div class="absolute inset-0 bg-black/20 z-10 pointer-events-none"></div>
+<img class="w-full h-full object-cover" data-alt="A stylized, high-contrast dark-mode satellite map of Muskoka Lakes, Ontario. The water bodies are deep navy and obsidian, with land masses rendered in subtle charcoal grey. Important docking locations are highlighted with glowing cyan pin markers. The aesthetic is professional and high-fidelity, resembling an expensive car's navigation system. The lighting is moody, with subtle glows emanating from the marked coastal areas." data-location="Muskoka Lakes, Ontario" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2oJ_I5HRcZ4PXtsZWSawcWaKJhy4W-3S5bkM14n_jhNz5lfdwZj4M3yy_42HEEJzG10irvDrYyTp3AKl1ygks2HQFgWlvEAyl3PcPCcGB1NJhLBqXUKOi39BXSIswl-Iy40Kr6JcpgyNTKJJWWyFDnCJKw-0OrxZKCbKCaPotT7s5Vyx0PLVQpDlCZb0BZ8fdGl15SytcntHNozXpC_eSbwrXVMKK6_uW3zLsoPFXlKaBe0MpdLI1tMdzkLW-ElCt2eLsZ7x9up-L"/>
+<div class="absolute bottom-4 right-4 z-20">
+<button class="bg-surface/80 backdrop-blur-md px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold border border-white/10">
+<span class="material-symbols-outlined text-sm">directions</span> Open in Maps
+                    </button>
+</div>
+</div>
+<!-- Support/Help -->
+<div class="mt-12 text-center border-t border-outline-variant/20 pt-8">
+<p class="font-body-md text-on-surface-variant">Need to change your booking?</p>
+<a class="text-secondary-fixed font-bold hover:underline" href="mailto:support@brosjetsky.ca">Contact High-Performance Support</a>
+</div>
+</div>
+</main>
+<!-- Footer: Integrated from Shared Components JSON -->
+<footer class="bg-surface-container-lowest py-12 border-t border-outline-variant/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-2">
+<h4 class="font-headline-md text-headline-md font-extrabold text-on-surface mb-4">Bros Jetsky Rentals</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">© 2024 Bros Jetsky Rentals. All rights reserved. Built for high performance.</p>
+</div>
+<div class="space-y-3">
+<p class="font-label-caps text-label-caps text-primary mb-4">LEGAL</p>
+<a class="block text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="block text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="block text-on-surface-variant hover:text-primary transition-colors" href="#">Rental Agreement</a>
+</div>
+<div class="space-y-3">
+<p class="font-label-caps text-label-caps text-primary mb-4">SUPPORT</p>
+<a class="block text-on-surface-variant hover:text-primary transition-colors" href="#">FAQ</a>
+<a class="block text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for checklist items
+        document.querySelectorAll('.flex.items-center.gap-4.p-4').forEach(item => {
+            item.addEventListener('click', () => {
+                const icon = item.querySelector('.material-symbols-outlined');
+                if (icon.innerText === 'check_circle') {
+                    icon.innerText = 'radio_button_unchecked';
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                    item.classList.add('opacity-50');
+                } else {
+                    icon.innerText = 'check_circle';
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                    item.classList.remove('opacity-50');
+                }
+            });
+        });
+    </script>
+</body></html>

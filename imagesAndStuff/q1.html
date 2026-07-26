@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Azure Velocity Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Manrope:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&amp;family=Montserrat:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(173, 199, 255, 0.1);
+        }
+        .cyan-glow {
+            box-shadow: 0 0 15px rgba(0, 219, 231, 0.15);
+        }
+        .speedometer-track {
+            stroke-dasharray: 251.2;
+            stroke-dashoffset: 62.8; /* 75% fill example */
+            transition: stroke-dashoffset 1s ease-out;
+        }
+        body {
+            background-color: #111318;
+            color: #e2e2e8;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#e2e2e8",
+                    "on-primary-fixed-variant": "#004493",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#00dbe7",
+                    "on-secondary": "#00363a",
+                    "primary": "#adc7ff",
+                    "secondary-container": "#00f1fe",
+                    "primary-container": "#4a8eff",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "secondary-fixed": "#74f5ff",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#1a1c20",
+                    "on-primary-container": "#00285b",
+                    "on-secondary-fixed": "#002022",
+                    "on-secondary-container": "#006a70",
+                    "on-error-container": "#ffdad6",
+                    "inverse-on-surface": "#2f3035",
+                    "outline": "#8b90a0",
+                    "surface-container-lowest": "#0c0e12",
+                    "primary-fixed": "#d8e2ff",
+                    "tertiary": "#c6c6c7",
+                    "on-background": "#e2e2e8",
+                    "on-surface": "#e2e2e8",
+                    "on-primary-fixed": "#001a41",
+                    "surface-container": "#1e2024",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "secondary": "#ddfcff",
+                    "surface-container-highest": "#333539",
+                    "on-tertiary": "#2f3131",
+                    "surface-dim": "#111318",
+                    "on-primary": "#002e68",
+                    "primary-fixed-dim": "#adc7ff",
+                    "error-container": "#93000a",
+                    "surface-variant": "#333539",
+                    "surface-bright": "#37393e",
+                    "inverse-primary": "#005bc0",
+                    "surface-container-high": "#282a2e",
+                    "outline-variant": "#414754",
+                    "tertiary-container": "#909191",
+                    "surface-tint": "#adc7ff",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-surface-variant": "#c1c6d7",
+                    "background": "#111318",
+                    "surface": "#111318",
+                    "on-tertiary-container": "#282a2a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Space Grotesk"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-lg": ["Manrope"],
+                    "button-text": ["Space Grotesk"],
+                    "headline-xl": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "headline-md": ["Montserrat"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-body-md text-on-surface selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- SIDE NAVIGATION BAR -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-unit-gutter bg-surface-container-low border-r border-outline-variant w-64 z-50">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-secondary-container tracking-tight">Azure Velocity</h1>
+<p class="font-body-md text-on-surface-variant opacity-70">Fleet Admin Console</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="sailing">sailing</span>
+<span class="font-label-caps text-label-caps">Fleet Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-caps text-label-caps">Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-caps text-label-caps">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="build">build</span>
+<span class="font-label-caps text-label-caps">Maintenance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 space-y-2 border-t border-outline-variant/20">
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text py-3 rounded-full hover:brightness-110 transition-all mb-4">
+                New Booking
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</div>
+</aside>
+<!-- MAIN CONTENT AREA -->
+<main class="ml-64 min-h-screen flex flex-col bg-background">
+<!-- TOP APP BAR -->
+<header class="flex justify-between items-center h-16 px-margin-desktop backdrop-blur-xl border-b border-outline-variant/30 sticky top-0 z-40 bg-surface-dim/80">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-2 text-on-surface focus:ring-1 focus:ring-secondary-fixed text-body-md" placeholder="Search fleet, bookings or analytics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 border-r border-outline-variant pr-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary-container rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface">Alex Carter</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Fleet Owner</p>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-secondary-fixed/30">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate male executive in his early 40s, looking confident and approachable. The lighting is dramatic with cool blue rim lights, reflecting a high-end maritime admin environment. High-fidelity photography style with a blurred office background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8eSSaEX4VAaj6s1zLbJoFo3WaVyaE9oAcsc042jKhaCQKjOwQvBt6iTxQdiaSkJijWtjAhwvvjq7HeOR9ZAX5-KriXQNZjt6zEh6thtBSciaxi3ycqDmA9b4gmdrV-rHxCaqFbhElehsus4Vz_PN8BhVDOuMqaYcU4RqxOVjoEdS7dzYbCrAFD5zAnOCJ7lhtSgm0OhyphHxukAq9ftSB3jZmWrTE5I5DYNVJuOl58tKU1jT-MDIvo49frZoyPbT9wmqUDLmH9Vt1"/>
+</div>
+</div>
+</div>
+</header>
+<!-- DASHBOARD CONTENT -->
+<div class="p-margin-desktop space-y-gutter flex-1">
+<!-- HEADER -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">System Overview</h2>
+<p class="font-body-md text-on-surface-variant">Real-time performance metrics for Ontario North Basin.</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-high px-4 py-2 rounded-lg font-label-caps text-label-caps border border-outline-variant hover:bg-surface-container-highest transition-colors">7 Days</button>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-label-caps text-label-caps font-bold">30 Days</button>
+</div>
+</div>
+<!-- KEY METRICS BENTO GRID -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Revenue Card -->
+<div class="col-span-12 lg:col-span-4 glass-card p-6 rounded-xl cyan-glow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-secondary-container" data-icon="payments">payments</span>
+</div>
+<span class="text-secondary-fixed-dim font-label-caps text-label-caps flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +12.5%
+                        </span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">TOTAL REVENUE</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">$142,850.00</h3>
+<div class="mt-6 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-3/4"></div>
+</div>
+</div>
+<!-- Utilization Card -->
+<div class="col-span-12 lg:col-span-4 glass-card p-6 rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="speed">speed</span>
+</div>
+<span class="text-primary font-label-caps text-label-caps flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                            Optimal
+                        </span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">FLEET UTILIZATION</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">88.4%</h3>
+<div class="mt-6 flex gap-1">
+<div class="h-8 flex-1 bg-primary-container/20 rounded-sm"></div>
+<div class="h-8 flex-1 bg-primary-container/40 rounded-sm"></div>
+<div class="h-8 flex-1 bg-primary-container/60 rounded-sm"></div>
+<div class="h-8 flex-1 bg-primary-container rounded-sm"></div>
+<div class="h-8 flex-1 bg-surface-container-highest rounded-sm"></div>
+</div>
+</div>
+<!-- Growth Card -->
+<div class="col-span-12 lg:col-span-4 glass-card p-6 rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<span class="text-tertiary font-label-caps text-label-caps flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                            YOY
+                        </span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">NEW ACQUISITIONS</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">248 Users</h3>
+<div class="mt-6 flex items-end gap-1 h-8">
+<div class="w-2 bg-tertiary h-[20%] rounded-t-sm"></div>
+<div class="w-2 bg-tertiary h-[40%] rounded-t-sm"></div>
+<div class="w-2 bg-tertiary h-[35%] rounded-t-sm"></div>
+<div class="w-2 bg-tertiary h-[60%] rounded-t-sm"></div>
+<div class="w-2 bg-tertiary h-[85%] rounded-t-sm"></div>
+<div class="w-2 bg-tertiary h-[100%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+<!-- MAIN CONTENT GRID -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- LIVE ACTIVITY FEED -->
+<section class="col-span-12 lg:col-span-8 glass-card rounded-xl overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container">
+<h4 class="font-headline-md text-headline-md text-on-surface">Live Activity</h4>
+<button class="text-primary font-label-caps text-label-caps hover:underline">View All</button>
+</div>
+<div class="divide-y divide-outline-variant/10 overflow-y-auto max-h-[500px]">
+<!-- Activity Item 1 -->
+<div class="p-6 hover:bg-surface-container-high transition-colors flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up of a premium carbon fiber jet ski hull with water droplets reflecting a sunset. High-contrast commercial photography with deep blues and bright cyan highlights, professional retouching, sharp focus on texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPKCxf6YZS0cEa1J1RgLcNMrMTr0gq2GLQBsoXQ4kAngU6z1OOqme7aHZ3KwLPukwOX4fgYpWJwfffKyJI0qWWX1bM9Wmkwruzq3ryb1FmMc9AMwbIW2Kq5qtjAuj8uqur2upzONCXnQ1rwsi0cHnlwYG-LEIJgDfqweyOzcVbktpcRVS2y7MICPQg61aoAWTb138XM6itlvX2w1WwYWX7Zt8XLNOCAAyrwsd7PzWB-MWw6dRXwIVL4tCBLBFalQ9zBctq-HF0nmJf"/>
+</div>
+<div class="flex-1">
+<p class="text-on-surface font-semibold">Sarah Jenkins booked <span class="text-secondary-fixed-dim">Sea-Doo RXP-X 300</span></p>
+<p class="text-on-surface-variant text-sm">Today at 10:45 AM • Lake Muskoka</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface">$450.00</p>
+<span class="bg-on-secondary-fixed/30 text-secondary-fixed text-[10px] px-2 py-0.5 rounded-full font-bold">CONFIRMED</span>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="p-6 hover:bg-surface-container-high transition-colors flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Macro shot of a jet ski digital gauge cluster glowing with neon cyan lighting in a dark environment. High-tech, futuristic aesthetic, sharp UI details, blurred mechanical parts in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2rF0hiAu-TD3fl5MYJf6Qm7SC9U9uZwE32SsTzZP7_gPUfGF3Kglrd09oBn2z4R5tThDqXzumBIiC6RnuhdyT58D27keb6APDQpI7o0lVpIFmjsaCnsspkpIv1na_bshSiepckTbCD6NdF8Hx8uQgTqnyq0nXZXwP89Jg5PtWq5_qyvZkqdG9w7utemVWI3gW-maOg4lIta7Powjh00lOa2B9DdkMexTJTs5J9ZUV0avg5PHcvLidSFssz6XrpeDD3MYz54MAGOtr"/>
+</div>
+<div class="flex-1">
+<p class="text-on-surface font-semibold">Maintenance Alert: <span class="text-error">Velocity Unit #09</span></p>
+<p class="text-on-surface-variant text-sm">2 hours ago • Routine 50hr Service Required</p>
+</div>
+<div class="text-right">
+<span class="bg-error/10 text-error text-[10px] px-2 py-0.5 rounded-full font-bold">URGENT</span>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="p-6 hover:bg-surface-container-high transition-colors flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Overhead aerial view of a powerful jet ski carving a sharp white foam wake through deep turquoise water. High-speed action photography, vibrant colors, cinematic lighting, extreme detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXIQ6un_vUkXhnUfABgilbDB1SEqnj2MGvMSu6aNvSIdYDILAvg2jPiTDLYak9Q6uNThqRPH6iMdScIpN927g8GeKLEbwsF7_EveZ2cw4FEAtXSsXtWsi4fvBDgH_rXwDUWRl9-8NPcx0yL-D9qLLQ_k8Ozo3KVlYXM3TuxWIXJZXeocmC-P6VWVacponf-SNzh56RONR9OI0oPzxJaozCarmQ6v69EYujVBJd0-yo50lk1qqzBun5ISDfsGKbl7gD21zv6GsbKK2e"/>
+</div>
+<div class="flex-1">
+<p class="text-on-surface font-semibold">Michael Thorne completed rental</p>
+<p class="text-on-surface-variant text-sm">3 hours ago • 4.5 Hour Duration</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface">$680.00</p>
+<span class="bg-surface-container-highest text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full font-bold">COMPLETED</span>
+</div>
+</div>
+<!-- Activity Item 4 -->
+<div class="p-6 hover:bg-surface-container-high transition-colors flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up of a chrome jet ski handle with high-tech controls and a vibrant cyan start button. Soft focus background of a misty marina at dawn. Luxury feel, professional lighting, corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnswIwUr9tNOqUKUx5UeUbldP47xx2ETAA_phRR42V4ewHuuVDkEh04XQEQ3mNhQJIXvp5OGFwOJyatMtSfRl027VqckGtId9tQQjHPb8oVN3vSNeYCkZWH_YSLmCj0WKafEgGTO4_Gqsd6qP6-jHEjUFGHaraka7oinFVZwLE0DXlFBhKVQZU27jBfUYQdiuHP5GcVvomCnjTk2_t70l7j8OB8em5pF3lMzNMYZVRJi7IRt0Kve8z-VOqnzV2u6Y3Ly-xbARchwu1"/>
+</div>
+<div class="flex-1">
+<p class="text-on-surface font-semibold">New Booking Request: <span class="text-secondary-fixed-dim">Yamaha GP1800R</span></p>
+<p class="text-on-surface-variant text-sm">4 hours ago • Pending Approval</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface">$520.00</p>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold">PENDING</span>
+</div>
+</div>
+</div>
+</section>
+<!-- FLEET HEALTH SUMMARY -->
+<aside class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Health Gauges -->
+<div class="glass-card p-6 rounded-xl">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-6 uppercase tracking-widest">Fleet Health Index</h4>
+<div class="flex justify-center items-center py-4 relative">
+<!-- SVG Gauge -->
+<svg class="w-48 h-48 -rotate-90">
+<circle class="text-surface-container-highest" cx="96" cy="96" fill="transparent" r="80" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-secondary-container transition-all duration-1000" cx="96" cy="96" fill="transparent" r="80" stroke="currentColor" stroke-dasharray="502.4" stroke-dashoffset="50.2" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center rotate-0">
+<span class="font-headline-lg text-headline-lg text-secondary-container">92%</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">OPTIMAL</span>
+</div>
+</div>
+<div class="mt-4 space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Active Units</span>
+<span class="text-on-surface font-bold">42 / 45</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Critical Maintenance</span>
+<span class="text-error font-bold">2 Units</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Average Fuel Level</span>
+<span class="text-primary font-bold">78%</span>
+</div>
+</div>
+</div>
+<!-- Quick Controls -->
+<div class="glass-card p-6 rounded-xl bg-primary-container/5 border-primary/20">
+<h4 class="font-label-caps text-label-caps text-primary mb-4 uppercase tracking-widest">Operational Alerts</h4>
+<div class="space-y-4">
+<div class="flex items-start gap-3 p-3 bg-error/10 border border-error/20 rounded-lg">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<div>
+<p class="text-on-surface text-sm font-bold">Weather Warning</p>
+<p class="text-on-surface-variant text-xs">High winds detected in North Basin. Monitor rental speeds.</p>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3 bg-secondary-container/10 border border-secondary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-secondary-container" data-icon="info">info</span>
+<div>
+<p class="text-on-surface text-sm font-bold">Fleet Update</p>
+<p class="text-on-surface-variant text-xs">Firmware update v4.2 successfully pushed to 38 units.</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<!-- FOOTER -->
+<footer class="flex justify-between items-center py-4 px-margin-desktop bg-surface-container-lowest border-t border-outline-variant/10 text-on-surface-variant">
+<div class="flex gap-6">
+<a class="font-label-caps text-label-caps hover:text-secondary-container transition-all" href="#">Terms of Service</a>
+<a class="font-label-caps text-label-caps hover:text-secondary-container transition-all" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps hover:text-secondary-container transition-all flex items-center gap-1" href="#">
+<span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    System Status
+                </a>
+</div>
+<p class="font-body-md text-label-caps">© 2024 Azure Velocity Ontario. All rights reserved.</p>
+</footer>
+</main>
+<!-- FLOATING ACTION DECORATION -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-95 group">
+<span class="material-symbols-outlined transition-transform group-hover:rotate-12" data-icon="chat_bubble" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+</div>
+<!-- BACKGROUND ATMOSPHERE -->
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden opacity-30">
+
+</div>
+<script>
+        // Micro-interactions and data visualization triggers
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate progress bars on load
+            const bars = document.querySelectorAll('.h-full.bg-secondary-container');
+            bars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    bar.style.width = width || '75%';
+                }, 100);
+            });
+
+            // Smooth scaling for interactive items
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-2px)';
+                    card.style.transition = 'all 0.3s ease';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body></html>

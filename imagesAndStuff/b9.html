@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gallery | Bros Jetsky Rentals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Manrope:wght@400;500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+    }
+    .backdrop-blur-20px {
+      backdrop-filter: blur(20px);
+    }
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .hover-lift {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hover-lift:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(116, 245, 255, 0.1);
+    }
+    /* Hide scrollbar for clean aesthetic */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0A0C10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #414754;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #74f5ff;
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#282a2e",
+            "tertiary-container": "#909191",
+            "on-secondary-fixed-variant": "#004f54",
+            "surface": "#111318",
+            "on-secondary": "#00363a",
+            "on-primary-container": "#00285b",
+            "surface-bright": "#37393e",
+            "inverse-surface": "#e2e2e8",
+            "outline-variant": "#414754",
+            "on-tertiary-fixed": "#1a1c1c",
+            "on-primary-fixed-variant": "#004493",
+            "secondary-fixed": "#74f5ff",
+            "primary-container": "#4a8eff",
+            "on-surface-variant": "#c1c6d7",
+            "on-surface": "#e2e2e8",
+            "surface-variant": "#333539",
+            "tertiary-fixed-dim": "#c6c6c7",
+            "primary": "#adc7ff",
+            "on-background": "#e2e2e8",
+            "outline": "#8b90a0",
+            "on-error": "#690005",
+            "on-error-container": "#ffdad6",
+            "on-secondary-container": "#006a70",
+            "on-primary-fixed": "#001a41",
+            "on-primary": "#002e68",
+            "secondary-container": "#00f1fe",
+            "primary-fixed-dim": "#adc7ff",
+            "on-tertiary-container": "#282a2a",
+            "inverse-primary": "#005bc0",
+            "surface-tint": "#adc7ff",
+            "secondary": "#ddfcff",
+            "on-tertiary-fixed-variant": "#454747",
+            "surface-container": "#1e2024",
+            "on-secondary-fixed": "#002022",
+            "surface-dim": "#111318",
+            "surface-container-lowest": "#0c0e12",
+            "tertiary": "#c6c6c7",
+            "surface-container-low": "#1a1c20",
+            "tertiary-fixed": "#e2e2e2",
+            "secondary-fixed-dim": "#00dbe7",
+            "on-tertiary": "#2f3131",
+            "primary-fixed": "#d8e2ff",
+            "surface-container-highest": "#333539",
+            "error-container": "#93000a",
+            "error": "#ffb4ab",
+            "background": "#111318",
+            "inverse-on-surface": "#2f3035"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "gutter": "24px",
+            "margin-mobile": "20px",
+            "margin-desktop": "64px",
+            "container-max": "1280px",
+            "unit": "8px"
+          },
+          "fontFamily": {
+            "headline-xl": ["Montserrat"],
+            "headline-lg": ["Montserrat"],
+            "headline-md": ["Montserrat"],
+            "body-lg": ["Manrope"],
+            "body-md": ["Manrope"],
+            "button-text": ["Space Grotesk"],
+            "label-caps": ["Space Grotesk"]
+          },
+          "fontSize": {
+            "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-background selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-outline-variant/20 shadow-[0_0_15px_rgba(116,245,255,0.15)]">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto h-20">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-primary">
+        Bros Jetsky Rentals
+      </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Fleet</a>
+<a class="font-button-text text-button-text text-secondary-fixed border-b-2 border-secondary-fixed pb-1" href="#">Gallery</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Safety</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Reviews</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Contact</a>
+</div>
+<button class="bg-secondary-fixed text-on-secondary-fixed px-6 py-2 rounded-full font-button-text text-button-text hover:opacity-80 transition-all duration-300 active:scale-95">
+        Book Now
+      </button>
+</div>
+</nav>
+<main class="pt-32 pb-24">
+<!-- Hero Intro Section -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-16 text-center">
+<span class="font-label-caps text-label-caps text-secondary-fixed uppercase tracking-[0.2em] mb-4 block">Capturing the Rush</span>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-6">Life at the Dock</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto">
+        Experience the electric energy of Ontario's pristine waters. From high-speed maneuvers to sun-drenched family afternoons, explore the lifestyle that awaits you at Bros Jetsky Rentals.
+      </p>
+</section>
+<!-- Bento Grid Gallery -->
+<section class="px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter auto-rows-[300px]">
+<!-- Large Action Shot -->
+<div class="md:col-span-8 md:row-span-2 relative group overflow-hidden rounded-xl glass-card hover-lift">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A high-performance blue jet ski leaping out of a dark blue Muskoka lake at sunset. The spray of water is illuminated by a golden sun, creating a high-contrast and energetic mood. The background features deep green pine forests and a luxurious rustic lake house. The overall aesthetic is cinematic and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVUkTkp6VL0_pQ-B2cMCzLeFf7wD016Xp3kHmMrBAipifxaD37HcRoXFYgId8UmgYHNyLwfvJycssmjtghrdWJB3ZYLuxAX7NLM7vAJO41oFHwhcB88WfBDCnSdoARj12OlxswqX0naSOKmY8LzfoG6VaAq61Tm3Oay2S73T2Qrak4ZdhX345gps8pssyfUjpXiVvn6NiZgaQbKwDWWIsEWhn_XaxGYeeh1wCwEi_3uHZdFevT1fxvso_KwSDD6cVODi8TxOFPl64g"/>
+<div class="absolute inset-x-4 bottom-4 glass-card p-6 rounded-lg opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+<span class="font-label-caps text-label-caps text-secondary-fixed">Action Series</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1">Maximum Velocity</h3>
+</div>
+</div>
+<!-- Drone Overhead -->
+<div class="md:col-span-4 md:row-span-2 relative group overflow-hidden rounded-xl glass-card hover-lift">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A dramatic aerial drone shot showing a V-formation of six powerful blue jet skis racing across a deep indigo lake in Northern Ontario. The white wake trails create symmetric patterns against the dark water. Dense evergreen forests line the rocky shores, captured in sharp detail under bright daylight. Corporate and high-fidelity visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv3bsgajI5UppxfOfapB0NQ74nAWF-blzMa7naElGalSQYUV7tN_P5CgDxn_a3b1CQOafxzTEfzFQr6gXcEGOLrdQpS8WIZ5PUssIxvR9QUy2Q7hledgj1s1ECIGkO7_GoXwi6T72DyyNi5xfstg049bPpWZ6ED1Hm3m235LKutf2cyTqcLjs-XoIAE2gEAUZz95MAFrKrXL7AVUglEeGKBEXG3BAnp8crt0rvdv-FkpM0Ct_umec0WOJ4Yo3GiXSR1a5t7yNMdGZz"/>
+<div class="absolute inset-x-4 bottom-4 glass-card p-6 rounded-lg opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+<span class="font-label-caps text-label-caps text-secondary-fixed">Aerial View</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1">Lake Fleet formation</h3>
+</div>
+</div>
+<!-- Lifestyle Shot - Friends -->
+<div class="md:col-span-4 md:row-span-1 relative group overflow-hidden rounded-xl glass-card hover-lift">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Two couples on dark blue Sea-Doo jet skis laughing and waving in the middle of a bright turquoise lake surrounded by mountains. The atmosphere is joyful and adventurous, with bright sunlight highlighting the clear water and happy expressions. Premium rental experience marketing style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzv_TyoGMfJ4XkDo6hTB7tWBbid4q75wID83bxVZI3SeXWZFg5skf9k3FrogfkdWXgre4bfS7c5viRBLZYJEX65koXFHRQanj2DDLS9mB_iuulA1ZLWdgN8wd9mdlKSb56TwsXrcsB-2OtY2-_nw0CG2GJGpqjgP0UFUBk5G1wqRdBmqmLQyyzcVjjW9WZj308T0kRSPIlwBRR5DosXNucp1G9yrp1mgrz34bj3an-Tn6nDSkcmBOUWQhV3wfGtAu32FVyyhE7wlzN"/>
+<div class="absolute inset-x-4 bottom-4 glass-card p-4 rounded-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+<h4 class="font-button-text text-button-text text-on-surface">Group Adventures</h4>
+</div>
+</div>
+<!-- Detail Action -->
+<div class="md:col-span-4 md:row-span-1 relative group overflow-hidden rounded-xl glass-card hover-lift">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A close-up action shot of a professional rider in a full wetsuit and helmet jumping a blue jet ski high off a white-capped wave in the open ocean. Crystal clear blue sky in the background with water droplets frozen in mid-air. High-speed shutter photography showing intense detail and power." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBQ7LBk4TMuXsGOGjI07b8gHVWPu-gFISABpwWnmxeYZDPFMxNfbGzqoigUW8l2utuIIAoftZBq_zbndDkgPq9kTev0uq874T_BAc4LQgKMePEOju1bIUZH0XI4tUn1q3gHaDA-MPdAkG97I3Nvd2Cb-S3jiXqiOqnB6fyfkx_mmGsMbMkj7XM6yx3Dm5h3KNgRjKxNsO82dv8x1JDQunZu9chWRuLTTxFp2ar7WyGkyIx2lReGpuNKzO0uADcXkFRi147b2quYeCa"/>
+<div class="absolute inset-x-4 bottom-4 glass-card p-4 rounded-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+<h4 class="font-button-text text-button-text text-on-surface">Power &amp; Precision</h4>
+</div>
+</div>
+<!-- Lifestyle Shot - Couple -->
+<div class="md:col-span-4 md:row-span-1 relative group overflow-hidden rounded-xl glass-card hover-lift">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A young happy couple riding a bright blue jet ski near a wooden dock in Muskoka. They are laughing as water splashes up around them. The background shows a calm lake and pine trees. Warm afternoon lighting creates a nostalgic and premium vacation vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0zWqvyiD8Io5XjdkK91AS_mv9zuqFAcraq9Wqfi7H1A1fU2jU6tW1VqLtkngKwK1tYC5vnTkIyS5CA9JJ0UfnX2xZY96qyLEwF8ABh_adq-bsnTFIXcosX8bggaEruEWAp0tmGE5AZXwkrxYcgfITkIEFXWFue6yatw2CnXaxOqlju_clIiHh2_icb3OYifyIbtc79SnGq2Lnd4BCGZkMEWqGHVgIy0mMw4lYwXTrqdqHoXid5jnTtMttzj6fLdR27Kitl-3KSjS_"/>
+<div class="absolute inset-x-4 bottom-4 glass-card p-4 rounded-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+<h4 class="font-button-text text-button-text text-on-surface">Couple Escape</h4>
+</div>
+</div>
+<!-- Full Width Family Shot -->
+<div class="md:col-span-12 md:row-span-2 relative group overflow-hidden rounded-xl glass-card hover-lift">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A beautiful high-resolution photo of a family of four, including two young children, taking a selfie on a weathered wooden dock. In the background, two premium blue jet skis are moored, and the sun is setting over a peaceful Muskoka lake with dense pine trees. The mood is heartwarming, exclusive, and serene. Professional lifestyle photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAttc591nhnqd4YMyGWzmfeSNWhAImF6Oq2mvkXR40XS6zzjFvTGB2bxNMHGVFN3Gpmy_DUAs2zer6JeaFQd4bWJJRSZyHa8V0GmDC0qdZKc6hD9oSeA7_WjzhfrXOUAGReqDlCLIOQ2j3wKukDduE8ndUbyeLDbFTw4rHCf9IyjceqLxl4Dm0WwNEoPgSbFjwC5Dz6zS3ZkIzf0ABn1q_wQ5hrAv-eVT0eca0HP6XHlapbAfT5_UlvxhWy9PxBtWdji-eUVeAhK-Wj"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+<div class="absolute left-8 bottom-8 max-w-lg">
+<span class="font-label-caps text-label-caps text-secondary-fixed">Lake Como Luxe</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mt-2">Family Memories at the Dock</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Our rentals are designed for all ages. Safety meets style for every generation of adventurer.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-surface-container-lowest py-12 border-t border-outline-variant/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="flex flex-col gap-4">
+<div class="font-headline-md text-headline-md font-extrabold text-on-surface">Bros Jetsky</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Elevating Ontario's waterways with high-performance marine adventures.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-label-caps text-label-caps text-primary">Quick Links</h5>
+<div class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">FAQ</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-label-caps text-label-caps text-primary">Support</h5>
+<div class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Rental Agreement</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-label-caps text-label-caps text-primary">Location</h5>
+<div class="font-body-md text-body-md text-on-surface-variant">
+          Muskoka Lakes District<br/>
+          Ontario, Canada
+        </div>
+<div class="flex gap-4 mt-2">
+<span class="material-symbols-outlined text-secondary-fixed cursor-pointer hover:scale-110 transition-transform">share</span>
+<span class="material-symbols-outlined text-secondary-fixed cursor-pointer hover:scale-110 transition-transform">alternate_email</span>
+</div>
+</div>
+</div>
+<div class="mt-12 px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant/10 pt-8 text-center md:text-left">
+<p class="font-body-md text-body-md text-on-surface-variant/60">
+        © 2024 Bros Jetsky Rentals. All rights reserved. Built for high performance.
+      </p>
+</div>
+</footer>
+<!-- Micro-interaction script for cursor glow effect -->
+<script>
+    document.addEventListener('mousemove', (e) => {
+      const glow = document.getElementById('cursor-glow');
+      if (glow) {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      }
+    });
+  </script>
+<div class="fixed pointer-events-none w-64 h-64 bg-secondary-fixed/5 blur-[100px] rounded-full -translate-x-1/2 -translate-y-1/2 z-0" id="cursor-glow"></div>
+</body></html>

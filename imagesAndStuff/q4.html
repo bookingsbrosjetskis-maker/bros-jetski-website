@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Azure Velocity | Dock Ops</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Manrope:wght@400;500;700&amp;family=Space+Grotesk:wght@600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&amp;family=Montserrat:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 219, 231, 0.1);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 219, 231, 0.15);
+        }
+        .speedometer-gradient {
+            background: conic-gradient(from 180deg at 50% 50%, #00dbe7 0deg, transparent 280deg);
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#2f3035",
+                        "surface-container-highest": "#333539",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "background": "#111318",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "on-tertiary": "#2f3131",
+                        "surface-container-low": "#1a1c20",
+                        "surface-dim": "#111318",
+                        "surface-container-lowest": "#0c0e12",
+                        "tertiary": "#c6c6c7",
+                        "on-secondary-fixed": "#002022",
+                        "surface-container": "#1e2024",
+                        "secondary": "#ddfcff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "secondary-container": "#00f1fe",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-tint": "#adc7ff",
+                        "on-tertiary-container": "#282a2a",
+                        "inverse-primary": "#005bc0",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#006a70",
+                        "on-primary-fixed": "#001a41",
+                        "on-primary": "#002e68",
+                        "outline": "#8b90a0",
+                        "on-error": "#690005",
+                        "primary": "#adc7ff",
+                        "on-background": "#e2e2e8",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-surface": "#e2e2e8",
+                        "primary-container": "#4a8eff",
+                        "on-surface-variant": "#c1c6d7",
+                        "surface-variant": "#333539",
+                        "surface-bright": "#37393e",
+                        "inverse-surface": "#e2e2e8",
+                        "secondary-fixed": "#74f5ff",
+                        "outline-variant": "#414754",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-fixed-variant": "#004493",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "tertiary-container": "#909191",
+                        "surface": "#111318",
+                        "on-secondary": "#00363a",
+                        "on-primary-container": "#00285b",
+                        "surface-container-high": "#282a2e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "button-text": ["Space Grotesk"],
+                        "headline-xl": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Manrope"],
+                        "headline-md": ["Montserrat"],
+                        "label-caps": ["Space Grotesk"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container selection:text-on-secondary-container min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex justify-between items-center px-margin-mobile w-full h-16 bg-surface z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary active:scale-95 transition-transform">menu</span>
+<h1 class="font-headline-md text-headline-md font-bold text-secondary-container">Azure Velocity</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-primary active:scale-95 transition-transform">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary-container rounded-full ring-2 ring-background"></span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto px-margin-mobile pt-4 pb-24 space-y-6">
+<!-- Quick Action Hero (Scan QR) -->
+<section class="relative overflow-hidden rounded-xl h-48 flex flex-col justify-center items-center group">
+
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<button class="relative z-10 w-28 h-28 rounded-full bg-secondary-container flex flex-col items-center justify-center glow-cyan active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl mb-1">qr_code_scanner</span>
+<span class="font-label-caps text-label-caps text-on-secondary-container">SCAN QR</span>
+</button>
+<p class="relative z-10 mt-4 font-label-caps text-label-caps text-secondary-fixed-dim tracking-[0.2em] animate-pulse-soft">TAP TO INITIALIZE ARRIVAL</p>
+</section>
+<!-- Stats Overview Row -->
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-4 rounded-xl flex items-center justify-between">
+<div>
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase">Fleet Ready</p>
+<p class="font-headline-md text-headline-md text-primary">12/14</p>
+</div>
+<span class="material-symbols-outlined text-secondary-container">directions_boat</span>
+</div>
+<div class="glass-panel p-4 rounded-xl flex items-center justify-between">
+<div>
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase">Incoming</p>
+<p class="font-headline-md text-headline-md text-primary">08</p>
+</div>
+<span class="material-symbols-outlined text-secondary-container">schedule</span>
+</div>
+</div>
+<!-- Arriving Soon Section -->
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-md text-headline-md text-on-surface">Arriving Soon</h2>
+<span class="font-label-caps text-label-caps text-secondary-fixed-dim">VIEW ALL (24)</span>
+</div>
+<div class="space-y-3">
+<!-- Customer Card 1 (Ready) -->
+<div class="glass-panel p-4 rounded-xl border-l-4 border-l-secondary-container flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full" data-alt="A professional headshot of a premium jet ski rental customer, high-end athletic wear, outdoors near water, soft natural light, cinematic corporate photography style with deep blacks and cyan accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-f1RQWe_LEAy1lGrc-xK0QPgnGqKoEWUSfAZU6bsSKYZ0PyjVVRb-3fcrq9VJkofowYQ9iOpTx__qonPZSYB0AZzMNliSAkyPZ-3N2QforlmmhGKA2r2ZB8PwXQ8BsTxqj5pApUlHnb8fHUy7YX9MQKtRuqzYq-9SXlDrGBz5gPmIbyAeIx0Tk4TpE8FIsPSAhDZ5cnUiv-CygbcZIXJpU6k3M94dcx2Fpo8yrk143ERJhMbBXn5-pGrsAE4Tn--A0HGwJtgKnOOY"/>
+</div>
+<div>
+<h3 class="font-body-md font-bold text-on-surface">Marcus Sterling</h3>
+<p class="text-label-caps text-[11px] text-on-surface-variant">SEA-DOO RXP-X • 10:30 AM</p>
+</div>
+</div>
+<span class="bg-secondary-container/10 text-secondary-container px-2 py-1 rounded text-[10px] font-bold">READY</span>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 flex items-center gap-2 bg-surface-container-low rounded p-2">
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-caps text-[10px]">WAIVER</span>
+</div>
+<div class="flex-1 flex items-center gap-2 bg-surface-container-low rounded p-2">
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-caps text-[10px]">ID VERIFIED</span>
+</div>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text py-3 rounded-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
+                        CHECK-IN GUEST
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+<!-- Customer Card 2 (Incomplete) -->
+<div class="glass-panel p-4 rounded-xl flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full" data-alt="Close up of an adventurer woman with sunglasses, reflecting the bright Ontario lake sun, professional photography, modern corporate travel aesthetic, deep dark tones with vibrant electric blue highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqnZ_I_IVrFbV6s9fyYQW2eMcc_tQXu0UsB20lP0xhm5zVLPAhM-WYVnEwdSJiOL8wc-lW_HWS_LBpNphkiRBbmn69FNi-WKNsM7drsQKK4O6vh6oh_UhdmTXw5o0A0nfyM8g7wtNqj7EWnJomq24w7jr1ycIs-hpk6KtiXL6NtTYt3YuMgwRjBPZxswgbLGQon_x6iyKwATCjHRiBX3DDMRPynwYZ1Jgc2MGKoCBpy7A5sSXbjAahxtrh-Qi0t8kjaBnuaguGbutL"/>
+</div>
+<div>
+<h3 class="font-body-md font-bold text-on-surface">Elena Vance</h3>
+<p class="text-label-caps text-[11px] text-on-surface-variant">YAMAHA GP1800R • 11:00 AM</p>
+</div>
+</div>
+<span class="bg-error-container/20 text-error px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Incomplete</span>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 flex items-center gap-2 bg-surface-container-low rounded p-2">
+<span class="material-symbols-outlined text-error text-sm">error</span>
+<span class="text-label-caps text-[10px]">WAIVER REQ</span>
+</div>
+<div class="flex-1 flex items-center gap-2 bg-surface-container-low rounded p-2">
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-caps text-[10px]">ID VERIFIED</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 border border-outline-variant text-on-surface font-button-text text-button-text py-3 rounded-lg active:scale-95 transition-all">
+                            RESEND LINK
+                        </button>
+<button class="flex-1 bg-surface-variant text-on-surface-variant font-button-text text-button-text py-3 rounded-lg opacity-50 cursor-not-allowed">
+                            CHECK-IN
+                        </button>
+</div>
+</div>
+<!-- Customer Card 3 (Ready) -->
+<div class="glass-panel p-4 rounded-xl border-l-4 border-l-secondary-container flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full" data-alt="Portrait of a young executive man in high-end boating gear, overlooking a luxury dock, cinematic lighting, sharp focus, deep navy and cyan color grade, premium lifestyle aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmcW5YHuH-LeOG8zsKP6odrLzvbASPjVnCWmNOVmgeDQEP60GUfYV7Z_tPCDSFrnehEdwiEg2P6VEHAWzNnlskdUIEpOZVHz4ynUHUNmlHzHo8Ta02eE5mzSJSiMvROgYlNj6uGHPnFnMvpXTwnsoDHAr765Ywd5spfZ1hoh0VQmlSYfhwgZqvOgXFdrQd3zQRBnQGUa0MGgx91I9Kl_gsCG-j12MvTWp4pAHzIC19xaUNnDTo-R77Lkz5dDJTiv_8A42ECyWKZL0C"/>
+</div>
+<div>
+<h3 class="font-body-md font-bold text-on-surface">David Chen</h3>
+<p class="text-label-caps text-[11px] text-on-surface-variant">KAWASAKI ULTRA • 11:15 AM</p>
+</div>
+</div>
+<span class="bg-secondary-container/10 text-secondary-container px-2 py-1 rounded text-[10px] font-bold">READY</span>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text py-3 rounded-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
+                        CHECK-IN GUEST
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Speedometer Duration Concept (Visual Decoration/Interactive Element) -->
+<section class="glass-panel p-6 rounded-xl space-y-6">
+<div class="text-center">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-4">AVG TURNAROUND TIME</h3>
+<div class="relative w-40 h-40 mx-auto">
+<div class="absolute inset-0 rounded-full border-8 border-surface-container-highest"></div>
+<div class="absolute inset-0 rounded-full border-8 border-secondary-container border-t-transparent border-l-transparent rotate-45"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-lg text-[32px] text-primary">4.2</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">MINUTES</span>
+</div>
+</div>
+</div>
+<p class="text-center text-body-md italic text-on-surface-variant/70 text-sm">
+                "Maintaining peak velocity on the docks."
+            </p>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container shadow-[0_-4px_20px_rgba(0,219,231,0.15)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary-fixed-dim transition-all duration-200" href="#">
+<span class="material-symbols-outlined">directions_boat</span>
+<span class="font-label-caps text-[10px]">Fleet</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-caps text-[10px]">Ops</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary-fixed-dim transition-all duration-200" href="#">
+<div class="relative">
+<span class="material-symbols-outlined">warning</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="font-label-caps text-[10px]">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-secondary-fixed-dim transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps text-[10px]">Staff</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Simulating some dynamic status change
+        setTimeout(() => {
+            const firstCard = document.querySelector('.border-l-secondary-container');
+            if(firstCard) {
+                firstCard.classList.add('glow-cyan');
+                setTimeout(() => firstCard.classList.remove('glow-cyan'), 1000);
+            }
+        }, 3000);
+    </script>
+</body></html>

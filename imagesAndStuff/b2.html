@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ONTARIO JET - Select Time</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Manrope:wght@400;500&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#e2e2e8",
+                    "surface-bright": "#37393e",
+                    "outline": "#8b90a0",
+                    "secondary-fixed": "#74f5ff",
+                    "on-error": "#690005",
+                    "inverse-primary": "#005bc0",
+                    "inverse-on-surface": "#2f3035",
+                    "surface-variant": "#333539",
+                    "on-primary-fixed-variant": "#004493",
+                    "on-tertiary-container": "#282a2a",
+                    "on-primary": "#002e68",
+                    "surface-container-high": "#282a2e",
+                    "on-surface": "#e2e2e8",
+                    "secondary-fixed-dim": "#00dbe7",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "primary-fixed": "#d8e2ff",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-primary-fixed": "#001a41",
+                    "tertiary": "#c6c6c7",
+                    "surface-container-highest": "#333539",
+                    "primary-fixed-dim": "#adc7ff",
+                    "surface": "#111318",
+                    "tertiary-container": "#909191",
+                    "on-secondary": "#00363a",
+                    "error-container": "#93000a",
+                    "background": "#111318",
+                    "surface-tint": "#adc7ff",
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#00f1fe",
+                    "surface-container-lowest": "#0c0e12",
+                    "primary": "#adc7ff",
+                    "on-surface-variant": "#c1c6d7",
+                    "surface-dim": "#111318",
+                    "on-secondary-container": "#006a70",
+                    "error": "#ffb4ab",
+                    "secondary": "#ddfcff",
+                    "surface-container": "#1e2024",
+                    "inverse-surface": "#e2e2e8",
+                    "outline-variant": "#414754",
+                    "on-secondary-fixed": "#002022",
+                    "on-primary-container": "#00285b",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary-container": "#4a8eff",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "surface-container-low": "#1a1c20",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-tertiary": "#2f3131"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-md": ["Manrope"],
+                    "headline-lg": ["Montserrat"],
+                    "headline-md": ["Montserrat"],
+                    "headline-xl": ["Montserrat"],
+                    "button-text": ["Space Grotesk"],
+                    "body-lg": ["Manrope"],
+                    "label-caps": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #111318;
+            color: #e2e2e8;
+        }
+        .glass-panel {
+            background: rgba(47, 48, 53, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 241, 254, 0.1);
+        }
+        .speed-track {
+            background: linear-gradient(90deg, #002e68 0%, #00f1fe 100%);
+        }
+        .time-chip-active {
+            background: #00f1fe;
+            color: #002022;
+            box-shadow: 0 0 15px rgba(0, 241, 254, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #414754;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-secondary-container/10 shadow-[0_0_20px_rgba(0,241,254,0.15)]">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary-container text-3xl">waves</span>
+<h1 class="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tight uppercase">ONTARIO JET</h1>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-on-surface transition-colors" href="#">Fleet</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-on-surface transition-colors" href="#">Locations</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-on-surface transition-colors" href="#">Safety</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-on-surface transition-colors" href="#">Reviews</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-on-surface cursor-pointer hover:text-secondary-container transition-colors">account_circle</span>
+<button class="bg-secondary-container text-on-secondary-container font-button-text text-button-text px-6 py-2.5 rounded-full active:scale-95 transition-transform">
+                    Book Now
+                </button>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-16 px-margin-desktop max-w-container-max mx-auto w-full grid grid-cols-12 gap-gutter">
+<!-- Left: Main Booking Flow -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-8">
+<!-- Progress Stepper -->
+<div class="flex items-center justify-between max-w-md">
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-10 h-10 rounded-full border-2 border-secondary-container flex items-center justify-center text-secondary-container font-bold">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Date</span>
+</div>
+<div class="h-[2px] flex-grow bg-secondary-container/30 mx-4"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">
+                        2
+                    </div>
+<span class="font-label-caps text-label-caps text-secondary-container uppercase">Time</span>
+</div>
+<div class="h-[2px] flex-grow bg-surface-container-highest mx-4"></div>
+<div class="flex flex-col items-center gap-2 opacity-40">
+<div class="w-10 h-10 rounded-full border-2 border-outline flex items-center justify-center text-outline font-bold">
+                        3
+                    </div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Pay</span>
+</div>
+</div>
+<!-- Content Title -->
+<div class="space-y-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Choose Your Launch Time</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Selected Date: Thursday, July 18th</p>
+</div>
+<!-- Duration Slider (The Speedometer Selector) -->
+<section class="glass-panel rounded-xl p-8 space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="font-label-caps text-label-caps text-secondary-container uppercase tracking-[0.2em] mb-1">Rental Duration</h3>
+<p class="font-headline-md text-headline-md text-on-surface" id="duration-display">4 Hours</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Rate</p>
+<p class="font-headline-md text-headline-md text-secondary-container">$349.00</p>
+</div>
+</div>
+<div class="relative pt-6">
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary-container" id="duration-slider" max="8" min="1" step="1" type="range" value="4"/>
+<div class="flex justify-between mt-4 font-label-caps text-label-caps text-outline">
+<span>1 HR</span>
+<span>2 HR</span>
+<span>3 HR</span>
+<span>4 HR</span>
+<span>5 HR</span>
+<span>6 HR</span>
+<span>7 HR</span>
+<span>8 HR</span>
+</div>
+</div>
+</section>
+<!-- Time Slots Grid -->
+<section class="space-y-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">Available Start Times</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Afternoon slots -->
+<button class="glass-panel py-5 px-4 rounded-xl flex flex-col items-center gap-1 hover:border-secondary-container/50 transition-all duration-300">
+<span class="font-button-text text-button-text text-on-surface">10:00 AM</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Morning Run</span>
+</button>
+<button class="glass-panel py-5 px-4 rounded-xl flex flex-col items-center gap-1 hover:border-secondary-container/50 transition-all duration-300">
+<span class="font-button-text text-button-text text-on-surface">11:00 AM</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Morning Run</span>
+</button>
+<button class="time-chip-active py-5 px-4 rounded-xl flex flex-col items-center gap-1 transition-all duration-300">
+<span class="font-button-text text-button-text">12:00 PM</span>
+<span class="font-label-caps text-[10px] opacity-70 uppercase">Mid Day</span>
+</button>
+<button class="glass-panel py-5 px-4 rounded-xl flex flex-col items-center gap-1 hover:border-secondary-container/50 transition-all duration-300">
+<span class="font-button-text text-button-text text-on-surface">01:00 PM</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Peak Heat</span>
+</button>
+<button class="glass-panel py-5 px-4 rounded-xl flex flex-col items-center gap-1 hover:border-secondary-container/50 transition-all duration-300">
+<span class="font-button-text text-button-text text-on-surface">02:00 PM</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Peak Heat</span>
+</button>
+<button class="glass-panel py-5 px-4 rounded-xl flex flex-col items-center gap-1 hover:border-secondary-container/50 transition-all duration-300">
+<span class="font-button-text text-button-text text-on-surface">03:00 PM</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Afternoon</span>
+</button>
+<button class="glass-panel py-5 px-4 rounded-xl flex flex-col items-center gap-1 opacity-50 cursor-not-allowed">
+<span class="font-button-text text-button-text text-outline line-through">04:00 PM</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Sold Out</span>
+</button>
+<button class="glass-panel py-5 px-4 rounded-xl flex flex-col items-center gap-1 hover:border-secondary-container/50 transition-all duration-300">
+<span class="font-button-text text-button-text text-on-surface">05:00 PM</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Evening</span>
+</button>
+</div>
+</section>
+<!-- Action Buttons -->
+<div class="flex items-center justify-between pt-8 border-t border-outline-variant/20">
+<button class="flex items-center gap-2 font-button-text text-button-text text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Back to Calendar
+                </button>
+<button class="bg-secondary-container text-on-secondary-container font-button-text text-button-text px-10 py-4 rounded-full active:scale-95 transition-transform shadow-[0_0_20px_rgba(0,241,254,0.3)]">
+                    Review &amp; Pay
+                </button>
+</div>
+</div>
+<!-- Right: Booking Summary Sidebar -->
+<aside class="col-span-12 lg:col-span-4">
+<div class="sticky top-32 glass-panel rounded-2xl overflow-hidden shadow-2xl">
+<!-- Vehicle Preview -->
+<div class="h-56 relative group overflow-hidden">
+<img alt="Close-up of a premium jet ski dashboard with carbon fiber textures and digital instrumentation at sunset." class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLtZk3vgFM_ZpPpDRGYfr2FA7kY9Xutaqi409XvyPYWRAmKYPsouNrHS61F1qmNfpq_UJMVq9sfw_PvSNFZ2namMtk4Pj9k9sAwVKl7kMcBnGzjkvdyDfDdYS-B828sCrLjwxOi_n2lnqsIZvPFMRgu8KsZdrFn70u-WL3D3f1M9_V6Hmkl5Zzp3aEIr3j6DFll7vgk-wdjgOvUdxMzkyLqdVwa0v2pxyu0FJZFz40TP4gHuBC0qAaDo7sV4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+<div class="absolute bottom-4 left-6">
+<span class="font-label-caps text-label-caps bg-secondary-container/90 text-on-secondary-container px-3 py-1 rounded-full mb-2 inline-block">High Performance</span>
+<h3 class="font-headline-md text-headline-md text-white">RXP-X 300 RS</h3>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<!-- Selection Summary -->
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary-container">calendar_today</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Date</p>
+<p class="font-button-text text-button-text text-on-surface">July 18, 2024</p>
+</div>
+</div>
+<button class="text-secondary-container font-label-caps text-label-caps uppercase hover:underline">Edit</button>
+</div>
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary-container">schedule</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Time &amp; Duration</p>
+<p class="font-button-text text-button-text text-on-surface">12:00 PM — 4 Hours</p>
+</div>
+</div>
+<button class="text-secondary-container font-label-caps text-label-caps uppercase hover:underline">Edit</button>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary-container">location_on</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Launch Point</p>
+<p class="font-button-text text-button-text text-on-surface">Muskoka District Hub</p>
+</div>
+</div>
+</div>
+<!-- Add-ons -->
+<div class="pt-6 border-t border-outline-variant/20">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4">Included Features</h4>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-high px-3 py-1 rounded text-[11px] font-label-caps text-on-surface-variant border border-outline-variant/30">Fuel Included</span>
+<span class="bg-surface-container-high px-3 py-1 rounded text-[11px] font-label-caps text-on-surface-variant border border-outline-variant/30">2x Life Vests</span>
+<span class="bg-surface-container-high px-3 py-1 rounded text-[11px] font-label-caps text-on-surface-variant border border-outline-variant/30">Insurance</span>
+</div>
+</div>
+<!-- Total -->
+<div class="pt-6 border-t border-outline-variant/20">
+<div class="flex justify-between mb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Rental Fee</span>
+<span class="font-body-md text-body-md text-on-surface">$349.00</span>
+</div>
+<div class="flex justify-between mb-4">
+<span class="font-body-md text-body-md text-on-surface-variant">Service Tax</span>
+<span class="font-body-md text-body-md text-on-surface">$45.37</span>
+</div>
+<div class="flex justify-between items-end pt-2 border-t border-outline-variant/50">
+<span class="font-headline-md text-headline-md text-on-surface">Total</span>
+<span class="font-headline-md text-headline-md text-secondary-container">$394.37</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container text-2xl">waves</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-extrabold uppercase tracking-tight">ONTARIO JET</h2>
+</div>
+<p class="font-body-md text-body-md text-outline">Experience the ultimate high-performance water adventure in the heart of Ontario's lakes.</p>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 tracking-[0.2em]">Quick Links</h4>
+<div class="flex flex-col gap-4">
+<a class="font-body-md text-body-md text-outline hover:text-secondary-container transition-colors" href="#">Fleet Info</a>
+<a class="font-body-md text-body-md text-outline hover:text-secondary-container transition-colors" href="#">Locations</a>
+<a class="font-body-md text-body-md text-outline hover:text-secondary-container transition-colors" href="#">Safety Video</a>
+</div>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 tracking-[0.2em]">Legal</h4>
+<div class="flex flex-col gap-4">
+<a class="font-body-md text-body-md text-outline hover:text-secondary-container transition-colors" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-outline hover:text-secondary-container transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-outline hover:text-secondary-container transition-colors" href="#">Rental Agreement</a>
+</div>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 tracking-[0.2em]">Newsletter</h4>
+<div class="space-y-4">
+<div class="flex gap-2">
+<input class="bg-surface-container border border-outline-variant/30 rounded px-4 py-2 w-full text-sm focus:border-secondary-container focus:ring-0" placeholder="Your Email" type="email"/>
+<button class="bg-secondary-container text-on-secondary-container p-2 rounded">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<p class="font-label-caps text-[10px] text-outline">© 2024 Ontario Jet Rentals. All Rights Reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        const slider = document.getElementById('duration-slider');
+        const display = document.getElementById('duration-display');
+        
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            display.textContent = `${val} Hour${val > 1 ? 's' : ''}`;
+        });
+
+        // Simple interaction for time slot buttons
+        const timeButtons = document.querySelectorAll('button.glass-panel');
+        timeButtons.forEach(btn => {
+            if (!btn.classList.contains('opacity-50')) {
+                btn.addEventListener('click', () => {
+                    // Remove active state from all
+                    document.querySelectorAll('.time-chip-active').forEach(active => {
+                        active.classList.remove('time-chip-active');
+                        active.classList.add('glass-panel');
+                    });
+                    
+                    // Add active state to clicked
+                    btn.classList.remove('glass-panel');
+                    btn.classList.add('time-chip-active');
+                });
+            }
+        });
+    </script>
+</body></html>

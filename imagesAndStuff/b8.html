@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fleet &amp; Rates | ONTARIO JET</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Manrope:wght@400;500&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#e2e2e8",
+                        "surface-bright": "#37393e",
+                        "outline": "#8b90a0",
+                        "secondary-fixed": "#74f5ff",
+                        "on-error": "#690005",
+                        "inverse-primary": "#005bc0",
+                        "inverse-on-surface": "#2f3035",
+                        "surface-variant": "#333539",
+                        "on-primary-fixed-variant": "#004493",
+                        "on-tertiary-container": "#282a2a",
+                        "on-primary": "#002e68",
+                        "surface-container-high": "#282a2e",
+                        "on-surface": "#e2e2e8",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "primary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-primary-fixed": "#001a41",
+                        "tertiary": "#c6c6c7",
+                        "surface-container-highest": "#333539",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface": "#111318",
+                        "tertiary-container": "#909191",
+                        "on-secondary": "#00363a",
+                        "error-container": "#93000a",
+                        "background": "#111318",
+                        "surface-tint": "#adc7ff",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#00f1fe",
+                        "surface-container-lowest": "#0c0e12",
+                        "primary": "#adc7ff",
+                        "on-surface-variant": "#c1c6d7",
+                        "surface-dim": "#111318",
+                        "on-secondary-container": "#006a70",
+                        "error": "#ffb4ab",
+                        "secondary": "#ddfcff",
+                        "surface-container": "#1e2024",
+                        "inverse-surface": "#e2e2e8",
+                        "outline-variant": "#414754",
+                        "on-secondary-fixed": "#002022",
+                        "on-primary-container": "#00285b",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-container": "#4a8eff",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "surface-container-low": "#1a1c20",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-tertiary": "#2f3131"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "body-md": ["Manrope"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-xl": ["Montserrat"],
+                        "button-text": ["Space Grotesk"],
+                        "body-lg": ["Manrope"],
+                        "label-caps": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #111318;
+            color: #e2e2e8;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 241, 254, 0.1);
+        }
+        .hero-gradient {
+            background: linear-gradient(0deg, #111318 0%, rgba(17, 19, 24, 0.2) 50%, rgba(17, 19, 24, 0) 100%);
+        }
+        .cyan-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 241, 254, 0.25);
+        }
+    </style>
+</head>
+<body class="font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-secondary-container/10 shadow-[0_0_20px_rgba(0,241,254,0.15)]">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tight uppercase">ONTARIO JET</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-secondary-container border-b-2 border-secondary-container pb-1 font-button-text text-button-text" href="#">Fleet</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-button-text text-button-text" href="#">Locations</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-button-text text-button-text" href="#">Safety</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-button-text text-button-text" href="#">Reviews</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-secondary-container transition-colors">account_circle</button>
+<button class="bg-secondary-container text-on-primary-container px-6 py-2 font-button-text text-button-text rounded-lg hover:scale-95 transition-all duration-300 cyan-glow">
+                    Book Now
+                </button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative w-full h-[60vh] flex items-end">
+<div class="absolute inset-0 z-0">
+<img alt="Drone view of jet skis" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLs6JEN_-bDWK57a5ZAS02m6_mLpRtDOkCuv9mL42VJRW1TAj39w03SO83Oianh7aJ8W9c7tPrlPlWfpPvF6osjAQsDM7Qf0rIpGv-9lr3lO77DzBlcJ6mWOwf13dGQmmLrNsH2IGnbQMl7n2tGUVfQg0cBj5665gpXzpo1pz2W1Zm0ARUEeAewcuAdblupCJP9BnA2K2c1SK6T53phFFIS0MZaT6m1vHkpLYJ1DN_FWiPC4mxWWMCzjW9R6"/>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 px-margin-desktop pb-16 w-full max-w-container-max mx-auto">
+<div class="max-w-3xl">
+<span class="font-label-caps text-label-caps text-secondary-fixed tracking-[0.2em] uppercase mb-4 block">Unmatched Performance</span>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-6 uppercase leading-none">THE 2024 FLEET</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">Experience the pinnacle of aquatic engineering. From the playful agility of the Spark to the raw power of the VX Cruiser, our fleet is meticulously maintained for ultimate reliability.</p>
+</div>
+</div>
+</header>
+<!-- Fleet Grid -->
+<main class="relative z-10 px-margin-desktop py-24 max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-32">
+<!-- Card 1: Sea-Doo Spark Trixx -->
+<div class="glass-card flex flex-col group hover:border-secondary-container/40 transition-all duration-500 overflow-hidden">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A professional studio shot of a neon blue and black Sea-Doo Spark Trixx jet ski positioned on shimmering dark water. The lighting is high-contrast with cyan highlights reflecting off the sleek plastic surfaces. The background is a moody, deep navy evening sky. Professional automotive photography style, wide angle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbEW8Kc0yxuv1OFHvXFovXkEWQsaYJwUNGkXP-Mo8YP74hiM902ONbinhBA7F0aKsDdKyh4US7CMp9-3520-GzGBhgfL08dtC-ih75sJPZnih52esGTyI5I9OTiZ6dln8gPmJ7YB7Eax0-m5TUVrcqZBn6-6CG2hKVYL8S9HlEdKflL9ZPj7KaQg5q-OFLPWkbxy-NFOWRKPaOZsLzJSQnui1tZ5LH82fypVseXyLy1xHfYbM-ObSs0YXKg8pyf-MlePxB7aAckzPA"/>
+<div class="absolute top-4 right-4 bg-surface-container/80 backdrop-blur px-3 py-1 rounded-full border border-outline-variant/30">
+<span class="font-label-caps text-label-caps text-secondary-fixed">PLAYFUL &amp; AGILE</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Sea-Doo Spark Trixx</h3>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[18px]">bolt</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">90 HP</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[18px]">groups</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">2 SEATS</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[18px]">music_note</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">AUDIO</span>
+</div>
+</div>
+<div class="mt-auto pt-8 border-t border-outline-variant/20 flex items-center justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase">Starting at</p>
+<p class="font-headline-md text-headline-md text-secondary-container">$89<span class="text-body-md font-normal text-on-surface-variant">/hr</span></p>
+</div>
+<button class="px-6 py-2 border border-secondary-container text-secondary-container font-button-text text-button-text hover:bg-secondary-container hover:text-on-primary-container transition-all">Details</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Sea-Doo GTI SE 130 -->
+<div class="glass-card flex flex-col group hover:border-secondary-container/40 transition-all duration-500 overflow-hidden">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A luxurious silver and bright teal Sea-Doo GTI SE 130 jet ski gliding through crystalline blue lake water in Muskoka. The sun is setting, creating golden glints on the metallic finish. A sense of speed and comfort is conveyed through the smooth wake behind the craft. High-end lifestyle photography, vivid colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwqKbAtRilXmxnJk7UpKxxDIKPyby8R457MBhzzHG3R-IKkm7BntlhWXZeoEPxpxZ8ufiGsgLzLE_p57SJ3wT_yZPaOKg6p2tc49Tyb3hzEdG_xiATXT6aSh6djHnW774oLrsfytz-XF4OKR-3eWbDaB8nVgcn2JqaJLXWpMEzpe4XTc7ES96JrbSvTUaNUjhFbbj1R-eGMAmn2VA9VYTSh4V-XZ4aVpnf9lbkG8EEQbHjt9FkD7MnLBhXYLeJ5tJ1IXiF7pU12dhp"/>
+<div class="absolute top-4 right-4 bg-surface-container/80 backdrop-blur px-3 py-1 rounded-full border border-outline-variant/30">
+<span class="font-label-caps text-label-caps text-secondary-fixed">COMFORT &amp; STABILITY</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Sea-Doo GTI SE 130</h3>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[18px]">bolt</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">130 HP</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[18px]">groups</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">3 SEATS</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[18px]">anchor</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">IBR SYSTEM</span>
+</div>
+</div>
+<div class="mt-auto pt-8 border-t border-outline-variant/20 flex items-center justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase">Starting at</p>
+<p class="font-headline-md text-headline-md text-secondary-container">$119<span class="text-body-md font-normal text-on-surface-variant">/hr</span></p>
+</div>
+<button class="px-6 py-2 border border-secondary-container text-secondary-container font-button-text text-button-text hover:bg-secondary-container hover:text-on-primary-container transition-all">Details</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Yamaha VX Cruiser HO -->
+<div class="glass-card flex flex-col group hover:border-secondary-container/40 transition-all duration-500 overflow-hidden">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="An aggressive, performance-focused Yamaha VX Cruiser HO jet ski in matte black and electric blue. The jet ski is carving a sharp turn in dark water, with dramatic white spray flying outwards. The scene is shot from a low angle to emphasize power and size. Cinematic lighting, sharp details, dark water aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdymIGjsDahfh35iP2TJqvKe3OkEaQR7NF5Twl76tfI2HKyKQPviVaGiepfvSDa2bPlkWQhaWwq52QgOHeFggeImwpKwT2vMrehuqQSKzdfU9_A79GSmHftySUYk5TsJuPuBt-XH3DzZEHeVdIM-5u9z3Ra-gk9Kwji-M5ooLtJLAd7sBvtQjdI6r7XnEBC_wbCyooZ0S551BC6zzKz5Da59AEBwykgwIhlw5NCqj3S2e-LGRQ9ZCnDLMvhuMT8enRu721PrufqgvM"/>
+<div class="absolute top-4 right-4 bg-surface-container/80 backdrop-blur px-3 py-1 rounded-full border border-outline-variant/30">
+<span class="font-label-caps text-label-caps text-secondary-fixed">HIGH OUTPUT POWER</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Yamaha VX Cruiser HO</h3>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[18px]">bolt</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">180 HP</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[18px]">groups</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">3 SEATS</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-outline text-[18px]">speed</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">RIDE TECH</span>
+</div>
+</div>
+<div class="mt-auto pt-8 border-t border-outline-variant/20 flex items-center justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase">Starting at</p>
+<p class="font-headline-md text-headline-md text-secondary-container">$149<span class="text-body-md font-normal text-on-surface-variant">/hr</span></p>
+</div>
+<button class="px-6 py-2 border border-secondary-container text-secondary-container font-button-text text-button-text hover:bg-secondary-container hover:text-on-primary-container transition-all">Details</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Booking Essentials -->
+<section class="mb-32">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-12 uppercase tracking-tight">Booking Essentials</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/10 flex items-center justify-center border border-secondary-container/20">
+<span class="material-symbols-outlined text-secondary-container">license</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Licensing</h4>
+<p class="text-on-surface-variant">A temporary boat license is provided with every rental. All operators must be 18+ and possess a valid driver's license.</p>
+</div>
+<div class="flex flex-col gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/10 flex items-center justify-center border border-secondary-container/20">
+<span class="material-symbols-outlined text-secondary-container">shield</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Safety First</h4>
+<p class="text-on-surface-variant">High-buoyancy PFDs and a full safety orientation are included. Our staff provides hands-on docking and operating instruction.</p>
+</div>
+<div class="flex flex-col gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/10 flex items-center justify-center border border-secondary-container/20">
+<span class="material-symbols-outlined text-secondary-container">event_busy</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Cancellations</h4>
+<p class="text-on-surface-variant">Full refund for cancellations made 48 hours in advance. Weather-related credits are issued for high winds or heavy rain.</p>
+</div>
+</div>
+</section>
+<!-- Location Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div>
+<span class="font-label-caps text-label-caps text-secondary-fixed tracking-[0.2em] uppercase mb-4 block">Our Base of Operations</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6 uppercase">MUSKOKA DOCKING</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">Located at the heart of Ontario's cottage country. Easy access to Lake Muskoka, Lake Rosseau, and Lake Joseph.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary-container">location_on</span>
+<span class="text-on-surface">123 Dockside Way, Gravenhurst, ON</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary-container">schedule</span>
+<span class="text-on-surface">Daily: 8:00 AM – 8:00 PM</span>
+</div>
+</div>
+</div>
+<div class="h-96 rounded-xl overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-location="Gravenhurst, Ontario" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIvQrxVCfnqBYsa5h99vxM5cAxvyA7mxDa9jDUOvwyo2dvrOFXU8Qc8cXK3drT6BuubGF8_lPEEdOcYuct8Kna2tzj9V5l_qcv2cxNYSm2EmJC0ITu3mrUDQxyQGs99lX2LWlMd5_KZkFn-f-HybqjRVacYGB2kG2Zw34f1sekK9Z0AE_sBHgDNoOy5lpkuZn9DRrZyEMnn86B5I24oK2JDUfvfGmSifjEkxSAv_1LX4KVvzA3is5mkUC2AmT6y23G2ImaE2uhxCqS"/>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<span class="font-headline-md text-headline-md text-on-surface font-extrabold tracking-tight block mb-6">ONTARIO JET</span>
+<p class="font-body-md text-body-md text-outline">The premier jet ski rental experience in Muskoka. Power, precision, and the open water.</p>
+</div>
+<div>
+<h5 class="font-button-text text-button-text text-on-surface mb-6 uppercase">Fleet</h5>
+<ul class="space-y-4">
+<li><a class="text-outline hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Sea-Doo Spark</a></li>
+<li><a class="text-outline hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Sea-Doo GTI</a></li>
+<li><a class="text-outline hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Yamaha VX</a></li>
+<li><a class="text-outline hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Safety Video</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-button-text text-button-text text-on-surface mb-6 uppercase">Company</h5>
+<ul class="space-y-4">
+<li><a class="text-outline hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Contact Us</a></li>
+<li><a class="text-outline hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Rental Agreement</a></li>
+<li><a class="text-outline hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Terms of Service</a></li>
+<li><a class="text-outline hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-button-text text-button-text text-on-surface mb-6 uppercase">Newsletter</h5>
+<p class="font-body-md text-body-md text-outline mb-4">Get exclusive offers and rental updates.</p>
+<div class="flex border border-outline-variant/30 rounded overflow-hidden">
+<input class="bg-transparent border-none text-on-surface w-full focus:ring-0 px-4 py-2" placeholder="Email" type="email"/>
+<button class="bg-secondary-container px-4 py-2 text-on-primary-container">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="px-margin-desktop py-8 border-t border-outline-variant/10 max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-md text-body-md text-outline">© 2024 Ontario Jet Rentals. All Rights Reserved.</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-secondary-container">face_nod</span>
+<svg class="w-6 h-6 fill-outline cursor-pointer hover:fill-secondary-container" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-secondary-container">photo_camera</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('header img');
+            if(hero) {
+                hero.style.transform = `translateY(${scrolled * 0.4}px)`;
+            }
+        });
+    </script>
+</body></html>

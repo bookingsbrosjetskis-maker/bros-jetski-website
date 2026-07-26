@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us - Bros Jetsky Rentals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Manrope:wght@400;700&family=Space+Grotesk:wght@600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Montserrat:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#282a2e",
+                    "tertiary-container": "#909191",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "surface": "#111318",
+                    "on-secondary": "#00363a",
+                    "on-primary-container": "#00285b",
+                    "surface-bright": "#37393e",
+                    "inverse-surface": "#e2e2e8",
+                    "outline-variant": "#414754",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed-variant": "#004493",
+                    "secondary-fixed": "#74f5ff",
+                    "primary-container": "#4a8eff",
+                    "on-surface-variant": "#c1c6d7",
+                    "on-surface": "#e2e2e8",
+                    "surface-variant": "#333539",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary": "#adc7ff",
+                    "on-background": "#e2e2e8",
+                    "outline": "#8b90a0",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#006a70",
+                    "on-primary-fixed": "#001a41",
+                    "on-primary": "#002e68",
+                    "secondary-container": "#00f1fe",
+                    "primary-fixed-dim": "#adc7ff",
+                    "on-tertiary-container": "#282a2a",
+                    "inverse-primary": "#005bc0",
+                    "surface-tint": "#adc7ff",
+                    "secondary": "#ddfcff",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container": "#1e2024",
+                    "on-secondary-fixed": "#002022",
+                    "surface-dim": "#111318",
+                    "surface-container-lowest": "#0c0e12",
+                    "tertiary": "#c6c6c7",
+                    "surface-container-low": "#1a1c20",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#00dbe7",
+                    "on-tertiary": "#2f3131",
+                    "primary-fixed": "#d8e2ff",
+                    "surface-container-highest": "#333539",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "background": "#111318",
+                    "inverse-on-surface": "#2f3035"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-lg": ["Manrope"],
+                    "headline-md": ["Montserrat"],
+                    "button-text": ["Space Grotesk"],
+                    "label-caps": ["Space Grotesk"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(26, 28, 32, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(116, 245, 255, 0.1);
+        }
+        .map-gradient {
+            background: linear-gradient(to bottom, transparent 0%, #111318 90%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-outline-variant/20 bg-surface/60 backdrop-blur-xl dark:bg-surface/60 shadow-[0_0_15px_rgba(116,245,255,0.15)]">
+<nav class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-primary dark:text-primary-fixed-dim">
+                Bros Jetsky Rentals
+            </div>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Fleet</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Gallery</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Safety</a>
+<a class="font-button-text text-button-text text-on-surface-variant hover:text-secondary-fixed transition-colors" href="#">Reviews</a>
+<a class="font-button-text text-button-text text-secondary-fixed border-b-2 border-secondary-fixed pb-1" href="#">Contact</a>
+<button class="bg-primary text-on-primary-container px-6 py-2 rounded-full font-button-text text-button-text hover:opacity-80 transition-all duration-300 active:scale-95">Book Now</button>
+</div>
+<!-- Mobile Menu Icon (Visual Only for this task) -->
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+</header>
+<main class="flex-grow pt-[72px]">
+<!-- Hero Stylized Map Section -->
+<section class="relative w-full h-[353px] min-h-[300px]">
+<div class="absolute inset-0 w-full h-full" data-location="Muskoka, Ontario" style="">
+<div class="w-full h-full grayscale opacity-40 bg-surface-container-lowest flex items-center justify-center">
+<!-- Placeholder representing a stylized map for mobile -->
+<div class="w-full h-full bg-cover bg-center" data-alt="A stylized, high-contrast dark mode map showing the Muskoka lakes region in Ontario. The map uses deep navy and obsidian tones with glowing cyan lines for waterways and bright primary blue markers for the marina location. The aesthetic is clean, corporate, and minimalist, matching a premium rental brand's visual identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHC_JXnw5qPIREAZeo2kM4TTuBo2MOEk_3cE7RWFqUMfTTXvcfQkE22flty3AXOTjvyCp0FpJZ05GGAMsMW28G6dzXIQ0H7pGMpsRGWBPyPMfeXlcUtLi8v2Bd6Vhuc5wvhpmz0xzYRsHk9gIGPaz5aH8Bn4kVdr22FubDnGuMz7fJXZVMbuvWY9vFCpeGJdTx4CBz9uAw9pgRLSavUSXRlBCIHJY2TLa7s02I-UJZKtdh1LcC99LNBOkfWoWZCR68sHoebqs7Hitd')"></div>
+</div>
+</div>
+<div class="absolute inset-0 map-gradient"></div>
+<div class="absolute bottom-0 left-0 px-margin-mobile pb-gutter z-10">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">Get in Touch</h1>
+<p class="text-on-surface-variant font-body-md mt-2 max-w-sm">Ready for high-performance aquatic adventure? We're at the docks waiting for you.</p>
+</div>
+</section>
+<!-- Quick Action Buttons -->
+<section class="px-margin-mobile py-gutter grid grid-cols-2 gap-4">
+<a class="flex flex-col items-center justify-center p-6 glass-card rounded-xl active:scale-95 transition-transform" href="tel:+15551234567">
+<span class="material-symbols-outlined text-secondary-fixed mb-2 text-3xl" style="font-variation-settings: 'FILL' 1;">call</span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Tap to Call</span>
+</a>
+<a class="flex flex-col items-center justify-center p-6 glass-card rounded-xl active:scale-95 transition-transform" href="mailto:bookings@brosjetsky.com">
+<span class="material-symbols-outlined text-secondary-fixed mb-2 text-3xl" style="font-variation-settings: 'FILL' 1;">mail</span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Tap to Email</span>
+</a>
+</section>
+<!-- Contact Form -->
+<section class="px-margin-mobile pb-12">
+<div class="glass-card p-6 rounded-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Send a Message</h2>
+<form action="#" class="space-y-6">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Full Name</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/30 text-on-surface rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-secondary-fixed transition-all font-body-md" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Email Address</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/30 text-on-surface rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-secondary-fixed transition-all font-body-md" placeholder="john@example.com" type="email"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Jet Ski Model Interest</label>
+<select class="w-full bg-surface-container-low border border-outline-variant/30 text-on-surface rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-secondary-fixed transition-all font-body-md appearance-none">
+<option>Yamaha GP1800R SVHO</option>
+<option>Sea-Doo RXP-X 300</option>
+<option>Kawasaki Ultra 310LX</option>
+<option>Generic Inquiry</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Your Message</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant/30 text-on-surface rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-secondary-fixed transition-all font-body-md" placeholder="Tell us about your rental needs..." rows="4"></textarea>
+</div>
+<button class="w-full py-4 bg-secondary-fixed text-on-secondary-fixed font-button-text text-button-text rounded-full shadow-[0_0_15px_rgba(116,245,255,0.3)] hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2" type="submit">
+<span>SEND MESSAGE</span>
+<span class="material-symbols-outlined text-lg">send</span>
+</button>
+</form>
+</div>
+</section>
+<!-- Location Details (Bento-style for mobile) -->
+<section class="px-margin-mobile pb-12 grid grid-cols-1 gap-4">
+<div class="p-6 glass-card rounded-xl">
+<span class="material-symbols-outlined text-primary mb-2">location_on</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Base Camp</h3>
+<p class="text-on-surface-variant font-body-md mt-1">123 Aurora Marina Way,<br/>Lake Muskoka, Ontario, P1L 1G1</p>
+</div>
+<div class="p-6 glass-card rounded-xl">
+<span class="material-symbols-outlined text-primary mb-2">schedule</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Operating Hours</h3>
+<p class="text-on-surface-variant font-body-md mt-1">Daily: 8:00 AM – 8:00 PM<br/>Season: May 24th – Oct 1st</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/10">
+<div class="px-margin-mobile grid grid-cols-1 gap-10 max-w-container-max mx-auto">
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md font-extrabold text-on-surface">Bros Jetsky Rentals</div>
+<p class="text-on-surface-variant font-body-md max-w-xs">Premium high-performance watercraft rentals for the discerning adventurer.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container border border-outline-variant/20 hover:text-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">face_nod</span>
+</a>
+<a class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container border border-outline-variant/20 hover:text-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</a>
+<a class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container border border-outline-variant/20 hover:text-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<div class="space-y-4">
+<h4 class="font-label-caps text-label-caps text-primary uppercase">Quick Links</h4>
+<ul class="space-y-2">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Rental Agreement</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-caps text-label-caps text-primary uppercase">Support</h4>
+<ul class="space-y-2">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">FAQ</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Safety Guide</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/10 text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant/60 uppercase tracking-tighter">
+                    © 2024 Bros Jetsky Rentals. All rights reserved. Built for high performance.
+                </p>
+</div>
+</div>
+</footer>
+<!-- Simple Scroll Progress Interaction -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    header.classList.add('bg-surface/95');
+                    header.classList.remove('bg-surface/60');
+                } else {
+                    header.classList.add('bg-surface/60');
+                    header.classList.remove('bg-surface/95');
+                }
+            });
+
+            // Contact Form Micro-interaction
+            const form = document.querySelector('form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span>MESSAGE SENT!</span><span class="material-symbols-outlined">check_circle</span>';
+                btn.classList.replace('bg-secondary-fixed', 'bg-primary');
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.replace('bg-primary', 'bg-secondary-fixed');
+                    form.reset();
+                }, 3000);
+            });
+        });
+    </script>
+</body></html>

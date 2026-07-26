@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fleet Management | Azure Velocity Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Manrope:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(173, 199, 255, 0.1);
+        }
+        .cyan-glow {
+            box-shadow: 0 0 15px rgba(0, 241, 254, 0.15);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0c0e12;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #414754;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#e2e2e8",
+                        "on-primary-fixed-variant": "#004493",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "on-secondary": "#00363a",
+                        "primary": "#adc7ff",
+                        "secondary-container": "#00f1fe",
+                        "primary-container": "#4a8eff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "secondary-fixed": "#74f5ff",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#1a1c20",
+                        "on-primary-container": "#00285b",
+                        "on-secondary-fixed": "#002022",
+                        "on-secondary-container": "#006a70",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#2f3035",
+                        "outline": "#8b90a0",
+                        "surface-container-lowest": "#0c0e12",
+                        "primary-fixed": "#d8e2ff",
+                        "tertiary": "#c6c6c7",
+                        "on-background": "#e2e2e8",
+                        "on-surface": "#e2e2e8",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container": "#1e2024",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "secondary": "#ddfcff",
+                        "surface-container-highest": "#333539",
+                        "on-tertiary": "#2f3131",
+                        "surface-dim": "#111318",
+                        "on-primary": "#002e68",
+                        "primary-fixed-dim": "#adc7ff",
+                        "error-container": "#93000a",
+                        "surface-variant": "#333539",
+                        "surface-bright": "#37393e",
+                        "inverse-primary": "#005bc0",
+                        "surface-container-high": "#282a2e",
+                        "outline-variant": "#414754",
+                        "tertiary-container": "#909191",
+                        "surface-tint": "#adc7ff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-surface-variant": "#c1c6d7",
+                        "background": "#111318",
+                        "surface": "#111318",
+                        "on-tertiary-container": "#282a2a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "body-lg": ["Manrope"],
+                        "button-text": ["Space Grotesk"],
+                        "headline-xl": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-unit-gutter w-64 bg-surface-container-low border-r border-outline-variant z-50">
+<div class="mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-secondary-container tracking-tight">Azure Velocity</h1>
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Fleet Admin Console</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">sailing</span>
+<span class="font-label-caps text-label-caps">Fleet Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-caps text-label-caps">Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps text-label-caps">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">build</span>
+<span class="font-label-caps text-label-caps">Maintenance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/30 space-y-2">
+<button class="w-full py-3 px-4 bg-secondary-container text-on-secondary-container font-button-text rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mb-4">
+<span class="material-symbols-outlined">add</span>
+                New Booking
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+<div class="flex items-center gap-3 px-4 py-4 mt-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border-2 border-secondary-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a fleet administrator, middle-aged male with a confident smile, wearing a dark navy corporate polo shirt with a subtle nautical logo. High-end studio lighting on a dark, moody gray background, conveying expertise and authority in a luxury marine rental setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaZ44YNotc0nSH1Z-3l44WyWthJBE1tKVyHBTCJ0oswxLyU2jZzRlWA1fHdnJAVoliuWMNfF4pvfKKckYdW3wMF0sxsqk9TygEr6xhgzOHFTXzX9-CR0bqHgOFl5YUANTaS4U3ccnrapJKsk95GAe-eeZZ-6Kl1ICnxukv63ezT3p9Fi3ltPhMMWfjEgr_6KuK4MXQwQScjGWxhNaJJzq9cmvn-oYc6VyN-IE0Kywz03-Beq2A-aked80oweVoCakN9bVdEnboXWYF"/>
+</div>
+<div class="overflow-hidden">
+<p class="font-label-caps text-[12px] truncate">Admin User</p>
+<p class="text-[10px] text-on-surface-variant truncate">Ontario North Hub</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen relative">
+<!-- Top App Bar -->
+<header class="sticky top-0 h-16 flex justify-between items-center px-margin-desktop bg-surface-dim/80 backdrop-blur-xl border-b border-outline-variant/30 z-40">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-full py-2 pl-10 pr-4 text-on-surface focus:ring-2 focus:ring-secondary-container font-body-md transition-all" placeholder="Search fleet by ID, model, or status..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-margin-desktop flex-1">
+<div class="flex justify-between items-end mb-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Fleet Management</h2>
+<p class="text-on-surface-variant mt-2 font-body-lg">Real-time status and operational health of the Ontario performance fleet.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 border border-outline text-on-surface font-button-text rounded-lg hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">filter_list</span>
+                        Filter View
+                    </button>
+<button class="px-6 py-3 bg-primary text-on-primary font-button-text rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                        Register New Unit
+                    </button>
+</div>
+</div>
+<!-- Stats Overview Bento -->
+<div class="grid grid-cols-12 gap-gutter mb-10">
+<div class="col-span-3 glass-panel p-6 rounded-xl border-l-4 border-secondary-container cyan-glow">
+<p class="font-label-caps text-on-surface-variant">Units Available</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="font-headline-lg text-headline-lg text-secondary-container">24</h3>
+<span class="text-on-secondary-container bg-secondary-container/20 px-2 py-1 rounded text-xs font-bold">+3 vs LW</span>
+</div>
+</div>
+<div class="col-span-3 glass-panel p-6 rounded-xl border-l-4 border-primary">
+<p class="font-label-caps text-on-surface-variant">Units Rented</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="font-headline-lg text-headline-lg text-primary">12</h3>
+<span class="text-on-primary-container bg-primary-container/20 px-2 py-1 rounded text-xs font-bold">84% Util.</span>
+</div>
+</div>
+<div class="col-span-3 glass-panel p-6 rounded-xl border-l-4 border-error">
+<p class="font-label-caps text-on-surface-variant">In Maintenance</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="font-headline-lg text-headline-lg text-error">04</h3>
+<span class="text-on-error-container bg-error-container/20 px-2 py-1 rounded text-xs font-bold">2 Urgent</span>
+</div>
+</div>
+<div class="col-span-3 glass-panel p-6 rounded-xl border-l-4 border-tertiary">
+<p class="font-label-caps text-on-surface-variant">Average Engine Hrs</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="font-headline-lg text-headline-lg text-tertiary">142</h3>
+<span class="text-on-tertiary-container bg-tertiary-container/20 px-2 py-1 rounded text-xs font-bold">Safe Range</span>
+</div>
+</div>
+</div>
+<!-- Fleet Data Table -->
+<div class="glass-panel rounded-xl overflow-hidden border border-outline-variant/30">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-highest/50 border-b border-outline-variant/30">
+<tr>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant">ID</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant">Model</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant">Status</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant">Fuel Level</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant">Engine Hours</th>
+<th class="px-6 py-4 font-label-caps text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<!-- Row 1: Available -->
+<tr class="hover:bg-surface-container-high/30 transition-colors group">
+<td class="px-6 py-5 font-label-caps text-secondary-fixed-dim">AV-RX300-01</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-12 h-8 rounded bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sleek black and cyan performance jet ski profile, floating on crystal clear turquoise water. The lighting is crisp afternoon sun reflecting off the chrome handles. 8k resolution, cinematic commercial photography style with a focus on powerful engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQn_tPPqhG2P3Uv6tqCL56HuRiciCG4_GfecgmPNMGI8ILQRxSIbcGPXikqOg0Zxvl2o4Qt3C2QGhNgzPRxWjwrUrhtWKnSh9vSynSy5zsfkU5XQgMFBFEjA5dqWmSQg2zP3fEAnkXOcZrjaZL1Kq-hkVDj1Es3tvxfrJeI23Ll8PPQNlV4SZBlmCqVAutVTNtjUPldAJPzqg4YVvpfymrL3b_CmqdnzNBvI7P4eU8g66KGapano9mUbicWPEeGlBX5JjEmlZ373ee"/>
+</div>
+<div>
+<p class="font-bold">Sea-Doo RXP-X 300</p>
+<p class="text-xs text-on-surface-variant">2024 Performance Series</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/10 text-secondary-container text-xs font-bold border border-secondary-container/30 cyan-glow">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                                        Available
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="w-full max-w-[100px] bg-surface-container rounded-full h-2">
+<div class="bg-secondary-container h-2 rounded-full" style="width: 95%"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-1">95% (Full Tank)</p>
+</td>
+<td class="px-6 py-5 font-label-caps">42.5 hrs</td>
+<td class="px-6 py-5 text-right space-x-2">
+<button class="p-2 hover:text-primary transition-colors" title="Edit Unit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:text-secondary-container transition-colors" title="Manage Maintenance">
+<span class="material-symbols-outlined text-[20px]">build</span>
+</button>
+<button class="p-2 hover:text-on-surface transition-colors" title="View History">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Rented -->
+<tr class="hover:bg-surface-container-high/30 transition-colors group">
+<td class="px-6 py-5 font-label-caps text-on-surface-variant">AV-GP180-08</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-12 h-8 rounded bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A blue and white Yamaha Waverunner jet ski racing through a wake, creating a dynamic splash of water. Action-packed sports photography with high shutter speed capturing individual water droplets. The setting is a vast blue lake in Ontario under a bright blue sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkBKW73L7AOpkAhR5dT64qL0Hs6hR0ff_H9yySJ7kUmU7-WfJ0VHiUgA7UxOa1krvznFuEeABlsj8ODWeBPAoEyakrucesavoVF5etvlTB6QR4XdTyTQ-iJr7fawmulXLxhw60SblegGrfhlN28cGuBrvl2wLGf6CaPVGMO4C7PLSNVcg28CL-c4BkxR7sHjW8wPlX1ycf64ZT2soI9fw63TIr1HkklTOBxTBg8KJB4drWUGNWGHPPK6hK684m4CYMoUGnTCIhTfyI"/>
+</div>
+<div>
+<p class="font-bold">Yamaha GP1800R SVHO</p>
+<p class="text-xs text-on-surface-variant">2023 Pro Series</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold border border-primary/30">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                                        Rented
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="w-full max-w-[100px] bg-surface-container rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 42%"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-1">42% (In Use)</p>
+</td>
+<td class="px-6 py-5 font-label-caps">188.2 hrs</td>
+<td class="px-6 py-5 text-right space-x-2">
+<button class="p-2 hover:text-primary transition-colors" title="Edit Unit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:text-secondary-container transition-colors" title="Manage Maintenance">
+<span class="material-symbols-outlined text-[20px]">build</span>
+</button>
+<button class="p-2 hover:text-on-surface transition-colors" title="View History">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Maintenance -->
+<tr class="hover:bg-surface-container-high/30 transition-colors group">
+<td class="px-6 py-5 font-label-caps text-on-surface-variant">AV-GTX300-14</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-12 h-8 rounded bg-surface-container overflow-hidden grayscale">
+<img class="w-full h-full object-cover" data-alt="Close up of a powerful jet ski engine being worked on by a technician in a modern, clean marine garage. Tools are organized neatly, and the focus is on the intricate metal parts and chrome finish of the engine block. Cool industrial lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW_oYck1AAEIQ4CondhRxHhkeQzP38POODyJyZ-NLo8BIj7wHkqg4q6msQq0lJiQh7UpsXPUkBLibz4NptJgihehfCb-qexsb-zrihfg8uBekFMSWg1BGz__fLr0Eo7CFE0JC2G00BaP3QOW4oH67FzOS5odbUbCJMNB--bfWsnkabXAYUDE2brF0jVImdtW-iWZrdgLqcsQha4YytkUUHZYaTYYBROUPNKlChjqnFkbd1ofTIpq01dU6TB--F2f6ca5EJMYQ9myqT"/>
+</div>
+<div>
+<p class="font-bold">Sea-Doo GTX Ltd 300</p>
+<p class="text-xs text-on-surface-variant">Luxury Touring Unit</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error/10 text-error text-xs font-bold border border-error/30">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                        Maintenance
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="w-full max-w-[100px] bg-surface-container rounded-full h-2">
+<div class="bg-error h-2 rounded-full" style="width: 15%"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-1">15% (Service Mode)</p>
+</td>
+<td class="px-6 py-5 font-label-caps">212.0 hrs</td>
+<td class="px-6 py-5 text-right space-x-2">
+<button class="p-2 hover:text-primary transition-colors" title="Edit Unit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-error" title="Urgent Maintenance">
+<span class="material-symbols-outlined text-[20px]">build</span>
+</button>
+<button class="p-2 hover:text-on-surface transition-colors" title="View History">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Available -->
+<tr class="hover:bg-surface-container-high/30 transition-colors group">
+<td class="px-6 py-5 font-label-caps text-secondary-fixed-dim">AV-RX300-02</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-12 h-8 rounded bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A side view of a racing jet ski in a vibrant orange and black color scheme, parked on a high-end wooden dock. The water in the background is calm and dark, reflecting the sunset colors. Luxurious atmosphere, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjucdQADxmIQxPGQXkIxObDDS0e2Eu6KL4Fh1HeBHkfW0PLRfJYkWF6k9wawHesdIbmNnWrDLFig302aYpPFt0mhLC9uuWgCwsja9fmqkrjbbPddmcPyswRBL6ypo5H7dWJMMKDB-qTtiH0z-s9RCsIRiZRpZrxLfBmfzAa-tJA_CYk64YOJ-whz9BjH-vApa3VrV05D2ZBhPrFlHSWJIVUnFb1BGkXOeUHBHRvtOimy9xAGcZ9NMoqZ_UXL1krB_e6d2SYt_7-B8j"/>
+</div>
+<div>
+<p class="font-bold">Sea-Doo RXP-X 300</p>
+<p class="text-xs text-on-surface-variant">2024 Performance Series</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/10 text-secondary-container text-xs font-bold border border-secondary-container/30">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                                        Available
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="w-full max-w-[100px] bg-surface-container rounded-full h-2">
+<div class="bg-secondary-container h-2 rounded-full" style="width: 88%"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-1">88% (Ready)</p>
+</td>
+<td class="px-6 py-5 font-label-caps">12.8 hrs</td>
+<td class="px-6 py-5 text-right space-x-2">
+<button class="p-2 hover:text-primary transition-colors" title="Edit Unit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:text-secondary-container transition-colors" title="Manage Maintenance">
+<span class="material-symbols-outlined text-[20px]">build</span>
+</button>
+<button class="p-2 hover:text-on-surface transition-colors" title="View History">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 flex items-center justify-between bg-surface-container-lowest border-t border-outline-variant/30">
+<p class="text-xs text-on-surface-variant font-label-caps">Showing 1-4 of 40 Units</p>
+<div class="flex gap-2">
+<button class="p-2 rounded border border-outline-variant/30 text-on-surface-variant hover:text-on-surface disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded bg-primary-container text-on-primary-container font-bold text-xs">1</button>
+<button class="px-3 py-1 rounded hover:bg-surface-container-high transition-colors text-xs">2</button>
+<button class="px-3 py-1 rounded hover:bg-surface-container-high transition-colors text-xs">3</button>
+<button class="p-2 rounded border border-outline-variant/30 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- System Status Footer -->
+<footer class="mt-auto flex justify-between items-center py-4 px-margin-desktop bg-surface-container-lowest border-t border-outline-variant/10 text-on-surface-variant">
+<div class="flex items-center gap-6">
+<p class="font-body-md text-[13px]">© 2024 Azure Velocity Ontario. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="font-label-caps text-[11px] hover:text-secondary-container transition-all" href="#">Terms of Service</a>
+<a class="font-label-caps text-[11px] hover:text-secondary-container transition-all" href="#">Privacy Policy</a>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container shadow-[0_0_8px_rgba(0,241,254,0.6)]"></span>
+<span class="font-label-caps text-[11px]">System Status: All Systems Operational</span>
+</div>
+</footer>
+</main>
+<!-- Interactive Elements Script -->
+<script>
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', (e) => {
+                if (e.target.closest('button')) return;
+                // Add click-to-detail interaction logic here
+                console.log('Unit clicked:', row.querySelector('td').textContent);
+            });
+        });
+        
+        // Simple search highlight simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.opacity = text.includes(term) ? '1' : '0.2';
+            });
+        });
+    </script>
+</body></html>
