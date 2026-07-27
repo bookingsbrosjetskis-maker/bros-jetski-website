@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import TrustBadges from "@/components/TrustBadges";
+import SocialLinks from "@/components/SocialLinks";
 import { Container } from "@/components/ui";
 import {
   SITE_NAME,
@@ -11,8 +12,6 @@ import {
   SITE_PHONE,
   SITE_ADDRESS,
   SITE_HOURS,
-  SITE_INSTAGRAM,
-  SITE_TIKTOK,
 } from "@/lib/constants";
 
 export default function Footer() {
@@ -81,52 +80,15 @@ export default function Footer() {
               </li>
               <li className="pt-2 text-outline">{SITE_HOURS}</li>
             </ul>
-            <div className="mt-4 flex gap-3">
-              <a
-                href={SITE_INSTAGRAM.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Instagram @${SITE_INSTAGRAM.handle}`}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan/10 ring-1 ring-cyan/30 transition-colors hover:bg-cyan/20"
-              >
-                <svg viewBox="0 0 24 24" className="h-5 w-5 stroke-cyan" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <rect x="3" y="3" width="18" height="18" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" className="stroke-cyan" />
-                </svg>
-              </a>
-              <a
-                href={SITE_TIKTOK.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`TikTok @${SITE_TIKTOK.handle}`}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan/10 ring-1 ring-cyan/30 transition-colors hover:bg-cyan/20"
-              >
-                <svg viewBox="0 0 24 24" className="h-5 w-5 fill-cyan" aria-hidden>
-                  <path d="M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.5c-1.3.1-2.5-.3-3.5-.9v5.9c0 3.3-2.4 5.6-5.5 5.6a5.4 5.4 0 01-5.5-5.5c0-3.1 2.6-5.6 5.9-5.4v2.7a3 3 0 00-.8-.1 2.8 2.8 0 100 5.6c1.6 0 2.8-1.2 2.8-2.9V3h2.6z" />
-                </svg>
-              </a>
-            </div>
-            <ul className="mt-3 space-y-1 text-xs text-outline">
-              <li>
-                <a href={SITE_INSTAGRAM.url} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-cyan-soft">
-                  @{SITE_INSTAGRAM.handle}
-                </a>
-              </li>
-              <li>
-                <a href={SITE_TIKTOK.url} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-cyan-soft">
-                  @{SITE_TIKTOK.handle}
-                </a>
-              </li>
-            </ul>
           </div>
         </Container>
         <div className="relative border-t border-white/10">
-          <Container className="flex flex-col items-center gap-2 py-4 sm:flex-row sm:justify-between">
-            <p className="text-center text-xs text-outline">
+          <Container className="flex flex-col items-center gap-4 py-5 sm:flex-row sm:justify-between">
+            <p className="order-2 text-center text-xs text-outline sm:order-1">
               © {new Date().getFullYear()} {SITE_NAME}. All prices in CAD.
             </p>
-            <ul className="flex items-center gap-4 text-xs text-outline">
+            <SocialLinks className="order-1 sm:order-2" />
+            <ul className="order-3 flex items-center gap-4 text-xs text-outline">
               <li><Link href="/terms" className="transition-colors hover:text-cyan-soft">Terms of Service</Link></li>
               <li><Link href="/privacy" className="transition-colors hover:text-cyan-soft">Privacy Policy</Link></li>
             </ul>

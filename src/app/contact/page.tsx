@@ -9,6 +9,7 @@ import {
   SITE_TIKTOK,
 } from "@/lib/constants";
 import { Card, Container } from "@/components/ui";
+import { SocialGlyph } from "@/components/SocialLinks";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import ContactForm from "@/components/ContactForm";
@@ -118,19 +119,7 @@ export default async function ContactPage() {
             </div>
             <div className="flex items-start gap-4 p-5">
               <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan/10 ring-1 ring-cyan/30">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5 stroke-cyan"
-                  fill="none"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden
-                >
-                  <rect x="3" y="3" width="18" height="18" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
-                </svg>
+                <SocialGlyph name="instagram" className="h-5 w-5 stroke-cyan" />
               </span>
               <div>
                 <p className="text-sm font-semibold text-ink">Follow us</p>
