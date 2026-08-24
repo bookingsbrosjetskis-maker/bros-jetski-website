@@ -6,17 +6,21 @@ import { fromDateKey, toDateKey } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
+type Busy = { startHour: number; endHour: number; quantity: number };
+
 type DaySummary = {
   blocked: boolean;
   fullyBooked: boolean;
-  busy: { startHour: number; endHour: number }[];
+  busy: Busy[];
 };
 
-/** True when the busy intervals leave no bookable hour in [OPEN_HOUR, CLOSE_HOUR). */
-function isFullyBooked(busy: { startHour: number; endHour: number }[]): boolean {
+/** True when no hour in [OPEN_HOUR, CLOSE_HOUR) has a spare jet ski. */
+function isFullyBooked(busy: Busy[], unitCount: number): boolean {
   for (let h = OPEN_HOUR; h < CLOSE_HOUR; h++) {
-    const covered = busy.some((b) => b.startHour < h + 1 && b.endHour > h);
-    if (!covered) return false;
+    const used = busy
+      .filter((b) => b.startHour < h + 1 && b.endHour > h)
+      .reduce((sum, b) => sum + b.quantity, 0);
+    if (used < unitCount) return false;
   }
   return true;
 }
@@ -57,7 +61,8 @@ export async function GET(req: Request) {
   await expireStaleBookings();
   const now = new Date();
 
-  const [bookings, blocks] = await Promise.all([
+  const [jetSki, bookings, blocks] = await Promise.all([
+    prisma.jetSki.findUnique({ where: { id: jetSkiId }, select: { unitCount: true } }),
     prisma.booking.findMany({
       where: {
         jetSkiId,
@@ -68,7 +73,7 @@ export async function GET(req: Request) {
           { status: BookingStatus.PENDING, expiresAt: { gt: now } },
         ],
       },
-      select: { startTime: true, endTime: true },
+      select: { startTime: true, endTime: true, quantity: true },
     }),
     prisma.blockedDate.findMany({
       where: {
@@ -80,6 +85,7 @@ export async function GET(req: Request) {
   ]);
 
   const blockedKeys = new Set(blocks.map((b) => toDateKey(b.date)));
+  const unitCount = jetSki?.unitCount ?? 1;
 
   const days: Record<string, DaySummary> = {};
   for (let d = 1; d <= daysInMonth; d++) {
@@ -92,14 +98,15 @@ export async function GET(req: Request) {
       .map((b) => ({
         startHour: Math.max(0, (b.startTime.getTime() - dayStart.getTime()) / 3600_000),
         endHour: Math.min(24, (b.endTime.getTime() - dayStart.getTime()) / 3600_000),
+        quantity: b.quantity,
       }));
 
     days[key] = {
       blocked: blockedKeys.has(key),
-      fullyBooked: isFullyBooked(busy),
+      fullyBooked: isFullyBooked(busy, unitCount),
       busy,
     };
   }
 
-  return NextResponse.json({ days });
+  return NextResponse.json({ unitCount, days });
 }

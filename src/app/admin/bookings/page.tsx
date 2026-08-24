@@ -122,7 +122,7 @@ async function ListView({ status }: { status: string }) {
                   <th className="px-4 py-3">Riding</th>
                   <th className="px-4 py-3">Date &amp; time</th>
                   <th className="px-4 py-3">Status</th>
-                  <th className="px-4 py-3">Total / deposit</th>
+                  <th className="px-4 py-3">Money</th>
                   <th className="px-4 py-3">Waiver</th>
                   <th className="px-4 py-3">Actions</th>
                 </tr>
@@ -135,7 +135,10 @@ async function ListView({ status }: { status: string }) {
                       <p className="text-xs text-ink-muted">{b.email}</p>
                       <p className="text-xs text-ink-muted">{b.phone}</p>
                     </td>
-                    <td className="px-4 py-3 text-ink-muted">{b.jetSki.name}</td>
+                    <td className="px-4 py-3 text-ink-muted">
+                      {b.jetSki.name}
+                      <span className="ml-1 font-semibold text-ink">x{b.quantity}</span>
+                    </td>
                     <td className="px-4 py-3">
                       <Badge color={b.ridingOption === RidingOption.FREE_RANGE ? "amber" : "slate"}>
                         {ridingLabel(b.ridingOption)}
@@ -151,10 +154,18 @@ async function ListView({ status }: { status: string }) {
                       <Badge color={statusColor(b.status)}>{b.status}</Badge>
                     </td>
                     <td className="px-4 py-3 text-ink-muted">
-                      <p className="font-medium text-ink">{formatCAD(b.totalPrice)}</p>
-                      <p className="text-xs text-ink-muted">
-                        dep. {formatCAD(b.depositAmount)}
+                      <p className="font-medium text-ink">{formatCAD(b.totalPrice)} total</p>
+                      <p className="text-xs text-emerald-300">
+                        {formatCAD(b.depositPaid)} deposit paid
                       </p>
+                      <p className="text-xs font-semibold text-amber-300">
+                        collect {formatCAD(b.balanceDue)}
+                      </p>
+                      {b.securityDeposit > 0 && (
+                        <p className="text-xs text-ink-muted">
+                          + {formatCAD(b.securityDeposit)} security hold
+                        </p>
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       {b.waiver ? (
@@ -184,7 +195,7 @@ async function ListView({ status }: { status: string }) {
                   <Badge color={statusColor(b.status)}>{b.status}</Badge>
                 </div>
                 <p className="mt-2 text-sm text-ink-muted">
-                  {b.jetSki.name} · {ridingLabel(b.ridingOption)}
+                  {b.jetSki.name} x{b.quantity} · {ridingLabel(b.ridingOption)}
                 </p>
                 <p className="text-sm text-ink-muted">
                   {formatDate(toDateKey(b.startTime))}
@@ -193,10 +204,19 @@ async function ListView({ status }: { status: string }) {
                   {formatBookingRange(b.startTime, b.endTime)}
                 </p>
                 <p className="mt-1 text-sm text-ink">
-                  {formatCAD(b.totalPrice)}{" "}
-                  <span className="text-xs text-ink-muted">
-                    (deposit {formatCAD(b.depositAmount)})
+                  {formatCAD(b.totalPrice)} total{" "}
+                  <span className="text-xs text-emerald-300">
+                    ({formatCAD(b.depositPaid)} paid)
+                  </span>{" "}
+                  <span className="text-xs font-semibold text-amber-300">
+                    collect {formatCAD(b.balanceDue)}
                   </span>
+                  {b.securityDeposit > 0 && (
+                    <span className="text-xs text-ink-muted">
+                      {" "}
+                      + {formatCAD(b.securityDeposit)} security hold
+                    </span>
+                  )}
                   {b.waiver && (
                     <Badge color="green" className="ml-2">
                       Waiver signed
@@ -325,7 +345,7 @@ async function CalendarView({ monthKey }: { monthKey: string }) {
                     {dayBookings.map((b) => (
                       <div
                         key={b.id}
-                        title={`${b.jetSki.name} · ${b.customerName}, ${formatSlot(
+                        title={`${b.jetSki.name} x${b.quantity} · ${b.customerName}, ${formatSlot(
                           b.startTime.getUTCHours(),
                           b.hours
                         )} (${b.status})`}
@@ -335,7 +355,7 @@ async function CalendarView({ monthKey }: { monthKey: string }) {
                             : "bg-cyan/15 text-cyan-soft ring-1 ring-inset ring-cyan/25"
                         }`}
                       >
-                        {b.jetSki.name} · {formatHour(b.startTime.getUTCHours())} ·{" "}
+                        {b.jetSki.name} x{b.quantity} · {formatHour(b.startTime.getUTCHours())} ·{" "}
                         {b.hours}h
                       </div>
                     ))}
@@ -371,7 +391,7 @@ async function CalendarView({ monthKey }: { monthKey: string }) {
                     className="flex items-center justify-between gap-2 rounded-lg bg-surface-low px-3 py-2"
                   >
                     <span className="min-w-0 truncate text-sm text-ink">
-                      {b.jetSki.name} · {b.customerName}
+                      {b.jetSki.name} x{b.quantity} · {b.customerName}
                     </span>
                     <span className="flex shrink-0 items-center gap-2">
                       <span className="text-xs text-ink-muted">

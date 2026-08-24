@@ -14,8 +14,8 @@ export const dynamic = "force-dynamic";
 
 const steps = [
   {
-    title: "Pick your date and time",
-    text: "Choose an open slot on the calendar and the length of your ride, from one hour up to a full weekend.",
+    title: "Pick your date, time, and jet skis",
+    text: "Choose an open slot, how long you want to ride, and how many jet skis you need. Bring the whole crew on one booking.",
     icon: <path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" />,
   },
   {
@@ -24,8 +24,8 @@ const steps = [
     icon: <path d="M7 3h10a1 1 0 011 1v16a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1zM9.5 13.5l2 2 3.5-4M9 7h6" />,
   },
   {
-    title: "Pay and ride",
-    text: "Meet us at Blair Boat Launch for a quick safety briefing and fitted life jackets, then you are on the Ottawa River.",
+    title: "Pay $50 to book, the rest at the dock",
+    text: "A $50 deposit per jet ski holds your slot and comes off your total. Pay the balance by card or cash at Blair Boat Launch, then you are on the Ottawa River.",
     icon: <path d="M3 18c2.5-2 4.5-2 7 0s4.5 2 7 0 3-1.5 4-1M12 4l3 6-3-1-3 1 3-6zM12 9v4" />,
   },
 ];

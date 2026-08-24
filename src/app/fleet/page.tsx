@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/db";
 import { formatCAD } from "@/lib/format";
+import { BOOKING_DEPOSIT_CENTS, CANCEL_CUTOFF_HOURS } from "@/lib/constants";
 import { Container, Card } from "@/components/ui";
 import { PageHero } from "@/components/PageHero";
 import FleetCard from "@/components/FleetCard";
@@ -43,6 +44,7 @@ export default async function FleetPage() {
               {/* Rates */}
               <Card className="p-6">
                 <h2 className="font-display text-lg font-bold text-ink">Rates</h2>
+                <p className="mt-1 text-sm text-ink-muted">Per jet ski, CAD.</p>
                 <dl className="mt-4 divide-y divide-outline-variant/50">
                   {[
                     { label: "Per hour", amount: ski.hourlyRate },
@@ -56,6 +58,42 @@ export default async function FleetPage() {
                     </div>
                   ))}
                 </dl>
+              </Card>
+
+              {/* Deposit & balance */}
+              <Card className="p-6">
+                <h2 className="font-display text-lg font-bold text-ink">
+                  Pay {formatCAD(BOOKING_DEPOSIT_CENTS)} now, the rest when you arrive
+                </h2>
+                <ul className="mt-4 space-y-3 text-sm text-ink-muted">
+                  <li>
+                    <span className="font-semibold text-ink">
+                      {formatCAD(BOOKING_DEPOSIT_CENTS)} deposit per jet ski
+                    </span>{" "}
+                    holds your slot. It comes off your rental total, so it is not an extra fee. Two
+                    jet skis, {formatCAD(BOOKING_DEPOSIT_CENTS * 2)}.
+                  </li>
+                  <li>
+                    <span className="font-semibold text-ink">The balance is paid at the dock</span>{" "}
+                    before you ride, by card (tap, chip, or phone) or cash. A{" "}
+                    {formatCAD(ski.hourlyRate)} hour is {formatCAD(BOOKING_DEPOSIT_CENTS)} online and{" "}
+                    {formatCAD(ski.hourlyRate - BOOKING_DEPOSIT_CENTS)} on arrival.
+                  </li>
+                  <li>
+                    <span className="font-semibold text-ink">
+                      Cancel {CANCEL_CUTOFF_HOURS}+ hours ahead
+                    </span>{" "}
+                    and the deposit is refunded in full.{" "}
+                    <span className="font-semibold text-amber-300">
+                      No-shows and late cancellations forfeit the deposit.
+                    </span>
+                  </li>
+                  <li>
+                    <span className="font-semibold text-ink">If we cancel</span> for weather or
+                    anything on our end, you keep your deposit or get a full refund. You never lose
+                    it because of us.
+                  </li>
+                </ul>
               </Card>
 
               {/* Riding options */}
@@ -78,8 +116,15 @@ export default async function FleetPage() {
               <Card className="p-6">
                 <h2 className="font-display text-lg font-bold text-ink">Good to know</h2>
                 <ul className="mt-4 space-y-2 text-sm text-ink-muted">
-                  <li>All prices in CAD and include fuel and safety gear.</li>
-                  <li>Free cancellation up to 12 hours before your start time.</li>
+                  <li>All prices in CAD, per jet ski, and include fuel and safety gear.</li>
+                  <li>
+                    Riding with friends? Book up to {ski.unitCount} jet skis on one reservation for
+                    the same time slot.
+                  </li>
+                  <li>
+                    Free cancellation up to {CANCEL_CUTOFF_HOURS} hours before your start time; after
+                    that the deposit is forfeited.
+                  </li>
                   <li>Riders must be 18 or older with a valid PCOC (boating card).</li>
                 </ul>
               </Card>

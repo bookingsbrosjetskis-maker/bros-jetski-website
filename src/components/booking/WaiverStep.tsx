@@ -2,13 +2,14 @@
 
 import { Input, Label } from "@/components/ui";
 
-/** The four discrete acknowledgements from the client's agreement. All must be
+/** The discrete acknowledgements from the client's agreement. All must be
  * checked to sign. Kept as a keyed object so the wizard can gate on "all true"
- * without four separate props. */
+ * without a prop per checkbox. */
 export type Acknowledgements = {
   legal: boolean;
   id: boolean;
   liability: boolean;
+  deposit: boolean;
   terms: boolean;
 };
 
@@ -16,6 +17,7 @@ export const EMPTY_ACKS: Acknowledgements = {
   legal: false,
   id: false,
   liability: false,
+  deposit: false,
   terms: false,
 };
 
@@ -30,7 +32,11 @@ const ACK_LABELS: { key: keyof Acknowledgements; text: string }[] = [
   },
   {
     key: "liability",
-    text: "I understand that no deposit does not mean no liability for damages.",
+    text: "I understand that no security deposit does not mean no liability for damages.",
+  },
+  {
+    key: "deposit",
+    text: "I understand my booking deposit is refunded if I cancel 12+ hours ahead, and forfeited for a no-show or a late cancellation. If Bros Jetskis Rental cancels, my deposit is not forfeited.",
   },
   {
     key: "terms",

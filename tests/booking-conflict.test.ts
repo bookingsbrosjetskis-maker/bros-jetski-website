@@ -45,6 +45,10 @@ const WEEKEND = {
   hours: 36,
 } as const;
 
+/** Availability is capacity-based, so "this slot is taken" means every unit in
+ * the fleet is taken. Tests that assert a conflict reserve the whole fleet. */
+const fullFleet = () => ({ quantity: jetSki.unitCount });
+
 beforeAll(async () => {
   jetSki = await prisma.jetSki.findFirstOrThrow({ where: { active: true } });
 });
@@ -60,7 +64,7 @@ afterAll(async () => {
 
 describe("booking conflict handling", () => {
   it("allows exactly one of two concurrent bookings for the same slot", async () => {
-    const slot = { dateKey: dateKeyFor(1), startHour: 10, hours: 2 };
+    const slot = { dateKey: dateKeyFor(1), startHour: 10, hours: 2, ...fullFleet() };
     const results = await Promise.allSettled([
       createPendingBooking(input(slot)),
       createPendingBooking(input(slot)),
@@ -76,7 +80,13 @@ describe("booking conflict handling", () => {
   it("rejects a partially overlapping slot", async () => {
     // 10:00–13:00 booked, then 12:00–14:00 attempted.
     await createPendingBooking(
-      input({ dateKey: dateKeyFor(2), startHour: 10, durationType: DurationType.HOURLY, hours: 3 })
+      input({
+        dateKey: dateKeyFor(2),
+        startHour: 10,
+        durationType: DurationType.HOURLY,
+        hours: 3,
+        ...fullFleet(),
+      })
     );
     await expect(
       createPendingBooking(
@@ -123,7 +133,7 @@ describe("booking conflict handling", () => {
   });
 
   it("releases the slot when a pending hold has expired", async () => {
-    const slot = { dateKey: dateKeyFor(6), startHour: 14, hours: 2 };
+    const slot = { dateKey: dateKeyFor(6), startHour: 14, hours: 2, ...fullFleet() };
     const stale = await createPendingBooking(input(slot));
 
     // Force the hold into the past; the next attempt should lazily expire it.
@@ -142,7 +152,7 @@ describe("booking conflict handling", () => {
   it("weekend booking is rejected when day 2 already has an hourly booking", async () => {
     // Hourly booking on day 21 morning; a weekend starting day 20 spans into it.
     await createPendingBooking(
-      input({ dateKey: dateKeyFor(21), startHour: 10, hours: 2 })
+      input({ dateKey: dateKeyFor(21), startHour: 10, hours: 2, ...fullFleet() })
     );
     await expect(
       createPendingBooking(input({ ...WEEKEND, dateKey: dateKeyFor(20) }))
@@ -150,7 +160,7 @@ describe("booking conflict handling", () => {
   });
 
   it("hourly booking on day 2 is rejected when a weekend already holds it", async () => {
-    await createPendingBooking(input({ ...WEEKEND, dateKey: dateKeyFor(30) }));
+    await createPendingBooking(input({ ...WEEKEND, dateKey: dateKeyFor(30), ...fullFleet() }));
     // Day 31 (the second weekend day) is now fully held.
     await expect(
       createPendingBooking(input({ dateKey: dateKeyFor(31), startHour: 12, hours: 2 }))
@@ -180,11 +190,11 @@ describe("booking conflict handling", () => {
     const free = await createPendingBooking(
       input({ dateKey: dateKeyFor(45), startHour: 9, hours: 1, ridingOption: RidingOption.FREE_RANGE })
     );
-    expect(free.depositAmount).toBeGreaterThan(0);
+    expect(free.securityDeposit).toBeGreaterThan(0);
     const designated = await createPendingBooking(
       input({ dateKey: dateKeyFor(46), startHour: 9, hours: 1, ridingOption: RidingOption.DESIGNATED })
     );
-    expect(designated.depositAmount).toBe(0);
+    expect(designated.securityDeposit).toBe(0);
   });
 
   it("confirmBooking is idempotent: confirmedNow true once, then false", async () => {

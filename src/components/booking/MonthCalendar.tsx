@@ -9,10 +9,11 @@ import { dockTodayKey, formatDate } from "@/lib/format";
 export type DaySummary = {
   blocked: boolean;
   fullyBooked: boolean;
-  busy: { startHour: number; endHour: number }[];
+  /** Occupied intervals, each holding `quantity` of the fleet's jet skis. */
+  busy: { startHour: number; endHour: number; quantity: number }[];
 };
 
-export type MonthData = { days: Record<string, DaySummary> };
+export type MonthData = { unitCount: number; days: Record<string, DaySummary> };
 
 const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const MONTH_NAMES = [

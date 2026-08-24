@@ -2,7 +2,14 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui";
 import { PageHero } from "@/components/PageHero";
 import { LegalSection } from "@/components/LegalDoc";
-import { SITE_NAME, SITE_PHONE, SITE_ADDRESS, CANCEL_CUTOFF_HOURS } from "@/lib/constants";
+import {
+  SITE_NAME,
+  SITE_PHONE,
+  SITE_ADDRESS,
+  CANCEL_CUTOFF_HOURS,
+  BOOKING_DEPOSIT_CENTS,
+} from "@/lib/constants";
+import { formatCAD } from "@/lib/format";
 
 // NOTE (developer): This is a working template reflecting the business's actual
 // practices. Have it reviewed by legal counsel before relying on it, and update
@@ -12,7 +19,7 @@ export const metadata: Metadata = {
   description: `The terms governing jet ski rentals and bookings with ${SITE_NAME}.`,
 };
 
-const LAST_UPDATED = "July 2026";
+const LAST_UPDATED = "August 2026";
 
 export default function TermsPage() {
   return (
@@ -49,35 +56,63 @@ export default function TermsPage() {
           </ul>
         </LegalSection>
 
-        <LegalSection heading="3. Bookings and payment">
+        <LegalSection heading="3. Bookings, deposits, and payment">
           <ul>
-            <li>All prices are in Canadian dollars (CAD) and are charged in full at the time of booking.</li>
+            <li>
+              All prices are in Canadian dollars (CAD) and are quoted per jet ski. One reservation
+              may cover several jet skis for the same date and time slot; the rental price and the
+              booking deposit both apply per jet ski.
+            </li>
+            <li>
+              <strong>Booking deposit.</strong> You pay a {formatCAD(BOOKING_DEPOSIT_CENTS)} deposit
+              per jet ski when you book online. Two jet skis means a{" "}
+              {formatCAD(BOOKING_DEPOSIT_CENTS * 2)} deposit. The deposit is applied against your
+              rental price. It is not an additional fee.
+            </li>
+            <li>
+              <strong>Balance on arrival.</strong> The remaining balance is due at the rental
+              location before you ride. We accept card (tap, chip, or phone) and cash. If the
+              balance is not paid, the rental does not proceed and the deposit is forfeited as a
+              late cancellation.
+            </li>
             <li>Payments are processed by our third-party payment provider (Stripe). We do not store your full card details.</li>
             <li>
-              A booking is confirmed only once payment is completed. Unpaid holds are released
+              A booking is confirmed only once the deposit is paid. Unpaid holds are released
               automatically after a short period.
             </li>
             <li>
               Free-range riding (outside our designated area) requires a refundable $1,000 security
               deposit per jet ski, collected in person before launch and returned in full once the
-              jet ski is returned undamaged.
+              jet ski is returned undamaged. This is separate from, and additional to, the booking
+              deposit.
             </li>
           </ul>
         </LegalSection>
 
-        <LegalSection heading="4. Cancellations, changes, and weather">
+        <LegalSection heading="4. Cancellations, no-shows, and weather">
           <ul>
             <li>
-              You may cancel online up to {CANCEL_CUTOFF_HOURS} hours before your rental start time
-              for a full refund. Within {CANCEL_CUTOFF_HOURS} hours, contact us at {SITE_PHONE}.
+              <strong>Cancelling {CANCEL_CUTOFF_HOURS}+ hours ahead.</strong> You may cancel online
+              up to {CANCEL_CUTOFF_HOURS} hours before your rental start time and your booking
+              deposit is refunded in full. Within {CANCEL_CUTOFF_HOURS} hours, contact us at{" "}
+              {SITE_PHONE}.
             </li>
             <li>
-              We may delay or cancel rentals for thunderstorms, lightning, high winds, severe
-              weather warnings, or any conditions our staff consider unsafe. If we cancel for unsafe
-              weather, you may reschedule at no extra cost or receive a full refund.
+              <strong>Late cancellations and no-shows forfeit the deposit.</strong> If you cancel
+              less than {CANCEL_CUTOFF_HOURS} hours before your start time, or do not arrive for
+              your rental, the {formatCAD(BOOKING_DEPOSIT_CENTS)} per jet ski deposit is not
+              refunded. Because only the deposit is charged online, the deposit is the most you can
+              lose.
             </li>
             <li>
-              If conditions are safe but you choose not to attend, standard cancellation terms apply.
+              <strong>If we cancel, your deposit is never forfeited.</strong> We may delay or cancel
+              rentals for thunderstorms, lightning, high winds, severe weather warnings, or any
+              conditions our staff consider unsafe, or for any other reason on our end. In that case
+              you may reschedule at no extra cost or receive a full refund of your deposit.
+            </li>
+            <li>
+              If conditions are safe but you choose not to attend, that is a customer cancellation
+              and the terms above apply.
             </li>
           </ul>
         </LegalSection>

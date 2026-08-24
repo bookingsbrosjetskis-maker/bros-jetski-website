@@ -25,7 +25,11 @@ model JetSki {
   halfDayRate   Int
   fullDayRate   Int
   weekendRate   Int           @default(160000)
-  depositAmount Int // refundable free-range security deposit, collected in person (never charged online)
+  depositAmount Int // refundable free-range security deposit, per ski, collected in person (never charged online)
+  // How many identical physical units of this jet ski the fleet owns. One
+  // booking may reserve up to this many for the same slot; availability is
+  // capacity-based, not one-booking-per-slot.
+  unitCount     Int           @default(1)
   featured      Boolean       @default(false)
   active        Boolean       @default(true)
   bookings      Booking[]
@@ -44,9 +48,14 @@ model Booking {
   endTime         DateTime
   durationType    String // HOURLY | HALF_DAY | FULL_DAY | WEEKEND
   hours           Int // 1-3, 4, 8, or 36 (weekend: day 1 09:00 to day 2 21:00)
-  totalPrice      Int
+  quantity        Int       @default(1) // jet skis reserved for this slot
+  totalPrice      Int // full rental price for all `quantity` skis
+  depositPaid     Int       @default(0) // booking deposit charged online (BOOKING_DEPOSIT_CENTS x quantity)
+  balanceDue      Int       @default(0) // totalPrice - depositPaid, collected at the dock (card or cash)
   ridingOption    String    @default("DESIGNATED") // DESIGNATED | FREE_RANGE
-  depositAmount   Int // security deposit due in person (0 for DESIGNATED)
+  // Refundable free-range security deposit due in person, for all skis
+  // (0 for DESIGNATED). Distinct from depositPaid, which is money taken online.
+  securityDeposit Int       @map("depositAmount")
   status          String    @default("PENDING") // PENDING | CONFIRMED | COMPLETED | CANCELLED | EXPIRED
   stripeSessionId String?   @unique
   expiresAt       DateTime? // set while PENDING: created + 15 min

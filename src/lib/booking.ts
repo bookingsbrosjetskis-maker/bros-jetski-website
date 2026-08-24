@@ -8,6 +8,8 @@ import {
   OPEN_HOUR,
   CLOSE_HOUR,
   PENDING_EXPIRY_MINUTES,
+  MAX_BOOKING_QUANTITY,
+  bookingDepositFor,
 } from "@/lib/constants";
 import { fromDateKey, dockNowMs } from "@/lib/format";
 
@@ -31,6 +33,12 @@ export class BookingValidationError extends Error {
 }
 
 type Client = Prisma.TransactionClient | typeof prisma;
+
+/** Prisma's defaults (2s to acquire, 5s to run) assume a local database. Ours
+ * is remote, and the booking transaction makes several sequential round-trips,
+ * so the defaults abort perfectly healthy writes. These bounds still fail fast
+ * enough that a wedged transaction cannot hold a slot hostage. */
+const TX_OPTIONS = { maxWait: 15_000, timeout: 20_000 } as const;
 
 /** Mark overdue PENDING bookings as EXPIRED so they release their slots.
  * Called lazily by every availability read and booking write — no cron. */
@@ -59,21 +67,53 @@ export function computeSlotTimes(dateKey: string, startHour: number, hours: numb
   return { day, startTime, endTime };
 }
 
+/** Rental price for `quantity` skis. Rates are per jet ski, so a group booking
+ * is simply the single-ski price multiplied by how many are reserved. */
 export function computePrice(
   jetSki: Pick<JetSki, "hourlyRate" | "halfDayRate" | "fullDayRate" | "weekendRate">,
   durationType: DurationType,
-  hours: number
+  hours: number,
+  quantity = 1
 ): number {
-  switch (durationType) {
-    case DurationType.HALF_DAY:
-      return jetSki.halfDayRate;
-    case DurationType.FULL_DAY:
-      return jetSki.fullDayRate;
-    case DurationType.WEEKEND:
-      return jetSki.weekendRate;
-    default:
-      return jetSki.hourlyRate * hours;
+  const perSki = (() => {
+    switch (durationType) {
+      case DurationType.HALF_DAY:
+        return jetSki.halfDayRate;
+      case DurationType.FULL_DAY:
+        return jetSki.fullDayRate;
+      case DurationType.WEEKEND:
+        return jetSki.weekendRate;
+      default:
+        return jetSki.hourlyRate * hours;
+    }
+  })();
+  return perSki * quantity;
+}
+
+/** Highest number of skis simultaneously committed at any instant of
+ * [windowStart, windowEnd). Usage only ever changes at a booking's start, so
+ * checking the window start plus every interior start instant is exact. */
+export function peakUsage(
+  intervals: { startTime: Date; endTime: Date; quantity: number }[],
+  windowStart: Date,
+  windowEnd: Date
+): number {
+  const from = windowStart.getTime();
+  const to = windowEnd.getTime();
+  const points = new Set<number>([from]);
+  for (const i of intervals) {
+    const t = i.startTime.getTime();
+    if (t > from && t < to) points.add(t);
   }
+  let peak = 0;
+  for (const t of points) {
+    let used = 0;
+    for (const i of intervals) {
+      if (i.startTime.getTime() <= t && i.endTime.getTime() > t) used += i.quantity;
+    }
+    if (used > peak) peak = used;
+  }
+  return peak;
 }
 
 function validateSlot(dateKey: string, startHour: number, durationType: DurationType, hours: number) {
@@ -114,18 +154,23 @@ async function findBlocks(client: Client, jetSkiId: string, startTime: Date, end
 export type DayAvailability = {
   blocked: boolean;
   blockReason: string | null;
-  /** Occupied intervals as start/end hours within the day. */
-  busy: { startHour: number; endHour: number }[];
+  /** How many identical units the fleet has for this jet ski. */
+  unitCount: number;
+  /** Occupied intervals as start/end hours within the day, each carrying the
+   * number of skis it holds. A slot is bookable while the skis committed
+   * across it stay below unitCount. */
+  busy: { startHour: number; endHour: number; quantity: number }[];
 };
 
-/** Availability for one unit on one day ("YYYY-MM-DD"). */
+/** Availability for one jet ski on one day ("YYYY-MM-DD"). */
 export async function getDayAvailability(jetSkiId: string, dateKey: string): Promise<DayAvailability> {
   await expireStaleBookings();
   const now = new Date();
   const day = fromDateKey(dateKey);
   const dayEnd = new Date(day.getTime() + 24 * 3600_000);
 
-  const [blocks, bookings] = await Promise.all([
+  const [jetSki, blocks, bookings] = await Promise.all([
+    prisma.jetSki.findUnique({ where: { id: jetSkiId }, select: { unitCount: true } }),
     prisma.blockedDate.findMany({
       where: { date: day, OR: [{ jetSkiId: null }, { jetSkiId }] },
     }),
@@ -136,16 +181,18 @@ export async function getDayAvailability(jetSkiId: string, dateKey: string): Pro
         endTime: { gt: day },
         ...slotHoldingWhere(now),
       },
-      select: { startTime: true, endTime: true },
+      select: { startTime: true, endTime: true, quantity: true },
     }),
   ]);
 
   return {
     blocked: blocks.length > 0,
     blockReason: blocks[0]?.reason ?? null,
+    unitCount: jetSki?.unitCount ?? 1,
     busy: bookings.map((b) => ({
       startHour: Math.max(0, (b.startTime.getTime() - day.getTime()) / 3600_000),
       endHour: Math.min(24, (b.endTime.getTime() - day.getTime()) / 3600_000),
+      quantity: b.quantity,
     })),
   };
 }
@@ -159,8 +206,42 @@ export type CreateBookingInput = {
   customerName: string;
   email: string;
   phone: string;
-  ridingOption?: RidingOption; // defaults to DESIGNATED (no deposit)
+  ridingOption?: RidingOption; // defaults to DESIGNATED (no security deposit)
+  quantity?: number; // jet skis for this slot; defaults to 1
 };
+
+/** Skis still free for [startTime, endTime), ignoring `excludeBookingId`
+ * (used when re-checking a booking against everything *else*). */
+async function remainingCapacity(
+  client: Client,
+  jetSkiId: string,
+  unitCount: number,
+  startTime: Date,
+  endTime: Date,
+  excludeBookingId?: string
+): Promise<number> {
+  const overlapping = await client.booking.findMany({
+    where: {
+      jetSkiId,
+      ...(excludeBookingId ? { id: { not: excludeBookingId } } : {}),
+      startTime: { lt: endTime },
+      endTime: { gt: startTime },
+      ...slotHoldingWhere(new Date()),
+    },
+    select: { startTime: true, endTime: true, quantity: true },
+  });
+  return unitCount - peakUsage(overlapping, startTime, endTime);
+}
+
+/** "Only 1 jet ski is left…" / "All 3 jet skis are booked…" */
+function capacityMessage(remaining: number, unitCount: number): string {
+  if (remaining <= 0) {
+    return unitCount === 1
+      ? "This time slot is no longer available."
+      : `All ${unitCount} jet skis are booked for that time. Please pick another time.`;
+  }
+  return `Only ${remaining} jet ski${remaining === 1 ? " is" : "s are"} left for that time. Please reduce the number of jet skis or pick another time.`;
+}
 
 /**
  * THE single write path for new bookings. Runs an interactive transaction:
@@ -173,6 +254,13 @@ export type CreateBookingInput = {
 export async function createPendingBooking(input: CreateBookingInput): Promise<Booking> {
   const { jetSkiId, dateKey, startHour, durationType, hours } = input;
   validateSlot(dateKey, startHour, durationType, hours);
+
+  const quantity = input.quantity ?? 1;
+  if (!Number.isInteger(quantity) || quantity < 1 || quantity > MAX_BOOKING_QUANTITY) {
+    throw new BookingValidationError(
+      `Please choose between 1 and ${MAX_BOOKING_QUANTITY} jet skis.`
+    );
+  }
 
   const customerName = input.customerName.trim();
   const email = input.email.trim().toLowerCase();
@@ -202,6 +290,11 @@ export async function createPendingBooking(input: CreateBookingInput): Promise<B
     async (tx) => {
       const jetSki = await tx.jetSki.findFirst({ where: { id: jetSkiId, active: true } });
       if (!jetSki) throw new BookingValidationError("This jet ski is not available for booking.");
+      if (quantity > jetSki.unitCount) {
+        throw new BookingValidationError(
+          `We only have ${jetSki.unitCount} jet ski${jetSki.unitCount === 1 ? "" : "s"} in the fleet.`
+        );
+      }
 
       await expireStaleBookings(tx);
       const now = new Date();
@@ -211,16 +304,21 @@ export async function createPendingBooking(input: CreateBookingInput): Promise<B
         throw new BookingConflictError("That date is unavailable (maintenance or weather).");
       }
 
-      const conflict = await tx.booking.findFirst({
-        where: {
-          jetSkiId,
-          startTime: { lt: endTime },
-          endTime: { gt: startTime },
-          ...slotHoldingWhere(now),
-        },
-        select: { id: true },
-      });
-      if (conflict) throw new BookingConflictError();
+      // Capacity, not exclusivity: the slot is free while the skis already
+      // committed across it leave `quantity` spare.
+      const remaining = await remainingCapacity(
+        tx,
+        jetSkiId,
+        jetSki.unitCount,
+        startTime,
+        endTime
+      );
+      if (remaining < quantity) {
+        throw new BookingConflictError(capacityMessage(remaining, jetSki.unitCount));
+      }
+
+      const totalPrice = computePrice(jetSki, durationType, hours, quantity);
+      const depositPaid = bookingDepositFor(totalPrice, quantity);
 
       return tx.booking.create({
         data: {
@@ -232,18 +330,23 @@ export async function createPendingBooking(input: CreateBookingInput): Promise<B
           endTime,
           durationType,
           hours,
-          totalPrice: computePrice(jetSki, durationType, hours),
+          quantity,
+          totalPrice,
+          // Only the deposit is charged online; the rest is collected at the
+          // dock by card (Stripe Tap to Pay) or cash before the ride.
+          depositPaid,
+          balanceDue: totalPrice - depositPaid,
           ridingOption,
-          // Free-range riders owe a refundable security deposit in person;
-          // designated-area riders owe none.
-          depositAmount:
-            ridingOption === RidingOption.FREE_RANGE ? jetSki.depositAmount : 0,
+          // Free-range riders owe a refundable security deposit in person, per
+          // ski; designated-area riders owe none.
+          securityDeposit:
+            ridingOption === RidingOption.FREE_RANGE ? jetSki.depositAmount * quantity : 0,
           status: BookingStatus.PENDING,
           expiresAt: new Date(now.getTime() + PENDING_EXPIRY_MINUTES * 60_000),
         },
       });
     },
-    { isolationLevel: Prisma.TransactionIsolationLevel.Serializable }
+    { ...TX_OPTIONS, isolationLevel: Prisma.TransactionIsolationLevel.Serializable }
     );
   } catch (err) {
     // On Postgres, two racing inserts that both pass the overlap SELECT abort
@@ -279,17 +382,23 @@ export async function confirmBooking(
       if (blocks.length > 0) {
         throw new BookingConflictError("Payment received but that date was closed (maintenance or weather); refund required.");
       }
-      const conflict = await tx.booking.findFirst({
-        where: {
-          id: { not: booking.id },
-          jetSkiId: booking.jetSkiId,
-          startTime: { lt: booking.endTime },
-          endTime: { gt: booking.startTime },
-          ...slotHoldingWhere(new Date()),
-        },
-        select: { id: true },
+      const jetSki = await tx.jetSki.findUnique({
+        where: { id: booking.jetSkiId },
+        select: { unitCount: true },
       });
-      if (conflict) throw new BookingConflictError("Payment received but the slot was re-booked; refund required.");
+      const remaining = await remainingCapacity(
+        tx,
+        booking.jetSkiId,
+        jetSki?.unitCount ?? 1,
+        booking.startTime,
+        booking.endTime,
+        booking.id
+      );
+      if (remaining < booking.quantity) {
+        throw new BookingConflictError(
+          "Payment received but the slot was re-booked; refund required."
+        );
+      }
     }
     const updated = await tx.booking.update({
       where: { id: bookingId },
@@ -300,7 +409,7 @@ export async function confirmBooking(
       },
     });
     return { booking: updated, confirmedNow: true };
-  });
+  }, TX_OPTIONS);
 }
 
 /** Cancel a booking (from PENDING or CONFIRMED). The single write path for
@@ -317,7 +426,7 @@ export async function cancelBooking(bookingId: string): Promise<Booking> {
       where: { id: bookingId },
       data: { status: BookingStatus.CANCELLED, expiresAt: null },
     });
-  });
+  }, TX_OPTIONS);
 }
 
 /** Mark a CONFIRMED booking COMPLETED. The single write path for completion. */
@@ -332,5 +441,5 @@ export async function completeBooking(bookingId: string): Promise<Booking> {
       where: { id: bookingId },
       data: { status: BookingStatus.COMPLETED },
     });
-  });
+  }, TX_OPTIONS);
 }

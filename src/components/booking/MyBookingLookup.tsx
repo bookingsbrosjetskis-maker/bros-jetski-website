@@ -15,10 +15,13 @@ type LookupResult = {
     startTime: string;
     endTime: string;
     hours: number;
+    quantity: number;
     durationType: string;
     ridingOption: string;
     totalPrice: number;
-    depositAmount: number;
+    depositPaid: number;
+    balanceDue: number;
+    securityDeposit: number;
     createdAt: string;
     expiresAt: string | null;
   };
@@ -240,8 +243,20 @@ export default function MyBookingLookup() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-outline">Paid in full</dt>
+                  <dt className="text-outline">Jet skis</dt>
+                  <dd className="font-medium text-ink">{b.quantity}</dd>
+                </div>
+                <div>
+                  <dt className="text-outline">Rental total</dt>
                   <dd className="font-medium text-ink">{formatCAD(b.totalPrice)}</dd>
+                </div>
+                <div>
+                  <dt className="text-outline">Deposit paid</dt>
+                  <dd className="font-medium text-emerald-300">{formatCAD(b.depositPaid)}</dd>
+                </div>
+                <div>
+                  <dt className="text-outline">Balance at the dock</dt>
+                  <dd className="font-medium text-ink">{formatCAD(b.balanceDue)}</dd>
                 </div>
                 <div className="col-span-2">
                   <dt className="text-outline">Reference</dt>
@@ -263,8 +278,8 @@ export default function MyBookingLookup() {
               {/* Cancellation */}
               {cancelled ? (
                 <div className="rounded-xl border border-emerald-400/30 bg-emerald-500/10 p-4 text-sm text-emerald-300">
-                  Your booking has been cancelled. Your payment will be refunded to your original
-                  payment method within 5 to 10 business days.
+                  Your booking has been cancelled. Your {formatCAD(b.depositPaid)} deposit will be
+                  refunded to your original payment method within 5 to 10 business days.
                 </div>
               ) : result.canCancel ? (
                 <div className="border-t border-outline-variant/50 pt-5">
@@ -278,7 +293,9 @@ export default function MyBookingLookup() {
                   ) : (
                     <div className="rounded-xl border border-red-400/30 bg-red-500/10 p-4">
                       <p className="text-sm font-medium text-ink">
-                        Cancel this booking? Your payment will be refunded within 5 to 10 business days.
+                        Cancel this booking? You are still {result.cancelCutoffHours}+ hours out, so
+                        your {formatCAD(b.depositPaid)} deposit is refunded in full within 5 to 10
+                        business days.
                       </p>
                       {cancelError && <p className="mt-2 text-sm text-red-300">{cancelError}</p>}
                       <div className="mt-4 flex gap-3">
@@ -294,7 +311,8 @@ export default function MyBookingLookup() {
                 </div>
               ) : (b.status === "CONFIRMED" || b.status === "PENDING") ? (
                 <div className="rounded-xl bg-surface-high p-4 text-sm text-ink-muted">
-                  Online cancellation closes {result.cancelCutoffHours} hours before your rental.
+                  Online cancellation closes {result.cancelCutoffHours} hours before your rental,
+                  and cancelling inside that window forfeits your {formatCAD(b.depositPaid)} deposit.
                   Need to make a change? Call us at{" "}
                   <a href={`tel:${SITE_PHONE.replace(/[^\d+]/g, "")}`} className="font-semibold text-cyan hover:underline">
                     {SITE_PHONE}

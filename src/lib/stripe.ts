@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import type { Booking, JetSki } from "@prisma/client";
-import { formatBookingRange, formatDate, toDateKey } from "@/lib/format";
+import { formatBookingRange, formatCAD, formatDate, toDateKey } from "@/lib/format";
+import { CANCEL_CUTOFF_HOURS } from "@/lib/constants";
 
 /** True when checkout should be simulated (instant redirect to the success
  * page) instead of hitting Stripe. Mock mode is allowed only when explicitly
@@ -34,10 +35,23 @@ function baseUrl(): string {
   return process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 }
 
+/** Stripe line-item description: what this charge is, and what is still owed. */
+function depositDescription(booking: Booking): string {
+  const when = `${formatDate(toDateKey(booking.startTime))}, ${formatBookingRange(booking.startTime, booking.endTime)}`;
+  const balance =
+    booking.balanceDue > 0
+      ? ` Deposit goes toward your ${formatCAD(booking.totalPrice)} rental; ${formatCAD(booking.balanceDue)} balance due at the dock by card or cash.`
+      : "";
+  const policy = ` Refundable if you cancel ${CANCEL_CUTOFF_HOURS}+ hours ahead.`;
+  return `${when}.${balance}${policy}`;
+}
+
 /**
- * Create the Checkout Session for a PENDING booking (charging the full rental
- * price) and return the URL to redirect the customer to. In mock mode this is
- * the success URL directly (the success page treats mock=1 as a paid session).
+ * Create the Checkout Session for a PENDING booking and return the URL to
+ * redirect the customer to. Only the booking deposit ($50 per jet ski) is
+ * charged online; the balance is collected at the dock by card or cash. In
+ * mock mode this is the success URL directly (the success page treats mock=1
+ * as a paid session).
  */
 export async function createCheckoutUrl(
   booking: Booking,
@@ -58,13 +72,15 @@ export async function createCheckoutUrl(
     payment_intent_data: { receipt_email: booking.email },
     line_items: [
       {
+        // One line for the whole deposit rather than N x $50: the amount is
+        // already clamped to the rental total, so this can never round oddly.
         quantity: 1,
         price_data: {
           currency: "cad",
-          unit_amount: booking.totalPrice,
+          unit_amount: booking.depositPaid,
           product_data: {
-            name: `${jetSki.name} rental`,
-            description: `${formatDate(toDateKey(booking.startTime))}, ${formatBookingRange(booking.startTime, booking.endTime)}`,
+            name: `Booking deposit — ${booking.quantity} ${jetSki.name}${booking.quantity === 1 ? "" : "s"}`,
+            description: depositDescription(booking),
           },
         },
       },

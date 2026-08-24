@@ -42,6 +42,7 @@ export default async function EditJetSkiPage({
           fullDayRate: toDollars(ski.fullDayRate),
           weekendRate: toDollars(ski.weekendRate),
           depositAmount: toDollars(ski.depositAmount),
+          unitCount: String(ski.unitCount),
           featured: ski.featured,
           active: ski.active,
         }}

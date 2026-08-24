@@ -33,6 +33,8 @@ export async function POST(req: Request) {
     b.ridingOption === RidingOption.FREE_RANGE
       ? RidingOption.FREE_RANGE
       : RidingOption.DESIGNATED;
+  // Absent quantity means a single jet ski (pre-group-booking clients).
+  const quantity = b.quantity === undefined ? 1 : Number(b.quantity);
 
   if (
     !jetSkiId ||
@@ -55,13 +57,17 @@ export async function POST(req: Request) {
       email,
       phone,
       ridingOption,
+      quantity,
     });
     return NextResponse.json(
       {
         bookingId: booking.id,
         expiresAt: booking.expiresAt,
+        quantity: booking.quantity,
         totalPrice: booking.totalPrice,
-        depositAmount: booking.depositAmount,
+        depositPaid: booking.depositPaid,
+        balanceDue: booking.balanceDue,
+        securityDeposit: booking.securityDeposit,
       },
       { status: 201 }
     );

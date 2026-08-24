@@ -72,9 +72,14 @@ export async function GET(
   const description = [
     `Booking reference: ${booking.id}`,
     `When: ${formatBookingRange(booking.startTime, booking.endTime)}`,
-    `Paid in full: ${formatCAD(booking.totalPrice)}`,
+    `Jet skis: ${booking.quantity}`,
+    `Rental total: ${formatCAD(booking.totalPrice)}`,
+    `Deposit paid online: ${formatCAD(booking.depositPaid)}`,
+    `Balance due at the dock (card or cash): ${formatCAD(booking.balanceDue)}`,
     ...(booking.ridingOption === RidingOption.FREE_RANGE
-      ? ["Free range: a $1,000 refundable security deposit is due in person before launch."]
+      ? [
+          `Free range: a refundable ${formatCAD(booking.securityDeposit)} security deposit is due in person before launch.`,
+        ]
       : []),
     `Please arrive 15 minutes early for the safety briefing.`,
     `${SITE_NAME}. Call ${SITE_PHONE}.`,
@@ -91,7 +96,7 @@ export async function GET(
     `DTSTAMP:${icsUtcStamp(new Date())}`,
     `DTSTART:${icsFloating(booking.startTime)}`,
     `DTEND:${icsFloating(booking.endTime)}`,
-    `SUMMARY:${icsEscape(`${SITE_NAME}: ${booking.jetSki.name}`)}`,
+    `SUMMARY:${icsEscape(`${SITE_NAME}: ${booking.jetSki.name} x ${booking.quantity}`)}`,
     `LOCATION:${icsEscape(SITE_ADDRESS)}`,
     `DESCRIPTION:${icsEscape(description)}`,
     "STATUS:CONFIRMED",

@@ -11,7 +11,13 @@ import {
 import { ensureChecklist } from "@/lib/checklist";
 import { isMockPayments, verifyPaidSession } from "@/lib/stripe";
 import { formatBookingRange, formatCAD, formatDate, toDateKey } from "@/lib/format";
-import { RidingOption, SITE_ADDRESS, SITE_NAME, SITE_PHONE } from "@/lib/constants";
+import {
+  CANCEL_CUTOFF_HOURS,
+  RidingOption,
+  SITE_ADDRESS,
+  SITE_NAME,
+  SITE_PHONE,
+} from "@/lib/constants";
 import { ButtonLink, Card, Container } from "@/components/ui";
 
 export const metadata: Metadata = { title: `Booking confirmed | ${SITE_NAME}` };
@@ -152,7 +158,7 @@ export default async function BookingSuccessPage({
               You&apos;re booked!
             </h1>
             <p className="animate-fade-up relative mt-1 text-sm text-ink-muted [animation-delay:0.3s]">
-              Paid in full. A confirmation email is on its way.
+              Deposit received. A confirmation email is on its way.
             </p>
           </div>
 
@@ -161,10 +167,11 @@ export default async function BookingSuccessPage({
               {(
                 [
                   ["Reference", booking.id],
-                  ["Jet ski", jetSki.name],
+                  ["Jet ski", `${jetSki.name} × ${booking.quantity}`],
                   ["Date", formatDate(toDateKey(booking.startTime))],
                   ["Time", timeRange],
                   ["Riding", isFreeRange ? "Free range" : "Designated riding area"],
+                  ["Rental total", formatCAD(booking.totalPrice)],
                 ] as const
               ).map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4">
@@ -172,17 +179,36 @@ export default async function BookingSuccessPage({
                   <dd className="break-all text-right font-medium text-ink">{v}</dd>
                 </div>
               ))}
-              <div className="border-t border-outline-variant/50 pt-2.5">
+              <div className="space-y-2.5 border-t border-outline-variant/50 pt-2.5">
                 <div className="flex justify-between gap-4">
-                  <dt className="text-outline">Paid in full</dt>
-                  <dd className="font-semibold text-emerald-300">{formatCAD(booking.totalPrice)}</dd>
+                  <dt className="text-outline">Deposit paid</dt>
+                  <dd className="font-semibold text-emerald-300">{formatCAD(booking.depositPaid)}</dd>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <dt className="text-outline">Balance due at the dock</dt>
+                  <dd className="font-semibold text-ink">{formatCAD(booking.balanceDue)}</dd>
                 </div>
               </div>
             </dl>
 
+            <div className="rounded-xl border border-cyan/20 bg-surface-high p-4 text-sm leading-relaxed text-ink-muted">
+              <p className="font-semibold text-ink">Before you ride</p>
+              <p className="mt-2">
+                Bring the remaining {formatCAD(booking.balanceDue)} to the dock. We take card (tap,
+                chip, or phone) and cash. Your {formatCAD(booking.depositPaid)} deposit has already
+                come off the total.
+              </p>
+              <p className="mt-2">
+                Need to cancel? Do it at least {CANCEL_CUTOFF_HOURS} hours before your start time
+                and your deposit is refunded in full. Late cancellations and no-shows forfeit the
+                deposit. If we cancel for weather or anything on our end, you keep it.
+              </p>
+            </div>
+
             {isFreeRange && (
               <div className="rounded-xl border border-amber-400/30 bg-amber-500/10 p-4 text-sm leading-relaxed text-amber-200">
-                Remember: a $1,000 refundable security deposit is due in person before you launch.
+                Remember: a refundable {formatCAD(booking.securityDeposit)} security deposit is due
+                in person before you launch.
               </div>
             )}
 

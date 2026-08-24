@@ -17,6 +17,8 @@ export type FleetFormInitial = {
   fullDayRate: string;
   weekendRate: string;
   depositAmount: string;
+  /** Identical physical units in the fleet — the cap on jet skis per booking. */
+  unitCount: string;
   featured: boolean;
   active: boolean;
 };
@@ -33,6 +35,7 @@ const EMPTY: FleetFormInitial = {
   fullDayRate: "",
   weekendRate: "",
   depositAmount: "",
+  unitCount: "1",
   featured: false,
   active: true,
 };
@@ -81,8 +84,9 @@ export default function FleetForm({
     }
     const horsepower = toPosInt(form.horsepower);
     const seats = toPosInt(form.seats);
-    if (horsepower === null || seats === null) {
-      setError("Horsepower and seats must be positive whole numbers.");
+    const unitCount = toPosInt(form.unitCount);
+    if (horsepower === null || seats === null || unitCount === null) {
+      setError("Horsepower, seats and units in fleet must be positive whole numbers.");
       return;
     }
     const hourlyRate = toCents(form.hourlyRate);
@@ -113,6 +117,7 @@ export default function FleetForm({
           imageUrl,
           horsepower,
           seats,
+          unitCount,
           hourlyRate,
           halfDayRate,
           fullDayRate,
@@ -199,6 +204,22 @@ export default function FleetForm({
               value={form.seats}
               onChange={(e) => set("seats", e.target.value)}
             />
+          </div>
+          <div className="sm:col-span-2">
+            <Label htmlFor="unitCount">Units in fleet</Label>
+            <Input
+              id="unitCount"
+              type="number"
+              min="1"
+              step="1"
+              required
+              value={form.unitCount}
+              onChange={(e) => set("unitCount", e.target.value)}
+            />
+            <p className="mt-1 text-xs text-ink-muted">
+              How many identical jet skis you own. Customers can reserve up to this many on one
+              booking, and a time slot stays bookable until all of them are taken.
+            </p>
           </div>
         </div>
 

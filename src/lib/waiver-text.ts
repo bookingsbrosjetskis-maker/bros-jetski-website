@@ -5,7 +5,7 @@
  * NOTE: This is the client's official rental agreement (DRAFT). It still needs
  * review by an Ontario lawyer before commercial use (see SCOPE.md). Keep the
  * draft flag until that review is complete. */
-export const WAIVER_VERSION = "2026-07-24";
+export const WAIVER_VERSION = "2026-08-24";
 
 export const WAIVER_TEXT = `RENTAL AGREEMENT, RELEASE OF LIABILITY, WAIVER OF CLAIMS, AND ASSUMPTION OF RISK
 Bros Jetskis Rental, Version ${WAIVER_VERSION}
@@ -75,13 +75,21 @@ treatment if required.
 method on file for amounts legally owed under this Agreement, subject to
 applicable law and payment processor rules.
 
-11. WEATHER AND CANCELLATION. I understand rentals may be cancelled or cut short
-by staff for safety reasons, in which case I may reschedule at no additional cost
-or receive a full refund. Cancellations I make at least 12 hours before the
-rental receive a full refund. This waiver remains in effect for any rescheduled
-rental.
+11. BOOKING DEPOSIT AND BALANCE. I understand that the amount charged online is a
+booking deposit of $50 per jet ski reserved, that the deposit is applied against
+the rental price and is not an additional fee, and that the remaining balance is
+due at the rental location before riding, payable by card or cash. If the balance
+is not paid, the rental will not proceed and the deposit is forfeited as a late
+cancellation.
 
-12. ACKNOWLEDGEMENT. I have read this agreement in full, understand it, understand
-that no deposit does not mean no liability for damages, and sign it voluntarily.
-Typing my full legal name below constitutes my electronic signature, with the same
-force as a handwritten signature.`;
+12. WEATHER AND CANCELLATION. I understand rentals may be cancelled or cut short
+by staff for safety reasons, in which case I may reschedule at no additional cost
+or receive a full refund of my deposit, which is not forfeited. If I cancel at
+least 12 hours before the rental start time, my deposit is refunded in full. If I
+cancel less than 12 hours before the start time, or do not arrive for my rental,
+my deposit is forfeited. This waiver remains in effect for any rescheduled rental.
+
+13. ACKNOWLEDGEMENT. I have read this agreement in full, understand it, understand
+that no security deposit does not mean no liability for damages, and sign it
+voluntarily. Typing my full legal name below constitutes my electronic signature,
+with the same force as a handwritten signature.`;

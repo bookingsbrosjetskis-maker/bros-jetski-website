@@ -105,14 +105,16 @@ describe("dock-local time helpers", () => {
 
 describe("confirmBooking after lazy expiry", () => {
   it("rejects when the slot was re-booked after the hold expired", async () => {
+    // The re-booking has to take the whole fleet — availability is capacity
+    // based, so one replacement booking would still leave room to confirm.
     const slot = { dateKey: dateKeyFor(10), startHour: 10, hours: 2 };
     const stale = await createPendingBooking(input(slot));
     await prisma.booking.update({
       where: { id: stale.id },
       data: { status: "EXPIRED", expiresAt: new Date(Date.now() - 60_000) },
     });
-    // Someone else takes the freed slot.
-    await createPendingBooking(input(slot));
+    // Someone else takes the freed slot, every unit of it.
+    await createPendingBooking(input({ ...slot, quantity: jetSki.unitCount }));
 
     await expect(confirmBooking(stale.id)).rejects.toBeInstanceOf(BookingConflictError);
   });

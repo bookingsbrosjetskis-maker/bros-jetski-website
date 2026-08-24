@@ -11,6 +11,7 @@ export type SkiInput = {
   fullDayRate: number;
   weekendRate: number;
   depositAmount: number;
+  unitCount: number;
   featured: boolean;
   active: boolean;
 };
@@ -39,6 +40,7 @@ export function parseSkiInput(
   const fullDayRate = posInt("fullDayRate");
   const weekendRate = posInt("weekendRate");
   const depositAmount = posInt("depositAmount");
+  const unitCount = posInt("unitCount");
   if (
     horsepower === null ||
     seats === null ||
@@ -46,11 +48,12 @@ export function parseSkiInput(
     halfDayRate === null ||
     fullDayRate === null ||
     weekendRate === null ||
-    depositAmount === null
+    depositAmount === null ||
+    unitCount === null
   ) {
     return {
       error:
-        "Horsepower, seats and all prices must be positive integers (prices in cents).",
+        "Horsepower, seats, units in fleet and all prices must be positive integers (prices in cents).",
     };
   }
 
@@ -67,6 +70,7 @@ export function parseSkiInput(
       fullDayRate,
       weekendRate,
       depositAmount,
+      unitCount,
       featured: body.featured === true,
       active: body.active !== false,
     },

@@ -68,7 +68,7 @@ export default async function AdminDashboard() {
     }),
     prisma.booking.findMany({
       where: { status: { in: REVENUE_STATUSES }, startTime: { gte: monthStart, lt: monthEnd } },
-      select: { totalPrice: true },
+      select: { totalPrice: true, balanceDue: true },
     }),
     prisma.booking.findMany({
       where: { status: { in: [...SLOT_HOLDING_STATUSES] }, startTime: { gte: chartStart, lt: todayEnd } },
@@ -85,6 +85,9 @@ export default async function AdminDashboard() {
   ]);
 
   const monthRevenue = monthRevenueRows.reduce((sum, r) => sum + r.totalPrice, 0);
+  // Only the deposit is taken online, so the rest is still to be collected at
+  // the dock. Worth its own tile — it is real money the owner has to chase.
+  const monthToCollect = monthRevenueRows.reduce((sum, r) => sum + r.balanceDue, 0);
 
   // Bookings-per-day, last 30 days.
   const dayCounts = new Map<string, number>();
@@ -138,10 +141,16 @@ export default async function AdminDashboard() {
         <p className="mt-1 text-sm text-ink-muted">{formatDate(todayKey)}</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
         <StatCard
-          label="Revenue (month)"
+          label="Booked value (month)"
           value={monthRevenue}
+          href="/admin/bookings?status=CONFIRMED"
+          currency
+        />
+        <StatCard
+          label="To collect at dock"
+          value={monthToCollect}
           href="/admin/bookings?status=CONFIRMED"
           currency
         />
@@ -156,9 +165,9 @@ export default async function AdminDashboard() {
           <BarChart title="Bookings per day, last 30 days" data={dayData} />
         </Card>
         <Card className="p-6">
-          <h2 className="font-display mb-4 text-sm font-bold text-ink">Revenue per week · last 8 weeks</h2>
+          <h2 className="font-display mb-4 text-sm font-bold text-ink">Booked value per week · last 8 weeks</h2>
           <BarChart
-            title="Revenue per week, last 8 weeks"
+            title="Booked rental value per week, last 8 weeks"
             data={weekData}
             formatValue={(v) => formatCAD(v)}
           />

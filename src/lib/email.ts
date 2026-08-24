@@ -1,6 +1,12 @@
 import type { Booking, JetSki } from "@prisma/client";
 import { formatCAD, toDateKey, formatDate, formatBookingRange } from "@/lib/format";
-import { SITE_NAME, SITE_PHONE, SITE_ADDRESS, RidingOption } from "@/lib/constants";
+import {
+  SITE_NAME,
+  SITE_PHONE,
+  SITE_ADDRESS,
+  RidingOption,
+  CANCEL_CUTOFF_HOURS,
+} from "@/lib/constants";
 
 type EmailMessage = { to: string; subject: string; text: string };
 
@@ -49,24 +55,45 @@ async function send(message: EmailMessage): Promise<void> {
 
 export async function sendBookingConfirmation(booking: Booking, jetSki: JetSki): Promise<void> {
   const freeRange = booking.ridingOption === RidingOption.FREE_RANGE;
+  const skis = `${booking.quantity} ${booking.quantity === 1 ? "jet ski" : "jet skis"}`;
   const lines = [
     `Hi ${booking.customerName},`,
     "",
     `Your jet ski rental is confirmed! Here are the details:`,
     "",
     `  Jet ski:   ${jetSki.name} (${jetSki.horsepower} HP, seats ${jetSki.seats})`,
+    `  Quantity:  ${skis}`,
     `  Date:      ${formatDate(toDateKey(booking.startTime))}`,
     `  Time:      ${formatBookingRange(booking.startTime, booking.endTime)}`,
     `  Riding:    ${freeRange ? "Free range" : "Designated riding area"}`,
-    `  Paid:      ${formatCAD(booking.totalPrice)} CAD (paid in full)`,
+    `  Rental:    ${formatCAD(booking.totalPrice)} CAD total`,
+    `  Deposit:   ${formatCAD(booking.depositPaid)} CAD paid online`,
+    `  Balance:   ${formatCAD(booking.balanceDue)} CAD due when you arrive`,
     `  Reference: ${booking.id}`,
     "",
   ];
+  if (booking.balanceDue > 0) {
+    lines.push(
+      `Your ${formatCAD(booking.depositPaid)} deposit is not an extra fee — it comes off your`,
+      `rental total. The remaining ${formatCAD(booking.balanceDue)} is due at the dock before you`,
+      "ride. We take card (tap, chip, or phone) and cash.",
+      ""
+    );
+  }
+  lines.push(
+    "Deposit policy:",
+    `  - Cancel at least ${CANCEL_CUTOFF_HOURS} hours before your start time and your deposit is`,
+    "    refunded in full.",
+    "  - Late cancellations and no-shows forfeit the deposit.",
+    "  - If we cancel for weather or anything on our end, you keep your deposit",
+    "    or receive a full refund.",
+    ""
+  );
   if (freeRange) {
     lines.push(
-      `Free range riding requires a refundable ${formatCAD(booking.depositAmount)} CAD security`,
-      "deposit per jet ski. We will collect it in person before you launch and",
-      "return it in full once the jet ski is back safely.",
+      `Free range riding also requires a refundable ${formatCAD(booking.securityDeposit)} CAD security`,
+      `deposit for your ${skis}. We will collect it in person before you launch and`,
+      "return it in full once the jet skis are back safely.",
       ""
     );
   }
@@ -118,18 +145,20 @@ export async function sendAdminBookingNotification(booking: Booking, jetSki: Jet
   const freeRange = booking.ridingOption === RidingOption.FREE_RANGE;
   await send({
     to: adminEmail(),
-    subject: `New booking: ${booking.customerName}, ${formatDate(toDateKey(booking.startTime))}`,
+    subject: `New booking: ${booking.customerName}, ${booking.quantity}x, ${formatDate(toDateKey(booking.startTime))}`,
     text: [
       "A new booking has been paid and confirmed.",
       "",
       `  Customer:  ${booking.customerName}`,
       `  Email:     ${booking.email}`,
       `  Phone:     ${booking.phone}`,
-      `  Jet ski:   ${jetSki.name}`,
+      `  Jet ski:   ${jetSki.name} x ${booking.quantity}`,
       `  Date:      ${formatDate(toDateKey(booking.startTime))}`,
       `  Time:      ${formatBookingRange(booking.startTime, booking.endTime)}`,
-      `  Riding:    ${freeRange ? "Free range (collect $1,000 deposit in person)" : "Designated riding area"}`,
-      `  Paid:      ${formatCAD(booking.totalPrice)} CAD`,
+      `  Riding:    ${freeRange ? `Free range (collect ${formatCAD(booking.securityDeposit)} security deposit in person)` : "Designated riding area"}`,
+      `  Rental:    ${formatCAD(booking.totalPrice)} CAD total`,
+      `  Deposit:   ${formatCAD(booking.depositPaid)} CAD paid online`,
+      `  COLLECT:   ${formatCAD(booking.balanceDue)} CAD balance at the dock (card or cash)`,
       `  Reference: ${booking.id}`,
     ].join("\n"),
   });
@@ -162,14 +191,14 @@ export async function sendBookingCancellation(booking: Booking, jetSki: JetSki):
       "",
       "Your jet ski rental has been cancelled as requested:",
       "",
-      `  Jet ski:   ${jetSki.name}`,
+      `  Jet ski:   ${jetSki.name} x ${booking.quantity}`,
       `  Date:      ${formatDate(toDateKey(booking.startTime))}`,
       `  Time:      ${formatBookingRange(booking.startTime, booking.endTime)}`,
       `  Reference: ${booking.id}`,
       "",
-      `Your ${formatCAD(booking.totalPrice)} CAD payment will be refunded to your`,
-      "original payment method within 5 to 10 business days (cancellations made at",
-      "least 12 hours before the rental receive a full refund).",
+      `Your ${formatCAD(booking.depositPaid)} CAD deposit will be refunded to your original`,
+      "payment method within 5 to 10 business days. Nothing else was charged online —",
+      "the rental balance is only ever collected at the dock.",
       "",
       "We would love to get you on the water another day. Book any time at our website.",
       "",

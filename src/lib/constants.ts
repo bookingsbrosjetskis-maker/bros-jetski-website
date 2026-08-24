@@ -55,9 +55,30 @@ export const DURATION_OPTIONS: { type: DurationType; hours: number; label: strin
 /** Minutes an unpaid PENDING booking holds its slot before expiring. */
 export const PENDING_EXPIRY_MINUTES = 15;
 
+/** Booking deposit charged online, per jet ski, in cents. It is not an extra
+ * fee: it comes off the rental total, and the balance is paid at the dock. */
+export const BOOKING_DEPOSIT_CENTS = 5000; // $50.00 CAD per jet ski
+
+/** Hard upper bound on jet skis per booking, independent of fleet size. Real
+ * availability is capped by the jet ski's unitCount; this only stops absurd
+ * request payloads. */
+export const MAX_BOOKING_QUANTITY = 10;
+
+/** Deposit charged online for `quantity` skis. Clamped to the rental total so
+ * we can never take more online than the rental is worth. */
+export function bookingDepositFor(totalPrice: number, quantity: number): number {
+  return Math.min(BOOKING_DEPOSIT_CENTS * quantity, totalPrice);
+}
+
 /** Customers may self-cancel up to this many hours before their start time
- * (matches the posted 12-hour cancellation policy). */
+ * (matches the posted 12-hour cancellation policy). Cancelling at or before
+ * this cutoff refunds the booking deposit; inside it — or not showing up —
+ * forfeits the deposit. */
 export const CANCEL_CUTOFF_HOURS = 12;
+
+/** One-sentence deposit policy, reused across the site so the wording never
+ * drifts between the booking flow, emails, and the legal pages. */
+export const DEPOSIT_POLICY_SHORT = `Cancel at least ${CANCEL_CUTOFF_HOURS} hours before your start time and your deposit is refunded in full. Late cancellations and no-shows forfeit the deposit. If we cancel — weather or anything on our end — you keep your deposit or get a full refund.`;
 
 /** Booking statuses that occupy a time slot (EXPIRED/CANCELLED never do;
  * PENDING only while expiresAt is in the future — callers add that check). */

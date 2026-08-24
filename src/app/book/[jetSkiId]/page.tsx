@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { prisma } from "@/lib/db";
 import { WAIVER_TEXT } from "@/lib/waiver-text";
 import { formatCAD } from "@/lib/format";
-import { SITE_NAME } from "@/lib/constants";
+import { BOOKING_DEPOSIT_CENTS, CANCEL_CUTOFF_HOURS, SITE_NAME } from "@/lib/constants";
 import { Badge, Container } from "@/components/ui";
 import BookingWizard from "@/components/booking/BookingWizard";
 
@@ -44,8 +44,9 @@ export default async function BookPage({
           {jetSki.name}
         </h1>
         <p className="mt-2 text-sm text-ink-muted sm:text-base">
-          Pick a date and time, sign the waiver, and pay online. Your rental is
-          paid in full when you book.
+          Pick a date and time, choose how many jet skis you need, sign the waiver,
+          and pay a {formatCAD(BOOKING_DEPOSIT_CENTS)} deposit per jet ski to lock
+          it in. The balance is due when you arrive.
         </p>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
@@ -60,6 +61,7 @@ export default async function BookPage({
                 fullDayRate: jetSki.fullDayRate,
                 weekendRate: jetSki.weekendRate,
                 depositAmount: jetSki.depositAmount,
+                unitCount: jetSki.unitCount,
               }}
               waiverText={WAIVER_TEXT}
               cancelled={cancelled}
@@ -104,9 +106,28 @@ export default async function BookPage({
                   ))}
                 </dl>
                 <p className="text-xs leading-relaxed text-outline">
-                  Pay the full rental online. Free range riding adds a $1,000
-                  refundable security deposit collected in person. Life jackets
-                  and safety kit are included.
+                  Rates are per jet ski. Life jackets and safety kit are included.
+                </p>
+                <div className="rounded-xl border border-cyan/20 bg-surface-high p-4 text-xs leading-relaxed text-ink-muted">
+                  <p className="text-sm font-semibold text-ink">Deposit &amp; balance</p>
+                  <ul className="mt-2 space-y-1.5">
+                    <li>
+                      Pay {formatCAD(BOOKING_DEPOSIT_CENTS)} per jet ski online to book. It comes
+                      off your rental total — it is not an extra fee.
+                    </li>
+                    <li>Pay the balance at the dock before you ride, by card or cash.</li>
+                    <li>
+                      Cancel {CANCEL_CUTOFF_HOURS}+ hours ahead for a full deposit refund.{" "}
+                      <span className="font-semibold text-amber-300">
+                        No-shows and late cancellations forfeit the deposit.
+                      </span>
+                    </li>
+                    <li>If we cancel for weather or anything on our end, you keep your deposit.</li>
+                  </ul>
+                </div>
+                <p className="text-xs leading-relaxed text-outline">
+                  Free range riding adds a $1,000 refundable security deposit per jet ski,
+                  collected in person.
                 </p>
               </div>
             </div>

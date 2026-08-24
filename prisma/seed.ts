@@ -17,7 +17,8 @@ const jetSkis = [
     halfDayRate: 48000, // $480 / 4 hours
     fullDayRate: 96000, // $960 / 8 hours
     weekendRate: 160000, // $1,600 / 2 days
-    depositAmount: 100000, // $1,000 refundable free-range security deposit (in person)
+    depositAmount: 100000, // $1,000 refundable free-range security deposit, per ski (in person)
+    unitCount: 3, // identical units; one booking may reserve up to this many
     featured: true,
   },
 ];
@@ -66,7 +67,7 @@ const safetyFaq = {
       items: [
         {
           q: "What is your cancellation policy?",
-          a: "Please cancel at least 12 hours in advance for a full refund.",
+          a: "Cancel at least 12 hours before your start time and your $50 per jet ski booking deposit is refunded in full. Cancellations inside 12 hours, and no-shows, forfeit the deposit. Since only the deposit is charged online, that is the most you can lose.",
         },
         {
           q: "What happens in bad weather?",
@@ -74,7 +75,41 @@ const safetyFaq = {
         },
         {
           q: "What if the weather is fine but I choose not to come?",
-          a: "If it is safe to ride but you choose not to attend, the booking is treated as a customer cancellation and the standard 12-hour cancellation policy applies. Weather decisions are made by Bros Jetskis Rental based on local conditions at the riding location.",
+          a: "If it is safe to ride but you choose not to attend, the booking is treated as a customer cancellation and the standard 12-hour cancellation policy applies, so the deposit is forfeited. Weather decisions are made by Bros Jetskis Rental based on local conditions at the riding location.",
+        },
+      ],
+    },
+    {
+      heading: "Paying for your rental",
+      items: [
+        {
+          q: "How much do I pay online?",
+          a: "A $50 booking deposit per jet ski. If you book two jet skis, that is $100. The deposit is not an extra fee: it comes off your rental total.",
+        },
+        {
+          q: "When do I pay the rest?",
+          a: "When you arrive, before you ride. For example, a $120 one-hour rental is $50 online and $70 at the dock. We accept card (tap, chip, or phone, using Stripe Tap to Pay) and cash.",
+        },
+        {
+          q: "What happens to my deposit if I do not show up?",
+          a: "No-shows and cancellations made less than 12 hours before the start time forfeit the deposit. If we cancel, for weather or anything else on our end, your deposit is never forfeited: you reschedule at no cost or get a full refund.",
+        },
+      ],
+    },
+    {
+      heading: "Booking for a group",
+      items: [
+        {
+          q: "Can I book more than one jet ski at once?",
+          a: "Yes. Choose how many jet skis you want on the booking page and they are all reserved for the same date and time slot, on one reservation and one confirmation. No need to book separately for each rider.",
+        },
+        {
+          q: "How is a group booking priced?",
+          a: "Rates are per jet ski, so two jet skis for an hour at $120 each is $240. You pay a $50 deposit per jet ski online and the balance at the dock.",
+        },
+        {
+          q: "Does everyone need to sign a waiver?",
+          a: "Every operator signs a waiver and completes safety requirements. The person booking signs online; anyone else riding signs at the dock before launch.",
         },
       ],
     },

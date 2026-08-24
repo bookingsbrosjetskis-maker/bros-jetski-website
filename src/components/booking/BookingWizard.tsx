@@ -9,6 +9,9 @@ import {
   OPEN_HOUR,
   CLOSE_HOUR,
   PENDING_EXPIRY_MINUTES,
+  CANCEL_CUTOFF_HOURS,
+  BOOKING_DEPOSIT_CENTS,
+  bookingDepositFor,
 } from "@/lib/constants";
 import { formatBookingRange, formatCAD, formatDate, formatHour, dockNowMs } from "@/lib/format";
 import { Button, Card, Input, Label } from "@/components/ui";
@@ -23,13 +26,40 @@ export type WizardJetSki = {
   fullDayRate: number;
   weekendRate: number;
   depositAmount: number;
+  /** Identical units in the fleet — the ceiling on jet skis per booking. */
+  unitCount: number;
 };
 
-/** The $1,000 refundable free-range security deposit, collected in person. */
-const FREE_RANGE_DEPOSIT_LABEL = "$1,000 refundable security deposit, collected in person.";
+/** The $1,000 refundable free-range security deposit, per ski, collected in person. */
+const FREE_RANGE_DEPOSIT_LABEL =
+  "$1,000 refundable security deposit per jet ski, collected in person.";
 
 type DurationOption = (typeof DURATION_OPTIONS)[number];
 type Hold = { bookingId: string; expiresAt: string };
+
+/** Jet skis committed across [hour, hour + 1) on a day. */
+function usedAtHour(day: DaySummary, hour: number): number {
+  return day.busy
+    .filter((b) => b.startHour < hour + 1 && b.endHour > hour)
+    .reduce((sum, b) => sum + b.quantity, 0);
+}
+
+/** Jet skis still free for every hour of [startHour, startHour + hours) — the
+ * client-side mirror of the server's capacity check (server is authoritative). */
+function remainingForWindow(
+  day: DaySummary | null,
+  unitCount: number,
+  startHour: number,
+  hours: number
+): number {
+  if (!day || day.blocked) return 0;
+  let peak = 0;
+  for (let h = startHour; h < startHour + hours; h++) {
+    const used = usedAtHour(day, h);
+    if (used > peak) peak = used;
+  }
+  return unitCount - peak;
+}
 
 const STEPS = ["Date", "Time", "Details", "Waiver", "Pay"] as const;
 
@@ -52,7 +82,7 @@ const cellVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.3, ease: EASE } },
 };
 
-/** Display-only price mirror of the server's computePrice (server recomputes). */
+/** Display-only per-ski price mirror of the server's computePrice (server recomputes). */
 function priceFor(jetSki: WizardJetSki, opt: DurationOption): number {
   switch (opt.type) {
     case DurationType.HALF_DAY:
@@ -193,6 +223,7 @@ export default function BookingWizard({
   const [step, setStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [duration, setDuration] = useState<DurationOption | null>(null);
+  const [quantity, setQuantity] = useState(1);
   const [startHour, setStartHour] = useState<number | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -369,54 +400,71 @@ export default function BookingWizard({
   }
 
   // --- derived ------------------------------------------------------------
-  const totalPrice = duration ? priceFor(jetSki, duration) : 0;
+  const perSkiPrice = duration ? priceFor(jetSki, duration) : 0;
+  const totalPrice = perSkiPrice * quantity;
+  const depositDue = duration ? bookingDepositFor(totalPrice, quantity) : 0;
+  const balanceDue = totalPrice - depositDue;
   const isWeekend = duration?.type === DurationType.WEEKEND;
   const isFreeRange = ridingOption === RidingOption.FREE_RANGE;
+  const skiWord = quantity === 1 ? "jet ski" : "jet skis";
 
   // Every candidate start hour is rendered; busy/past ones come back DISABLED so
   // the grid greys them out instead of hiding them.
+  type StartCandidate = {
+    hour: number;
+    disabled: boolean;
+    reason: "booked" | "past" | "short" | null;
+    /** Jet skis still free across this window (for the "only N left" hint). */
+    remaining: number;
+  };
+
   const startCandidates = useMemo(() => {
-    if (!selectedDate || !duration || isWeekend || !day) {
-      return [] as { hour: number; disabled: boolean; reason: "booked" | "past" | null }[];
-    }
-    const list: { hour: number; disabled: boolean; reason: "booked" | "past" | null }[] = [];
+    if (!selectedDate || !duration || isWeekend || !day) return [] as StartCandidate[];
+    const list: StartCandidate[] = [];
     for (let h = OPEN_HOUR; h + duration.hours <= CLOSE_HOUR; h++) {
-      const overlaps = day.busy.some((b) => h < b.endHour && h + duration.hours > b.startHour);
+      const remaining = remainingForWindow(day, jetSki.unitCount, h, duration.hours);
       // Compare against dock-local now (slot times are UTC-encoded dock time).
       const past = slotStartMs(selectedDate, h) <= dockNowMs();
-      const booked = day.blocked || overlaps;
-      list.push({
-        hour: h,
-        disabled: booked || past,
-        reason: booked ? "booked" : past ? "past" : null,
-      });
+      // "booked" = nothing left at all; "short" = some left, but fewer than asked.
+      const reason = remaining <= 0 ? "booked" : past ? "past" : remaining < quantity ? "short" : null;
+      list.push({ hour: h, disabled: reason !== null, reason, remaining });
     }
     return list;
-  }, [selectedDate, duration, day, isWeekend]);
+  }, [selectedDate, duration, day, isWeekend, quantity, jetSki.unitCount]);
 
   const noStartsAvailable =
     startCandidates.length === 0 || startCandidates.every((c) => c.disabled);
+
 
   // Weekend availability: day1 free across 09:00-21:00, day2 free across the
   // same window, and the start is still in the future.
   const weekendInfo = useMemo(() => {
     if (!isWeekend || !selectedDate) return null;
     const day2Key = addDayKey(selectedDate, 1);
-    const overlapsWindow = (s: DaySummary | null) =>
-      !s ||
-      s.blocked ||
-      s.busy.some((b) => b.startHour < WEEKEND_END_HOUR && b.endHour > WEEKEND_START_HOUR);
-    const day1Ok = !overlapsWindow(day);
-    const day2Ok = !overlapsWindow(weekendDay2);
+    const freeOn = (s: DaySummary | null) =>
+      s
+        ? remainingForWindow(
+            s,
+            jetSki.unitCount,
+            WEEKEND_START_HOUR,
+            WEEKEND_END_HOUR - WEEKEND_START_HOUR
+          )
+        : 0;
+    const day1Free = freeOn(day);
+    const day2Free = freeOn(weekendDay2);
+    const remaining = Math.min(day1Free, day2Free);
+    const day1Ok = day1Free >= quantity;
+    const day2Ok = day2Free >= quantity;
     const future = slotStartMs(selectedDate, WEEKEND_START_HOUR) > dockNowMs();
     return {
       day2Key,
       day1Ok,
       day2Ok,
+      remaining,
       future,
       bookable: day1Ok && day2Ok && future,
     };
-  }, [isWeekend, selectedDate, day, weekendDay2]);
+  }, [isWeekend, selectedDate, day, weekendDay2, quantity, jetSki.unitCount]);
 
   // Real start/end datetimes for weekend-safe display (getUTC* on both ends).
   const bookingRange = useMemo(() => {
@@ -434,7 +482,7 @@ export default function BookingWizard({
     /^\S+@\S+\.\S+$/.test(email.trim()) &&
     phone.replace(/\D/g, "").length >= 10;
 
-  const allAcked = acks.legal && acks.id && acks.liability && acks.terms;
+  const allAcked = acks.legal && acks.id && acks.liability && acks.deposit && acks.terms;
   const waiverValid =
     allAcked &&
     signedName.trim().length > 0 &&
@@ -444,6 +492,17 @@ export default function BookingWizard({
     emergencyPhone.replace(/\D/g, "").length >= 10;
 
   // --- actions ------------------------------------------------------------
+  /** Changing the group size can outgrow the start time already picked, so
+   * re-check it here rather than reacting to it in an effect. */
+  function chooseQuantity(q: number) {
+    setQuantity(q);
+    if (startHour !== null && !isWeekend && duration) {
+      if (remainingForWindow(day, jetSki.unitCount, startHour, duration.hours) < q) {
+        setStartHour(null);
+      }
+    }
+  }
+
   function selectDate(dateKey: string) {
     setSelectedDate(dateKey);
     setStartHour(null);
@@ -479,6 +538,7 @@ export default function BookingWizard({
             startHour,
             durationType: duration.type,
             hours: duration.hours,
+            quantity,
             ridingOption,
             customerName: name,
             email,
@@ -497,7 +557,12 @@ export default function BookingWizard({
           return;
         }
         if (!res.ok) throw new Error(await safeError(res, "Could not create your booking."));
-        const data = (await res.json()) as Hold & { totalPrice: number; depositAmount: number };
+        const data = (await res.json()) as Hold & {
+          quantity: number;
+          totalPrice: number;
+          depositPaid: number;
+          balanceDue: number;
+        };
         bookingId = data.bookingId;
         const h: Hold = { bookingId: data.bookingId, expiresAt: data.expiresAt };
         setHold(h);
@@ -684,6 +749,49 @@ export default function BookingWizard({
                 </div>
               )}
 
+              {/* Group bookings: one reservation can hold several jet skis for
+                  the same slot, capped by what the fleet has free. */}
+              {jetSki.unitCount > 1 && (
+                <div className="mb-6">
+                  <p className="mb-2 font-label text-xs font-bold uppercase tracking-wide text-outline">
+                    How many jet skis?
+                  </p>
+                  <div
+                    className="flex flex-wrap gap-2"
+                    role="radiogroup"
+                    aria-label="Number of jet skis"
+                  >
+                    {Array.from({ length: jetSki.unitCount }, (_, i) => i + 1).map((q) => {
+                      const selected = quantity === q;
+                      return (
+                        <motion.button
+                          key={q}
+                          whileHover={{ y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                          type="button"
+                          onClick={() => chooseQuantity(q)}
+                          role="radio"
+                          aria-checked={selected}
+                          aria-label={`${q} ${q === 1 ? "jet ski" : "jet skis"}`}
+                          className={`h-12 w-12 rounded-xl border text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-surface ${
+                            selected
+                              ? "border-cyan bg-cyan text-surface-lowest glow-cyan"
+                              : "border-outline text-ink hover:border-cyan hover:text-cyan-soft"
+                          }`}
+                        >
+                          {q}
+                        </motion.button>
+                      );
+                    })}
+                  </div>
+                  <p className="mt-2 text-xs text-outline">
+                    Riding with friends? Reserve up to {jetSki.unitCount} jet skis on one booking —
+                    same date, same time slot. Rates and the {formatCAD(BOOKING_DEPOSIT_CENTS)}{" "}
+                    deposit are per jet ski.
+                  </p>
+                </div>
+              )}
+
               <p className="mb-2 font-label text-xs font-bold uppercase tracking-wide text-outline">How long do you want to ride?</p>
 
               {/* Speedometer visual — reflects the selected duration index (purely decorative) */}
@@ -744,8 +852,13 @@ export default function BookingWizard({
                           selected ? "gradient-text" : "text-cyan"
                         }`}
                       >
-                        {formatCAD(priceFor(jetSki, opt))}
+                        {formatCAD(priceFor(jetSki, opt) * quantity)}
                       </span>
+                      {quantity > 1 && (
+                        <span className="mt-0.5 block text-[11px] text-outline">
+                          {formatCAD(priceFor(jetSki, opt))} x {quantity}
+                        </span>
+                      )}
                     </motion.button>
                   );
                 })}
@@ -769,11 +882,15 @@ export default function BookingWizard({
                     <p className="rounded-xl border border-amber-400/30 bg-amber-500/10 p-4 text-sm text-amber-300">
                       {!weekendInfo?.future
                         ? "That start date has already passed. Please pick a future date."
-                        : !weekendInfo?.day1Ok
-                          ? `${formatDate(selectedDate)} is not fully available for a weekend rental. Please pick another start date.`
-                          : `Weekend rentals also need the following day. ${formatDate(
-                              weekendInfo.day2Key
-                            )} is not fully available. Please pick another start date.`}
+                        : `${
+                            weekendInfo.remaining > 0
+                              ? `Only ${weekendInfo.remaining} jet ski${
+                                  weekendInfo.remaining === 1 ? " is" : "s are"
+                                } free across that whole weekend`
+                              : "No jet skis are free across that whole weekend"
+                          }. Weekend rentals need both ${formatDate(selectedDate)} and ${formatDate(
+                            weekendInfo.day2Key
+                          )}. Try fewer jet skis or another start date.`}
                     </p>
                   )}
                 </div>
@@ -787,8 +904,8 @@ export default function BookingWizard({
                     <p className="py-4 text-sm text-outline">Checking availability…</p>
                   ) : noStartsAvailable ? (
                     <p className="rounded-xl border border-outline-variant bg-surface-low p-4 text-sm text-ink-muted">
-                      No {duration.label.toLowerCase()} start times left on this day. Try a shorter
-                      duration or another date.
+                      No {duration.label.toLowerCase()} start times on this day fit {quantity}{" "}
+                      {skiWord}. Try fewer jet skis, a shorter duration, or another date.
                     </p>
                   ) : (
                     <motion.div
@@ -807,11 +924,21 @@ export default function BookingWizard({
                             variants={cellVariants}
                             className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/40 bg-surface-low py-2.5 text-outline/60"
                             aria-disabled="true"
-                            aria-label={`${formatHour(c.hour)} ${c.reason === "past" ? "(past)" : "(booked)"}`}
+                            aria-label={`${formatHour(c.hour)} ${
+                              c.reason === "past"
+                                ? "(past)"
+                                : c.reason === "short"
+                                  ? `(only ${c.remaining} left)`
+                                  : "(booked)"
+                            }`}
                           >
                             <span className="text-sm font-semibold line-through">{formatHour(c.hour)}</span>
                             <span className="mt-0.5 font-label text-[9px] font-bold uppercase tracking-wide">
-                              {c.reason === "past" ? "Past" : "Booked"}
+                              {c.reason === "past"
+                                ? "Past"
+                                : c.reason === "short"
+                                  ? `${c.remaining} left`
+                                  : "Booked"}
                             </span>
                           </motion.div>
                         ) : (
@@ -840,10 +967,20 @@ export default function BookingWizard({
               )}
 
               {duration && (
-                <div className="mt-6 rounded-xl border border-cyan/20 bg-surface-high p-4 text-sm">
+                <div className="mt-6 space-y-2 rounded-xl border border-cyan/20 bg-surface-high p-4 text-sm">
                   <div className="flex justify-between text-ink-muted">
-                    <span>Total due today</span>
-                    <AnimatedPrice cents={totalPrice} className="gradient-text font-bold" />
+                    <span>
+                      Rental total{quantity > 1 ? ` (${quantity} ${skiWord})` : ""}
+                    </span>
+                    <span className="font-semibold text-ink">{formatCAD(totalPrice)}</span>
+                  </div>
+                  <div className="flex justify-between border-t border-outline-variant/50 pt-2 text-ink-muted">
+                    <span>Deposit due today</span>
+                    <AnimatedPrice cents={depositDue} className="gradient-text font-bold" />
+                  </div>
+                  <div className="flex justify-between text-ink-muted">
+                    <span>Balance at the dock</span>
+                    <span className="font-semibold text-ink">{formatCAD(balanceDue)}</span>
                   </div>
                 </div>
               )}
@@ -1012,7 +1149,7 @@ export default function BookingWizard({
                 className="space-y-2.5 rounded-xl border border-outline-variant bg-surface-low p-4 text-sm sm:p-5"
               >
                 {[
-                  ["Jet ski", jetSki.name],
+                  ["Jet ski", `${jetSki.name} × ${quantity}`],
                   ["Date", formatDate(selectedDate)],
                   ["Time", bookingRange ?? ""],
                   ["Duration", duration.label],
@@ -1022,33 +1159,73 @@ export default function BookingWizard({
                   ],
                   ["Rider", `${name.trim()} · ${email.trim()}`],
                   ["Waiver", `Signed by ${signedName.trim()}`],
+                  ["Rental total", formatCAD(totalPrice)],
                 ].map(([k, v]) => (
                   <motion.div key={k} variants={cellVariants} className="flex justify-between gap-4">
                     <dt className="text-outline">{k}</dt>
                     <dd className="text-right font-medium text-ink">{v}</dd>
                   </motion.div>
                 ))}
-                <motion.div variants={cellVariants} className="border-t border-outline-variant/50 pt-2.5">
+                <motion.div variants={cellVariants} className="space-y-2.5 border-t border-outline-variant/50 pt-2.5">
                   <div className="flex items-center justify-between gap-4">
-                    <dt className="text-outline">Total due today</dt>
+                    <dt className="text-outline">
+                      Deposit due today
+                      {quantity > 1 && (
+                        <span className="block text-xs text-outline/80">
+                          {formatCAD(BOOKING_DEPOSIT_CENTS)} × {quantity} {skiWord}
+                        </span>
+                      )}
+                    </dt>
                     <dd className="rounded-full bg-cyan px-2.5 py-0.5 text-xs font-bold text-surface-lowest glow-cyan">
-                      {formatCAD(totalPrice)}
+                      {formatCAD(depositDue)}
                     </dd>
                   </div>
+                  <div className="flex items-center justify-between gap-4">
+                    <dt className="text-outline">Balance at the dock</dt>
+                    <dd className="font-semibold text-ink">{formatCAD(balanceDue)}</dd>
+                  </div>
                   {isFreeRange && (
-                    <p className="mt-2 text-xs leading-relaxed text-ink-muted">
+                    <p className="text-xs leading-relaxed text-ink-muted">
                       Plus a {FREE_RANGE_DEPOSIT_LABEL}
                     </p>
                   )}
                 </motion.div>
               </motion.dl>
 
+              {/* The deposit terms the customer is agreeing to, stated plainly
+                  right where they pay. */}
+              <div className="mt-4 rounded-xl border border-outline-variant bg-surface-low p-4 text-xs leading-relaxed text-ink-muted">
+                <p className="text-sm font-semibold text-ink">How payment works</p>
+                <ul className="mt-2 space-y-1.5">
+                  <li>
+                    You pay a {formatCAD(BOOKING_DEPOSIT_CENTS)} deposit per jet ski today
+                    ({formatCAD(depositDue)}). It is not an extra fee — it comes off your rental
+                    total.
+                  </li>
+                  <li>
+                    The remaining {formatCAD(balanceDue)} is due when you arrive, before you ride.
+                    We take card (tap, chip, or phone) and cash.
+                  </li>
+                  <li>
+                    Cancel at least {CANCEL_CUTOFF_HOURS} hours before your start time and your
+                    deposit is refunded in full.{" "}
+                    <span className="font-semibold text-amber-300">
+                      Late cancellations and no-shows forfeit the deposit.
+                    </span>
+                  </li>
+                  <li>
+                    If we cancel — bad weather or anything on our end — you keep your deposit or get
+                    a full refund.
+                  </li>
+                </ul>
+              </div>
+
               {hold ? (
                 <HoldCountdown expiresAt={hold.expiresAt} />
               ) : (
                 <p className="mt-4 text-xs text-outline">
-                  Clicking pay holds your slot for {PENDING_EXPIRY_MINUTES} minutes while you complete
-                  payment securely.
+                  Clicking pay holds your {skiWord} for {PENDING_EXPIRY_MINUTES} minutes while you
+                  complete payment securely.
                 </p>
               )}
 
@@ -1061,7 +1238,7 @@ export default function BookingWizard({
               <div className="mt-6 flex justify-between gap-3">
                 {backBtn(4)}
                 <Button type="button" onClick={handlePay} disabled={submitting} className="min-w-44">
-                  {submitting ? "Processing…" : `Pay ${formatCAD(totalPrice)}`}
+                  {submitting ? "Processing…" : `Pay ${formatCAD(depositDue)} deposit`}
                 </Button>
               </div>
             </div>

@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { ButtonLink } from "@/components/ui";
 import type { JetSki } from "@prisma/client";
 import { formatCAD } from "@/lib/format";
+import { BOOKING_DEPOSIT_CENTS } from "@/lib/constants";
 
 /** Rate rows for the single Spark Trixx. No dashes in labels. */
 const priceRows = [
@@ -127,9 +128,13 @@ export default function FleetCard({
           ))}
         </dl>
 
-        {/* Riding options teaser */}
+        {/* Deposit + riding options teaser */}
         <p className="text-xs leading-relaxed text-outline">
-          Designated area (no deposit) or free range ($1,000 refundable deposit).
+          Rates per jet ski. Book with a {formatCAD(BOOKING_DEPOSIT_CENTS)} deposit per jet ski,
+          balance due at the dock.
+        </p>
+        <p className="text-xs leading-relaxed text-outline">
+          Designated area (no security deposit) or free range ($1,000 refundable security deposit).
         </p>
 
         <ButtonLink href={`/book/${jetSki.id}`} className="min-h-[48px] w-full">
