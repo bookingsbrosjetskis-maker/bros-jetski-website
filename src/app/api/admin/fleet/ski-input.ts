@@ -53,7 +53,7 @@ export function parseSkiInput(
   ) {
     return {
       error:
-        "Horsepower, seats, units in fleet and all prices must be positive integers (prices in cents).",
+        "Horsepower, seats, max jet skis per booking and all prices must be positive integers (prices in cents).",
     };
   }
 

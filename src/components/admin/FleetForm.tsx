@@ -17,7 +17,8 @@ export type FleetFormInitial = {
   fullDayRate: string;
   weekendRate: string;
   depositAmount: string;
-  /** Identical physical units in the fleet — the cap on jet skis per booking. */
+  /** Most jet skis a customer may request for one slot (a supply ceiling the
+   * owner sets, not a count of machines owned). */
   unitCount: string;
   featured: boolean;
   active: boolean;
@@ -86,7 +87,7 @@ export default function FleetForm({
     const seats = toPosInt(form.seats);
     const unitCount = toPosInt(form.unitCount);
     if (horsepower === null || seats === null || unitCount === null) {
-      setError("Horsepower, seats and units in fleet must be positive whole numbers.");
+      setError("Horsepower, seats and max jet skis per booking must be positive whole numbers.");
       return;
     }
     const hourlyRate = toCents(form.hourlyRate);
@@ -206,7 +207,7 @@ export default function FleetForm({
             />
           </div>
           <div className="sm:col-span-2">
-            <Label htmlFor="unitCount">Units in fleet</Label>
+            <Label htmlFor="unitCount">Max jet skis per booking</Label>
             <Input
               id="unitCount"
               type="number"
@@ -217,8 +218,9 @@ export default function FleetForm({
               onChange={(e) => set("unitCount", e.target.value)}
             />
             <p className="mt-1 text-xs text-ink-muted">
-              How many identical jet skis you own. Customers can reserve up to this many on one
-              booking, and a time slot stays bookable until all of them are taken.
+              The highest number a customer can request for one time slot. Set it to the most you
+              can realistically supply, not the number you own. A slot stays bookable until this
+              many jet skis are committed across it.
             </p>
           </div>
         </div>

@@ -26,7 +26,7 @@ export type WizardJetSki = {
   fullDayRate: number;
   weekendRate: number;
   depositAmount: number;
-  /** Identical units in the fleet — the ceiling on jet skis per booking. */
+  /** Most jet skis a customer may request for one slot. */
   unitCount: number;
 };
 

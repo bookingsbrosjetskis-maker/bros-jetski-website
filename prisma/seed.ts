@@ -18,7 +18,10 @@ const jetSkis = [
     fullDayRate: 96000, // $960 / 8 hours
     weekendRate: 160000, // $1,600 / 2 days
     depositAmount: 100000, // $1,000 refundable free-range security deposit, per ski (in person)
-    unitCount: 3, // identical units; one booking may reserve up to this many
+    // How many jet skis one booking may request for a slot. This is a supply
+    // ceiling, not a count of machines owned: customers say what they need and
+    // the business sources it. Editable in Admin > Fleet.
+    unitCount: 10,
     featured: true,
   },
 ];

@@ -26,10 +26,11 @@ model JetSki {
   fullDayRate   Int
   weekendRate   Int           @default(160000)
   depositAmount Int // refundable free-range security deposit, per ski, collected in person (never charged online)
-  // How many identical physical units of this jet ski the fleet owns. One
-  // booking may reserve up to this many for the same slot; availability is
-  // capacity-based, not one-booking-per-slot.
-  unitCount     Int           @default(1)
+  // How many jet skis one booking may request for a single slot, and how many
+  // may be committed across it. A supply ceiling the owner sets, NOT a count of
+  // machines owned -- customers request what they need and the business sources
+  // it. Availability is capacity-based, not one-booking-per-slot.
+  unitCount     Int           @default(10)
   featured      Boolean       @default(false)
   active        Boolean       @default(true)
   bookings      Booking[]

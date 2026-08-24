@@ -7,9 +7,9 @@
 --
 -- Running it twice is harmless: every statement is idempotent.
 
--- 1. Fleet size. Adjust the number if you buy or retire a jet ski (or just
---    edit it in Admin > Fleet > Units in fleet).
-UPDATE "JetSki" SET "unitCount" = 3 WHERE "unitCount" < 3;
+-- 1. How many jet skis one booking may request. A supply ceiling, not a count
+--    of machines owned -- raise or lower it any time in Admin > Fleet.
+UPDATE "JetSki" SET "unitCount" = 10 WHERE "unitCount" < 10;
 
 -- 2. Bookings taken before this release were charged the FULL rental price
 --    online, so their deposit is the whole amount and nothing is owed at the
