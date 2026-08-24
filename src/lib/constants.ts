@@ -59,11 +59,6 @@ export const PENDING_EXPIRY_MINUTES = 15;
  * fee: it comes off the rental total, and the balance is paid at the dock. */
 export const BOOKING_DEPOSIT_CENTS = 5000; // $50.00 CAD per jet ski
 
-/** Hard upper bound on jet skis per booking, independent of fleet size. Real
- * availability is capped by the jet ski's unitCount; this only stops absurd
- * request payloads. */
-export const MAX_BOOKING_QUANTITY = 10;
-
 /** Deposit charged online for `quantity` skis. Clamped to the rental total so
  * we can never take more online than the rental is worth. */
 export function bookingDepositFor(totalPrice: number, quantity: number): number {

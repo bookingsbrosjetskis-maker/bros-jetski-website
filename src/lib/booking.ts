@@ -8,7 +8,6 @@ import {
   OPEN_HOUR,
   CLOSE_HOUR,
   PENDING_EXPIRY_MINUTES,
-  MAX_BOOKING_QUANTITY,
   bookingDepositFor,
 } from "@/lib/constants";
 import { fromDateKey, dockNowMs } from "@/lib/format";
@@ -255,11 +254,12 @@ export async function createPendingBooking(input: CreateBookingInput): Promise<B
   const { jetSkiId, dateKey, startHour, durationType, hours } = input;
   validateSlot(dateKey, startHour, durationType, hours);
 
+  // Shape only. There is deliberately no arbitrary ceiling here: the fleet's
+  // unitCount is the single source of truth for how many skis can be booked,
+  // and it is checked inside the transaction below against live data.
   const quantity = input.quantity ?? 1;
-  if (!Number.isInteger(quantity) || quantity < 1 || quantity > MAX_BOOKING_QUANTITY) {
-    throw new BookingValidationError(
-      `Please choose between 1 and ${MAX_BOOKING_QUANTITY} jet skis.`
-    );
+  if (!Number.isInteger(quantity) || quantity < 1) {
+    throw new BookingValidationError("Please choose at least one jet ski.");
   }
 
   const customerName = input.customerName.trim();

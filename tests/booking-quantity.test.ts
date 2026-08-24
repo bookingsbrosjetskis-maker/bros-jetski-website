@@ -12,7 +12,6 @@ import {
 import {
   BOOKING_DEPOSIT_CENTS,
   DurationType,
-  MAX_BOOKING_QUANTITY,
   RidingOption,
   bookingDepositFor,
 } from "@/lib/constants";
@@ -126,8 +125,8 @@ describe("quantity validation", () => {
     expect(booking.depositPaid).toBe(BOOKING_DEPOSIT_CENTS);
   });
 
-  it("rejects zero, fractional, and absurd quantities", async () => {
-    for (const quantity of [0, -1, 1.5, MAX_BOOKING_QUANTITY + 1]) {
+  it("rejects zero, negative, and fractional quantities", async () => {
+    for (const quantity of [0, -1, 1.5]) {
       await expect(
         createPendingBooking(input({ dateKey: dateKeyFor(4), startHour: 9, hours: 1, quantity }))
       ).rejects.toBeInstanceOf(BookingValidationError);
@@ -140,6 +139,14 @@ describe("quantity validation", () => {
         input({ dateKey: dateKeyFor(5), startHour: 9, hours: 1, quantity: FLEET_SIZE + 1 })
       )
     ).rejects.toBeInstanceOf(BookingValidationError);
+  });
+
+  it("caps on the fleet size alone, with no arbitrary ceiling above it", async () => {
+    // A wildly oversized request is still refused, but by the fleet check --
+    // so growing the fleet past any hard-coded number just works.
+    await expect(
+      createPendingBooking(input({ dateKey: dateKeyFor(5), startHour: 9, hours: 1, quantity: 500 }))
+    ).rejects.toThrowError(new RegExp(`only have ${FLEET_SIZE} jet ski`));
   });
 });
 
