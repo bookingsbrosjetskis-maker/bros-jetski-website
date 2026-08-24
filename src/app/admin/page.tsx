@@ -7,6 +7,7 @@ import { Badge, ButtonLink, Card } from "@/components/ui";
 import { statusColor } from "@/components/admin/status";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import BarChart, { type BarChartDatum } from "@/components/admin/BarChart";
+import { emailConfigStatus } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -159,6 +160,8 @@ export default async function AdminDashboard() {
         <StatCard label="Unread messages" value={unreadMessages} href="/admin/messages" />
       </div>
 
+      <EmailStatusPanel />
+
       <div className="grid gap-6 lg:grid-cols-2">
         <Card className="p-6">
           <h2 className="font-display mb-4 text-sm font-bold text-ink">Bookings per day · last 30 days</h2>
@@ -242,5 +245,55 @@ export default async function AdminDashboard() {
         <ButtonLink href="/admin/blocked-dates" variant="secondary">Block a date</ButtonLink>
       </div>
     </div>
+  );
+}
+
+/**
+ * Whether notification email is actually working, and what is left to set.
+ * Every alert on this site is email, so silent misconfiguration means missed
+ * bookings and enquiries -- this makes that visible instead of invisible.
+ */
+function EmailStatusPanel() {
+  const status = emailConfigStatus();
+  const ok = status.warnings.length === 0;
+
+  return (
+    <Card className={`p-6 ${ok ? "" : "ring-1 ring-amber-400/30"}`}>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="font-display text-sm font-bold text-ink">Email notifications</h2>
+        <Badge color={ok ? "green" : "amber"}>{ok ? "Live" : "Needs setup"}</Badge>
+      </div>
+
+      <dl className="mt-4 space-y-2 text-sm">
+        <div className="flex flex-wrap justify-between gap-2">
+          <dt className="text-ink-muted">Sending</dt>
+          <dd className="text-ink">{status.live ? "Yes, via Resend" : "No — written to the server log only"}</dd>
+        </div>
+        <div className="flex flex-wrap justify-between gap-2">
+          <dt className="text-ink-muted">From address</dt>
+          <dd className="break-all text-right text-ink">{status.from}</dd>
+        </div>
+        <div className="flex flex-wrap justify-between gap-2">
+          <dt className="text-ink-muted">Owner alerts go to</dt>
+          <dd className="break-all text-right text-ink">{status.adminInbox || "nobody"}</dd>
+        </div>
+      </dl>
+
+      {ok ? (
+        <p className="mt-4 text-xs leading-relaxed text-ink-muted">
+          Booking confirmations, cancellations, safety checklists, enquiries, and review alerts are
+          all being delivered.
+        </p>
+      ) : (
+        <ul className="mt-4 space-y-2 text-xs leading-relaxed text-amber-200">
+          {status.warnings.map((w) => (
+            <li key={w} className="flex gap-2">
+              <span aria-hidden>•</span>
+              <span>{w}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Card>
   );
 }

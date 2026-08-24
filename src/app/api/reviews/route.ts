@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { clientIp, rateLimit, tooManyRequests } from "@/lib/rate-limit";
+import { sendAdminReviewNotification } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -41,6 +42,10 @@ export async function POST(req: Request) {
   await prisma.review.create({
     data: { authorName, rating, text, approved: false },
   });
+
+  // Reviews stay hidden until approved, so an unnoticed one never reaches the
+  // site. Tell the owner there is something in the queue.
+  await sendAdminReviewNotification({ authorName, rating, text });
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }

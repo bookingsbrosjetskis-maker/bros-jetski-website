@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { clientIp, rateLimit, tooManyRequests } from "@/lib/rate-limit";
+import {
+  sendAdminContactNotification,
+  sendContactAcknowledgement,
+} from "@/lib/email";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_LENGTHS = { name: 200, email: 320, message: 5000 } as const;
@@ -68,6 +72,12 @@ export async function POST(request: Request) {
       message: message.trim(),
     },
   });
+
+  // The message is already saved, so a mail failure must not fail the request —
+  // send() swallows its own errors, and these are awaited only so the serverless
+  // function is not torn down mid-flight.
+  await sendAdminContactNotification(created);
+  await sendContactAcknowledgement(created);
 
   return NextResponse.json({ id: created.id }, { status: 201 });
 }
